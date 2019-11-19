@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { HOMEPAGE_FORMS } from '../constants.js';
+import BinarySelector from '../components/selectors/BinarySelector';
 import SignInForm from '../components/forms/SignInForm';
-import RegistrationForm from '../components/form/RegistrationForm';
+import RegistrationForm from '../components/forms/RegistrationForm';
 
 const HomepageFormContainer = () => {
 
@@ -10,7 +11,7 @@ const HomepageFormContainer = () => {
 
   return(
     <div>
-      <HomepageFormSelector setForm={setForm} />
+      <BinarySelector handleChange={setForm} />
       { 
         form === HOMEPAGE_FORMS.SIGN_IN ?
         <SignInForm /> :

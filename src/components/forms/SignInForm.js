@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SignInForm = () => {
-  return();
+  return(<div></div>);
 }
 
 export default SignInForm;

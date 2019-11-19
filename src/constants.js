@@ -6,3 +6,8 @@ export const HOMEPAGE_FORMS = {
 export const ICONS = {
   SORT_YELLOW: '/ic_sort_yellow.svg'
 }
+
+export const POSITIONS = {
+  LEFT: 'left',
+  RIGHT: 'right'
+}

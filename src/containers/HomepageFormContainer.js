@@ -7,20 +7,20 @@ import RegistrationForm from '../components/forms/RegistrationForm';
 
 const HomepageFormContainer = () => {
 
-  const [form, setForm] = useState(HOMEPAGE_FORMS.SIGN_IN);
+  const [formToDisplay, setFormToDisplay] = useState(HOMEPAGE_FORMS.SIGN_IN);
 
   return(
     <div>
       <BinarySelector
         heading={"Welcome to Hyperdrive"}
         icon={ICONS.SORT_YELLOW}
-        selectedOption={form}
+        selectedOption={formToDisplay}
         option1={HOMEPAGE_FORMS.REGISTER}
         option2={HOMEPAGE_FORMS.SIGN_IN}
-        handleClick={setForm}
+        handleClick={setFormToDisplay}
       />
       { 
-        form === HOMEPAGE_FORMS.SIGN_IN ?
+        formToDisplay === HOMEPAGE_FORMS.SIGN_IN ?
         <SignInForm /> :
         <RegistrationForm />
       }

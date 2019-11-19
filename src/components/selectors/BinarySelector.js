@@ -1,22 +1,12 @@
 import React from 'react';
 import './selectors.css'
 
+import SelectorButton from './SelectorButton'
+import { POSITIONS } from '../../constants'
+
 const BinarySelector = props => {
-
-  const getClassName = option => {
-    if (props.selectedOption === option) {
-      return "selector-button selected";
-    } else {
-      return "selector-button";
-    }
-  }
-  
-  const handleClick = event => {
-
-  }
-
   return(
-    <div>
+    <div class="binary-selector">
 
       <div className="selector-header">
         <div className="selector-header-icon">
@@ -26,8 +16,18 @@ const BinarySelector = props => {
       </div>
       
       <div className="selector-button-container">
-        <button className={getClassName(props.option1) + " left"} value={props.option1} onClick={() => props.handleClick(props.option1)}>{props.option1}</button>
-        <button className={getClassName(props.option2) + " right"} value={props.option2} onClick={() => props.handleClick(props.option2)}>{props.option2}</button>
+        <SelectorButton
+          position={POSITIONS.LEFT}
+          buttonOption={props.option1}
+          selectedOption={props.selectedOption}
+          handleClick={props.handleClick}
+        />
+        <SelectorButton
+          position={POSITIONS.RIGHT}
+          buttonOption={props.option2}
+          selectedOption={props.selectedOption}
+          handleClick={props.handleClick}
+        />
       </div>
 
     </div>

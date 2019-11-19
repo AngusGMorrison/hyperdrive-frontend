@@ -1,3 +1,7 @@
+.binary-selector {
+  margin-bottom: 30px;
+}
+
 .selector-header {
   display: flex;
   align-items: center;

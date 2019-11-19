@@ -1,5 +1,8 @@
 import React from 'react';
-import { HOMEPAGE_FORMS } from "../constants.js"
+
+import { HOMEPAGE_FORMS } from '../constants.js';
+import SignInForm from '../components/forms/SignInForm';
+import RegistrationForm from '../components/form/RegistrationForm';
 
 const HomepageFormContainer = () => {
 
@@ -14,7 +17,7 @@ const HomepageFormContainer = () => {
         <RegistrationForm />
       }
     </div>
-  )
+  );
 }
 
 export default HomepageFormContainer;

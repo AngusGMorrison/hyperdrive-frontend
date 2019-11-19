@@ -13,7 +13,7 @@ const HomepageFormContainer = () => {
     <div>
       <BinarySelector
         heading={"Welcome to Hyperdrive"}
-        icon={ICONS.SORT_YELLOW}
+        icon={ICONS.YELLOW.SORT}
         selectedOption={formToDisplay}
         option1={HOMEPAGE_FORMS.REGISTER}
         option2={HOMEPAGE_FORMS.SIGN_IN}

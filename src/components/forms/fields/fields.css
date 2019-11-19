@@ -1,0 +1,25 @@
+.icon-text-field {
+  display: flex;
+  height: 40px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  border: 2px solid white;
+  border-radius: 3px;
+}
+
+.icon-text-field.blue {
+  border-color: var(--hyper-blue);
+}
+
+.field-icon {
+  margin-right: 20px;
+}
+
+.icon-text-field input {
+  width: 100%;
+  padding-right: 10px;
+  background-color: transparent;
+  border: none;
+  font: var(--single-line-big);
+  color: var(--hyper-blue);
+}

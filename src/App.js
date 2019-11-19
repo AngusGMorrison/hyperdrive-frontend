@@ -6,8 +6,6 @@ import Homepage from './components/Homepage'
 
 const App = () => {
 
-
-
   return (
     <Router>
       <div className="router-div">

@@ -2,6 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import './Homepage.css';
 
+import HomepageFormContainer from "../containers/HomepageFormContainer";
+
 const Homepage = () => {
 
   const redirectIfLoggedIn = () => {
@@ -15,7 +17,7 @@ const Homepage = () => {
       <div className="content-container" >
         {redirectIfLoggedIn()}
         <img className="hero-logo" src="/hyperdrive-logo-150px.jpg" />
-        {/* <HomepageFormContainer /> */}
+        <HomepageFormContainer />
       </div>
     </div>
   )

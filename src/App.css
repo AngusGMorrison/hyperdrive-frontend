@@ -1,5 +1,6 @@
 body {
-  background-color: #333839;
+  --hyper-dark-grey: #333839;
+  background-color: var(--hyper-dark-grey);
 }
 
 .router-div {

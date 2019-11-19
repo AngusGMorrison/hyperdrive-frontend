@@ -11,6 +11,10 @@
   border-color: var(--hyper-blue);
 }
 
+.icon-text-field:last-of-type {
+  margin-bottom: 25px;
+}
+
 .field-icon {
   margin-right: 20px;
 }

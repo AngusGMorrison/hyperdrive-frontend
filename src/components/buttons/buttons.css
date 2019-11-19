@@ -1,6 +1,22 @@
-.big-button {
-  width: 100%;
+.button {
+  border-radius: 3px;
   height: 40px;
   display: flex;
+  padding-left: 10px;
   align-items: center;
+  border: none;
+  font: var(--single-line-big);
+  color: var(--hyper-dark-grey);
+}
+
+.big-button {
+  width: 100%;
+}
+
+.button.blue {
+  background-color: var(--hyper-blue);
+}
+
+.button-text {
+  margin-top: 1px;
 }

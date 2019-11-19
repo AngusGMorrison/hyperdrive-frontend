@@ -3,7 +3,7 @@
   align-items: center;
   height: 40px;
   padding-left: 10px;
-  border: solid 2px #FFD45A;
+  border: solid 2px var(--hyper-yellow);
   border-radius: 3px 3px 0px 0px;
 }
 
@@ -13,23 +13,19 @@
 }
 
 h2.selector-header-heading {
-  color: #FFD45A;
+  color: var(--hyper-yellow);
   display: inline-block;
-  font-size: 18px;
-  line-height: 1;
+  font: var(--single-line-big);
   margin: 0;
-  font-weight: 700;
 }
 
 .selector-button {
   height: 40px;
   width: 50%;
-  border: solid 2px #FFD45A;
+  border: solid 2px var(--hyper-yellow);
   border-top: 1px;
-  font-size: 18px;
-  line-height: 1;
-  font-weight: 700;
-  color: #FFD45A;
+  font: var(--single-line-big);
+  color: var(--hyper-yellow);
   background-color: transparent;
 }
 
@@ -43,8 +39,8 @@ h2.selector-header-heading {
 }
 
 .selector-button.selected {
-  background-color: #FFD45A;
-  color: #333839;
+  background-color: var(--hyper-yellow);
+  color: var(--hyper-dark-grey);
   outline: none;
 }
 

@@ -1,5 +1,9 @@
 body {
   --hyper-dark-grey: #333839;
+  --hyper-yellow: #FFD45A;
+
+  --single-line-big: 700 18px/18px "Menlo";
+
   background-color: var(--hyper-dark-grey);
 }
 

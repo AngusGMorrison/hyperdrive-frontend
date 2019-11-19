@@ -13,10 +13,10 @@
 }
 
 h2.selector-header-heading {
-  color: var(--hyper-yellow);
   display: inline-block;
-  font: var(--single-line-big);
   margin: 0;
+  font: var(--single-line-big);
+  color: var(--hyper-yellow);
 }
 
 .selector-button {
@@ -39,11 +39,6 @@ h2.selector-header-heading {
 }
 
 .selector-button.selected {
-  background-color: var(--hyper-yellow);
   color: var(--hyper-dark-grey);
-  outline: none;
-}
-
-.selector-button:active {
-  outline: none;
+  background-color: var(--hyper-yellow);
 }

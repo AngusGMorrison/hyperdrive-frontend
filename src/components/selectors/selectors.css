@@ -1,0 +1,53 @@
+.selector-header {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-left: 10px;
+  border: solid 2px #FFD45A;
+  border-radius: 3px 3px 0px 0px;
+}
+
+.selector-header-icon {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+h2.selector-header-heading {
+  color: #FFD45A;
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1;
+  margin: 0;
+  font-weight: 700;
+}
+
+.selector-button {
+  height: 40px;
+  width: 50%;
+  border: solid 2px #FFD45A;
+  border-top: 1px;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 700;
+  color: #FFD45A;
+  background-color: transparent;
+}
+
+.selector-button.left {
+  border-bottom-left-radius: 3px;
+  border-right: 0;
+}
+
+.selector-button.right {
+  border-bottom-right-radius: 3px;
+}
+
+.selector-button.selected {
+  background-color: #FFD45A;
+  color: #333839;
+  outline: none;
+}
+
+.selector-button:active {
+  outline: none;
+}

@@ -3,14 +3,22 @@ import React, { useState } from 'react';
 import TextField from "./fields/TextField"
 import BigButton from "../buttons/BigButton";
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
+import API from "../../adapters/API"
 
 const SignInForm = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = event => {
+    event.preventDefault();
+    API.signIn({email, password})
+      .then(console.log)
+      .catch(console.error);
+  }
+
   return(
-    <form className="sign-in">
+    <form className="sign-in" onSubmit={handleSubmit}>
       <TextField
         theme={THEMES.BLUE}
         icon={ICONS.BLUE.MAIL}

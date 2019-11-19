@@ -2,13 +2,16 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
-import SkeletonPage from "./components/skeletons/SkeletonPage"
+import Homepage from './components/Homepage'
 
 const App = () => {
+
+
+
   return (
     <Router>
-      <div>
-        <Route exact path="/" render={() => <SkeletonPage />} />
+      <div className="router-div">
+        <Route exact path='/' render={() => <Homepage />} />
       </div>
     </Router>
   );

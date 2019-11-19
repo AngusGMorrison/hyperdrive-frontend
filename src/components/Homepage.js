@@ -16,7 +16,7 @@ const Homepage = () => {
     <div className="homepage-grid">
       <div className="content-container" >
         {redirectIfLoggedIn()}
-        <img className="hero-logo" src="/hyperdrive-logo-150px.jpg" />
+        <img className="hero-logo" src="/hyperdrive-logo-150px.jpg" alt="Hyperdrive logo" />
         <HomepageFormContainer />
       </div>
     </div>

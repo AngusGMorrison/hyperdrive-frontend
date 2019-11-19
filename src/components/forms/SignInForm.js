@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import TextField from "./fields/TextField"
 import BigButton from "../buttons/BigButton";
-import { ICONS, THEMES } from "../../constants";
+import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
 
 const SignInForm = () => {
 
@@ -13,12 +13,13 @@ const SignInForm = () => {
     <form className="sign-in">
       <TextField
         theme={THEMES.BLUE}
-        icon={ICONS.BLUE.ACCOUNT_CIRCLE}
+        icon={ICONS.BLUE.MAIL}
         placeholder="Email"
         value={email}
         handleChange={setEmail}
       />
       <TextField
+        type={FIELD_TYPES.PASSWORD}
         theme={THEMES.BLUE}
         icon={ICONS.BLUE.KEY}
         placeholder="Password"

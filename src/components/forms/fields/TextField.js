@@ -13,7 +13,7 @@ const TextField = ({...props}) => {
       />
 
       <input
-        type="text"
+        type={props.type}
         placeholder={props.placeholder}
         value={props.value}
         onChange={(e) => props.handleChange(e.target.value)}

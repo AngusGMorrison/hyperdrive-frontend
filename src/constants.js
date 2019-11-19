@@ -1,3 +1,8 @@
+export const FIELD_TYPES = {
+  TEXT: "text",
+  PASSWORD: "password"
+}
+
 export const HOMEPAGE_FORMS = {
   SIGN_IN: 'sign in',
   REGISTER: 'register'
@@ -9,6 +14,7 @@ export const ICONS = {
   },
   BLUE: {
     ACCOUNT_CIRCLE: '/icons/ic_account_circle_blue.svg',
+    MAIL: '/icons/ic_mail_blue.svg',
     KEY: '/icons/ic_key_blue.svg'
   },
   DARK: {

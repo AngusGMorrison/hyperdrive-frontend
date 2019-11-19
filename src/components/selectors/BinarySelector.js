@@ -6,7 +6,7 @@ import { POSITIONS } from '../../constants'
 
 const BinarySelector = props => {
   return(
-    <div class="binary-selector">
+    <div className="binary-selector">
 
       <div className="selector-header">
         <div className="selector-header-icon">

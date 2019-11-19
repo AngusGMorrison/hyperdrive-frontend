@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import TextField from "./fields/TextField"
-import { ICONS, THEMES } from "../../constants"
+import BigButton from "../buttons/BigButton";
+import { ICONS, THEMES } from "../../constants";
 
 const SignInForm = () => {
 
@@ -23,6 +24,11 @@ const SignInForm = () => {
         placeholder="Password"
         value={password}
         handleChange={setPassword}
+      />
+      <BigButton 
+        theme={THEMES.BLUE}
+        icon={ICONS.DARK.THUMBS_UP}
+        text={"Sign in"}
       />
     </form>
   );

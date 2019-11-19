@@ -11,6 +11,9 @@ export const ICONS = {
     ACCOUNT_CIRCLE: '/icons/ic_account_circle_blue.svg',
     KEY: '/icons/ic_key_blue.svg'
   },
+  DARK: {
+    THUMBS_UP: '/icons/ic_thumb_up_dark.svg'
+  }
 }
 
 export const POSITIONS = {

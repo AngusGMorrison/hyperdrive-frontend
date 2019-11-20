@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
-import { isValidEmail, isValidName, isValidPassword, ERROR_MESSAGES } from '../../validators/validators';
+import { isValidName, isValidEmail, isValidPassword, ERROR_MESSAGES } from '../../validators/validators';
 import API from '../../adapters/API';
 
 import TextField from './fields/TextField';
@@ -14,12 +14,17 @@ const RegistrationForm = props => {
   const [errors, setErrors] = useState({ name: false, email: false, password: false });
 
   const handleSubmit = event => {
-    //Validate non-empty fields
     event.preventDefault();
-    props.resetErrors();
-    API.signUp({name, email, password})
-      .then(props.setTokenAndRedirect)
-      .catch(props.handleHttpError);
+    if (formIsValid()) {
+      props.resetErrors();
+      API.signUp({name, email, password})
+        .then(props.setTokenAndRedirect)
+        .catch(props.handleHttpError);
+    }   
+  }
+
+  const formIsValid = () => {
+    return name && email && password && !errors.name && !errors.email && !errors.password;
   }
 
   const validateName = () => {

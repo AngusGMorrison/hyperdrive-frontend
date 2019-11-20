@@ -14,23 +14,36 @@ export const HOMEPAGE_FORMS = {
 }
 
 export const ICONS = {
-  YELLOW: {
-    SORT: '/icons/ic_sort_yellow.svg'
+  ACCOUNT_CIRCLE: {
+    BLUE: '/icons/ic_account_circle_blue.svg',
+    MAGENTA: '/icons/ic_account_circle_magenta.svg'
   },
-  BLUE: {
-    ACCOUNT_CIRCLE: '/icons/ic_account_circle_blue.svg',
-    MAIL: '/icons/ic_mail_blue.svg',
-    KEY: '/icons/ic_key_blue.svg'
+  CLOUD_OFF: {
+    DARK: '/icons/ic_cloud_off_dark.svg'
   },
-  DARK: {
-    THUMBS_UP: '/icons/ic_thumb_up_dark.svg',
-    CLOUD_OFF: '/icons/ic_cloud_off_dark.svg'
+  KEY: {
+    BLUE: '/icons/ic_key_blue.svg',
+    MAGENTA: '/icons/ic_key_magenta.svg'
+  },
+  MAIL: {
+    BLUE: '/icons/ic_mail_blue.svg',
+    MAGENTA: '/icons/ic_mail_magenta.svg'
+  },
+  THUMBS_UP: {
+    DARK: '/icons/ic_thumb_up_dark.svg',
+  },
+  SORT: {
+    YELLOW: '/icons/ic_sort_yellow.svg'
   }
 }
 
 export const POSITIONS = {
   LEFT: 'left',
   RIGHT: 'right'
+}
+
+export const REGEX = {
+  EMAIL: new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 }
 
 export const THEMES = {

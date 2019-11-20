@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
-import TextField from "./fields/TextField"
-import BigButton from "../buttons/BigButton";
-import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
-import API from "../../adapters/API"
+import TextField from './fields/TextField'
+import BigButton from '../buttons/BigButton';
+import Banner from '../banners/Banner'
+import { BANNER_TYPES, FIELD_TYPES, ICONS, THEMES } from '../../constants';
+import API from '../../adapters/API';
+import { ServerError } from '../../errors/errors';
 
 const SignInForm = () => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [serverError, setServerError] = useState(null);
 
   const handleSubmit = event => {
@@ -21,7 +23,7 @@ const SignInForm = () => {
 
   const setTokenAndRedirect = data => {
     if (data.errors) {
-      setServerErrors(data.errors);
+      setServerError(data.errors);
     } else {
       localStorage.setItem('token', data.token);
       //Placeholder for redirect
@@ -38,7 +40,7 @@ const SignInForm = () => {
 
   return(
     <form className="sign-in" onSubmit={handleSubmit}>
-      { serverError && <ErrorBanner icon={ICONS.DARK.CLOUD_OFF} details={serverError} /> }
+      { serverError && <Banner type={BANNER_TYPES.ERROR} icon={ICONS.DARK.CLOUD_OFF} content={serverError} /> }
       <TextField
         theme={THEMES.BLUE}
         icon={ICONS.BLUE.MAIL}

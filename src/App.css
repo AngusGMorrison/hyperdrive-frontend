@@ -2,10 +2,26 @@ body {
   --hyper-dark-grey: #333839;
   --hyper-yellow: #FFD45A;
   --hyper-blue: #7AFFE0;
+  --hyper-magenta: #F61DB7;
 
   --single-line-big: 700 18px/18px "Menlo";
+  --body-big: 700 16px/1.4 "Menlo";
+  --body: 400 14px/1.4 "Menlo";
 
   background-color: var(--hyper-dark-grey);
+}
+
+p.big-body {
+  font: var(--body-big);
+  color: var(--hyper-dark-grey);
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+
+p.body {
+  font: var(--body);
+  color: var(--hyper-dark-grey);
+  margin: 0;
 }
 
 .router-div {

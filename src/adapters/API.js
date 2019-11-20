@@ -1,12 +1,13 @@
 import { ServerError } from '../errors/errors';
 import ERROR_DETAILS from '../errors/error_details';
 
-const BASE_URL = 'http://localhost:3000'
-const SIGN_IN_URL = BASE_URL + '/sign-in'
+const BASE_URL = 'http://localhost:3000';
+const SIGN_IN_URL = BASE_URL + '/sign-in';
+const TEST_URL = 'http://localhost:3000/test';
 
 const signIn = loginDetails => {
   const payload = { user: loginDetails }
-  return post(payload, SIGN_IN_URL);
+  return post(payload, TEST_URL);
 }
 
 const post = (payload, route) => {

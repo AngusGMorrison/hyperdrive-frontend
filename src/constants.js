@@ -1,3 +1,7 @@
+export const BANNER_TYPES = {
+  ERROR: "error"
+}
+
 export const FIELD_TYPES = {
   TEXT: "text",
   PASSWORD: "password"

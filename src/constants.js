@@ -4,7 +4,8 @@ export const BANNER_TYPES = {
 
 export const FIELD_TYPES = {
   TEXT: "text",
-  PASSWORD: "password"
+  PASSWORD: "password",
+  EMAIL: "email"
 }
 
 export const HOMEPAGE_FORMS = {

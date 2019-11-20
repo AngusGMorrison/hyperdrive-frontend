@@ -30,7 +30,7 @@ const RegistrationForm = props => {
         handleChange={setName}
       />
       <TextField
-        type={FIELD_TYPES.TEXT}
+        type={FIELD_TYPES.EMAIL}
         theme={THEMES.BLUE}
         icon={ICONS.BLUE.MAIL}
         placeholder="Email"

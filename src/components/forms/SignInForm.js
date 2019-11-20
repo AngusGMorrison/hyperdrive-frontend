@@ -21,6 +21,7 @@ const SignInForm = props => {
   return(
     <form className="sign-in" onSubmit={handleSubmit}>
       <TextField
+        type={FIELD_TYPES.EMAIL}
         theme={THEMES.BLUE}
         icon={ICONS.BLUE.MAIL}
         placeholder="Email"

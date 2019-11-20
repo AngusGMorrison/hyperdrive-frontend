@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
-import { isValidEmail, ERROR_MESSAGES } from '../../validators/validators';
+import { isValidEmail, isValidName, ERROR_MESSAGES } from '../../validators/validators';
 import API from '../../adapters/API';
 
 import TextField from './fields/TextField';
@@ -22,6 +22,14 @@ const RegistrationForm = props => {
       .catch(props.handleHttpError);
   }
 
+  const validateName = () => {
+    if (isValidName(name)) {
+      setErrors({ ...errors, name: false});
+    } else {
+      setErrors({ ...errors, name: ERROR_MESSAGES.name })
+    }
+  }
+
   const validateEmail = () => {
     if (isValidEmail(email)) {
       setErrors({ ...errors, email: false });
@@ -38,6 +46,8 @@ const RegistrationForm = props => {
         placeholder="Name"
         value={name}
         handleChange={setName}
+        errors={errors.name}
+        validate={validateName}
       />
       <TextField
         type={FIELD_TYPES.EMAIL}

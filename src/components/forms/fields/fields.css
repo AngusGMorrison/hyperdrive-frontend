@@ -1,29 +1,45 @@
-.icon-text-field {
+.text-field {
   display: flex;
   height: 40px;
-  margin-bottom: 15px;
   padding-left: 10px;
   border: 2px solid white;
   border-radius: 3px;
-}
-
-.icon-text-field.blue {
   border-color: var(--hyper-blue);
 }
 
-.icon-text-field:last-of-type {
-  margin-bottom: 25px;
+.text-field.error {
+  border-color: var(--hyper-magenta);
+}
+
+.text-field.error > input {
+  color: var(--hyper-magenta);
+}
+
+.text-field-container {
+  height: 52px;
+  margin-bottom: 15px;
+}
+
+.text-field-container:last-of-type {
+  margin-bottom: 35px;
 }
 
 .field-icon {
   margin-right: 20px;
 }
 
-.icon-text-field input {
+.text-field input {
   width: 100%;
   padding-right: 10px;
   background-color: transparent;
   border: none;
   font: var(--single-line-big);
   color: var(--hyper-blue);
+}
+
+p.text-field-error {
+  margin-top: 5px;
+  margin-left: 15px;
+  font: 400 12px/1 "Menlo";
+  color: var(--hyper-magenta);
 }

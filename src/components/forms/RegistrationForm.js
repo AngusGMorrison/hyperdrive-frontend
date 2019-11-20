@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
+import { isValidEmail, ERROR_MESSAGES } from '../../validators/validators';
 import API from '../../adapters/API';
 
 import TextField from './fields/TextField';
@@ -10,8 +11,10 @@ const RegistrationForm = props => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ name: false, email: false, password: false });
 
   const handleSubmit = event => {
+    //Validate non-empty fields
     event.preventDefault();
     props.resetErrors();
     API.signUp({name, email, password})
@@ -19,35 +22,48 @@ const RegistrationForm = props => {
       .catch(props.handleHttpError);
   }
 
+  const validateEmail = () => {
+    if (isValidEmail(email)) {
+      setErrors({
+        ...errors,
+        email: false
+      });
+    } else {
+      setErrors({
+        ...errors,
+        email: ERROR_MESSAGES.email
+      });
+    }
+  }
+
   return(
     <form className="registration" onSubmit={handleSubmit}>
       <TextField
         type={FIELD_TYPES.TEXT}
-        theme={THEMES.BLUE}
-        icon={ICONS.BLUE.ACCOUNT_CIRCLE}
+        icon={ICONS.ACCOUNT_CIRCLE}
         placeholder="Name"
         value={name}
         handleChange={setName}
       />
       <TextField
         type={FIELD_TYPES.EMAIL}
-        theme={THEMES.BLUE}
-        icon={ICONS.BLUE.MAIL}
+        icon={ICONS.MAIL}
         placeholder="Email"
         value={email}
         handleChange={setEmail}
+        errors={errors.email}
+        validate={validateEmail}
       />
       <TextField
         type={FIELD_TYPES.PASSWORD}
-        theme={THEMES.BLUE}
-        icon={ICONS.BLUE.KEY}
+        icon={ICONS.KEY}
         placeholder="Create a password"
         value={password}
         handleChange={setPassword}
       />
       <BigButton 
         theme={THEMES.BLUE}
-        icon={ICONS.DARK.THUMBS_UP}
+        icon={ICONS.THUMBS_UP.DARK}
         text={"Sign up"}
       />
     </form>

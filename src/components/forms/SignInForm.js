@@ -23,7 +23,7 @@ const SignInForm = props => {
       <TextField
         type={FIELD_TYPES.EMAIL}
         theme={THEMES.BLUE}
-        icon={ICONS.BLUE.MAIL}
+        icon={ICONS.MAIL}
         placeholder="Email"
         value={email}
         handleChange={setEmail}
@@ -31,14 +31,14 @@ const SignInForm = props => {
       <TextField
         type={FIELD_TYPES.PASSWORD}
         theme={THEMES.BLUE}
-        icon={ICONS.BLUE.KEY}
+        icon={ICONS.KEY}
         placeholder="Password"
         value={password}
         handleChange={setPassword}
       />
       <BigButton 
         theme={THEMES.BLUE}
-        icon={ICONS.DARK.THUMBS_UP}
+        icon={ICONS.THUMBS_UP.DARK}
         text={"Sign in"}
       />
     </form>

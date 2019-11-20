@@ -52,7 +52,7 @@ const HomepageFormContainer = props => {
     <div>
       <BinarySelector
         heading={"Welcome to Hyperdrive"}
-        icon={ICONS.YELLOW.SORT}
+        icon={ICONS.SORT.YELLOW}
         selectedOption={formToDisplay}
         option1={HOMEPAGE_FORMS.REGISTER}
         option2={HOMEPAGE_FORMS.SIGN_IN}
@@ -62,7 +62,7 @@ const HomepageFormContainer = props => {
         serverError &&
         <Banner
           type={BANNER_TYPES.ERROR}
-          icon={ICONS.DARK.CLOUD_OFF}
+          icon={ICONS.CLOUD_OFF.DARK}
           content={serverError}
         />
       }

@@ -2,7 +2,6 @@ import React from 'react';
 import './fields.css';
 
 const TextField = (props) => {
-  console.log(props.icon)
   return(
     <div className="text-field-container">
       <div className={`text-field ${props.errors ? `error` : ``}`}>

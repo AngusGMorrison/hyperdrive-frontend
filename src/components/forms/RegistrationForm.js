@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
-import { isValidEmail, isValidName, ERROR_MESSAGES } from '../../validators/validators';
+import { isValidEmail, isValidName, isValidPassword, ERROR_MESSAGES } from '../../validators/validators';
 import API from '../../adapters/API';
 
 import TextField from './fields/TextField';
@@ -38,6 +38,14 @@ const RegistrationForm = props => {
     }
   }
 
+  const validatePassword = () => {
+    if (isValidPassword(password)) {
+      setErrors({ ...errors, password: false });
+    } else {
+      setErrors({ ...errors, password: ERROR_MESSAGES.password });
+    }
+  }
+
   return(
     <form className="registration" onSubmit={handleSubmit}>
       <TextField
@@ -64,6 +72,8 @@ const RegistrationForm = props => {
         placeholder="Create a password"
         value={password}
         handleChange={setPassword}
+        errors={errors.password}
+        validate={validatePassword}
       />
       <BigButton 
         theme={THEMES.BLUE}

@@ -24,15 +24,9 @@ const RegistrationForm = props => {
 
   const validateEmail = () => {
     if (isValidEmail(email)) {
-      setErrors({
-        ...errors,
-        email: false
-      });
+      setErrors({ ...errors, email: false });
     } else {
-      setErrors({
-        ...errors,
-        email: ERROR_MESSAGES.email
-      });
+      setErrors({ ...errors, email: ERROR_MESSAGES.email });
     }
   }
 

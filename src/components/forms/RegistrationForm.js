@@ -6,79 +6,60 @@ import API from '../../adapters/API';
 import TextField from './fields/TextField';
 import BigButton from "../buttons/BigButton";
 
+import useForm from '../../hooks/useForm'
+
+const initialFormState = {
+  name: '',
+  email: '',
+  password: ''
+}
+
+const validators = { name: isValidName, email: isValidEmail, password: isValidPassword }
+
 const RegistrationForm = props => {
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({ name: false, email: false, password: false });
+  const submitAction = formData => API.signUp(formData)
+    .then(props.setTokenAndRedirect)
+    .catch(props.handleHttpError);
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    if (formIsValid()) {
-      props.resetErrors();
-      API.signUp({name, email, password})
-        .then(props.setTokenAndRedirect)
-        .catch(props.handleHttpError);
-    }   
-  }
 
-  const formIsValid = () => {
-    return name && email && password && !errors.name && !errors.email && !errors.password;
-  }
+  const { formData, errors, handleInputChange, handleFormSubmission, //fieldValidators } = useForm({ initialFormState, validators, submitAction })
 
-  const validateName = () => {
-    if (isValidName(name)) {
-      setErrors({ ...errors, name: false});
-    } else {
-      setErrors({ ...errors, name: ERROR_MESSAGES.name })
-    }
-  }
-
-  const validateEmail = () => {
-    if (isValidEmail(email)) {
-      setErrors({ ...errors, email: false });
-    } else {
-      setErrors({ ...errors, email: ERROR_MESSAGES.email });
-    }
-  }
-
-  const validatePassword = () => {
-    if (isValidPassword(password)) {
-      setErrors({ ...errors, password: false });
-    } else {
-      setErrors({ ...errors, password: ERROR_MESSAGES.password });
-    }
-  }
+  console.log({ formData, errors, handleInputChange, handleFormSubmission })
+  
+  const {email, password, name} = formData;
 
   return(
-    <form className="registration" onSubmit={handleSubmit}>
+    <form className="registration" onSubmit={handleFormSubmission}>
       <TextField
         type={FIELD_TYPES.TEXT}
         icon={ICONS.ACCOUNT_CIRCLE}
+        name="name"
         placeholder="Name"
         value={name}
-        handleChange={setName}
+        handleChange={handleInputChange}
         errors={errors.name}
-        validate={validateName}
+        // validate={validateName}
       />
       <TextField
         type={FIELD_TYPES.EMAIL}
         icon={ICONS.MAIL}
+        name="email"
         placeholder="Email"
         value={email}
-        handleChange={setEmail}
+        handleChange={handleInputChange}
         errors={errors.email}
-        validate={validateEmail}
+        // validate={validateEmail}
       />
       <TextField
         type={FIELD_TYPES.PASSWORD}
         icon={ICONS.KEY}
+        name="password"
         placeholder="Create a password"
         value={password}
-        handleChange={setPassword}
+        handleChange={handleInputChange}
         errors={errors.password}
-        validate={validatePassword}
+        // validate={validatePassword}
       />
       <BigButton 
         theme={THEMES.BLUE}

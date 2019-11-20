@@ -5,7 +5,7 @@ import BinarySelector from '../components/selectors/BinarySelector';
 import SignInForm from '../components/forms/SignInForm';
 import RegistrationForm from '../components/forms/RegistrationForm';
 
-const HomepageFormContainer = () => {
+const HomepageFormContainer = props => {
 
   const [formToDisplay, setFormToDisplay] = useState(HOMEPAGE_FORMS.SIGN_IN);
 
@@ -21,8 +21,8 @@ const HomepageFormContainer = () => {
       />
       { 
         formToDisplay === HOMEPAGE_FORMS.SIGN_IN ?
-        <SignInForm /> :
-        <RegistrationForm />
+        <SignInForm loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn} /> :
+        <RegistrationForm loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn} />
       }
     </div>
   );

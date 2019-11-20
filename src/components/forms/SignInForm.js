@@ -7,30 +7,31 @@ import { BANNER_TYPES, FIELD_TYPES, ICONS, THEMES } from '../../constants';
 import API from '../../adapters/API';
 import { ServerError } from '../../errors/errors';
 
-const SignInForm = () => {
+const SignInForm = props => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [serverError, setServerError] = useState(null);
+  const [formErrors, setFormErrors]=  useState([]);
 
   const handleSubmit = event => {
     event.preventDefault();
     setServerError(null);
     API.signIn({email, password})
       .then(setTokenAndRedirect)
-      .catch(handleError);
+      .catch(handleHttpError);
   }
 
   const setTokenAndRedirect = data => {
     if (data.errors) {
-      setServerError(data.errors);
+      setFormErrors(data.errors);
     } else {
       localStorage.setItem('token', data.token);
-      //Placeholder for redirect
+      props.setLoggedIn(true);
     }
   }
 
-  const handleError = error => {
+  const handleHttpError = error => {
     if (error instanceof ServerError) {
       setServerError(error.details);
     } else {

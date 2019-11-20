@@ -7,7 +7,7 @@ const TEST_URL = 'http://localhost:3000/test';
 
 const signIn = loginDetails => {
   const payload = { user: loginDetails }
-  return post(payload, TEST_URL);
+  return post(payload, SIGN_IN_URL);
 }
 
 const post = (payload, route) => {

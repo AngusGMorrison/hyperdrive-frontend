@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
+import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
+import API from '../../adapters/API';
 
 import TextField from './fields/TextField';
 import BigButton from "../buttons/BigButton";
-import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
 
-const RegistrationForm = () => {
+const RegistrationForm = props => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = event => {
+    event.preventDefault();
+    props.resetErrors();
+    API.signUp({name, email, password})
+      .then(props.setTokenAndRedirect)
+      .catch(props.handleHttpError);
+  }
+
   return(
-    <form className="registration">
+    <form className="registration" onSubmit={handleSubmit}>
       <TextField
         type={FIELD_TYPES.TEXT}
         theme={THEMES.BLUE}

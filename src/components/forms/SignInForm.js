@@ -9,16 +9,36 @@ const SignInForm = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [serverError, setServerError] = useState(null);
 
   const handleSubmit = event => {
     event.preventDefault();
+    setServerError(null);
     API.signIn({email, password})
-      .then(console.log)
-      .catch(console.error);
+      .then(setTokenAndRedirect)
+      .catch(handleError);
+  }
+
+  const setTokenAndRedirect = data => {
+    if (data.errors) {
+      setServerErrors(data.errors);
+    } else {
+      localStorage.setItem('token', data.token);
+      //Placeholder for redirect
+    }
+  }
+
+  const handleError = error => {
+    if (error instanceof ServerError) {
+      setServerError(error.details);
+    } else {
+      console.error(error);
+    }
   }
 
   return(
     <form className="sign-in" onSubmit={handleSubmit}>
+      { serverError && <ErrorBanner icon={ICONS.DARK.CLOUD_OFF} details={serverError} /> }
       <TextField
         theme={THEMES.BLUE}
         icon={ICONS.BLUE.MAIL}

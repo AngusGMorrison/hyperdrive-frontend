@@ -18,7 +18,8 @@ export const ICONS = {
     KEY: '/icons/ic_key_blue.svg'
   },
   DARK: {
-    THUMBS_UP: '/icons/ic_thumb_up_dark.svg'
+    THUMBS_UP: '/icons/ic_thumb_up_dark.svg',
+    CLOUD_OFF: '/icons/ic_cloud_off_dark.svg'
   }
 }
 

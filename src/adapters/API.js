@@ -1,3 +1,6 @@
+import { ServerError } from '../errors/errors';
+import ERROR_DETAILS from '../errors/error_details';
+
 const BASE_URL = 'http://localhost:3000'
 const SIGN_IN_URL = BASE_URL + '/sign-in'
 
@@ -25,10 +28,10 @@ const createConfig = (method, payload) => {
 }
 
 const objectify = response => {
-  if (response.ok) {
-    return response.json();
+  if (response.status === 500 || response.status === 404) {
+    throw new ServerError(ERROR_DETAILS.GENERIC)
   } else {
-    throw new Error(`HTTP status code ${response.status}`);
+    return response.json();
   }
 }
 

@@ -7,8 +7,16 @@
   border-color: var(--hyper-blue);
 }
 
+.text-field:focus-within { 
+  box-shadow: 0 0 10px var(--hyper-blue);
+}
+
 .text-field.error {
   border-color: var(--hyper-magenta);
+}
+
+.text-field.error:focus-within {
+  box-shadow: 0 0 10px var(--hyper-magenta);
 }
 
 .text-field.error > input {

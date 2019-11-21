@@ -52,4 +52,4 @@ export const THEMES = {
   BLUE: 'blue'
 }
 
-export const THROWABLE_STATUS_CODES = [500, 404, 403];
+export const THROWABLE_STATUS_CODES = [500, 404, 403, 400];

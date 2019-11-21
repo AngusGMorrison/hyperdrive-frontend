@@ -109,7 +109,7 @@ const useForm = ({ initialFormState = {}, submitAction = formFields => {} } = {}
     if (formIsInvalid()) {
       highlightEmptyFields();
     } else {
-      submitAndResetForm()
+      submitForm()
     }
   }
 
@@ -124,10 +124,9 @@ const useForm = ({ initialFormState = {}, submitAction = formFields => {} } = {}
     });
   }
 
-  const submitAndResetForm = () => {
+  const submitForm = () => {
     resetErrors();
     submitAction(getFormContent());
-    setFormFields(initialFormState);
   }
 
   const getFormContent = () => {

@@ -37,9 +37,20 @@ const createConfig = (method, payload) => {
 
 const objectify = response => {
   if (THROWABLE_STATUS_CODES.includes(response.status)) {
-    throw new ServerError(response.status)
+    return selectAndThrowServerError(response);
   } else {
     return response.json();
+  }
+}
+
+const selectAndThrowServerError = response => {
+  if (response.status === 400) {
+    return response.json()
+      .then(data => {
+        throw new ServerError(response.status, data.errors)
+      })
+  } else {
+    throw new ServerError(response.status)
   }
 }
 

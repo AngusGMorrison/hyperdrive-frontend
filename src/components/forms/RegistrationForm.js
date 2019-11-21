@@ -37,7 +37,7 @@ const RegistrationForm = props => {
       .catch(props.handleHttpError);
   }
 
-  const { formFields, errors, handleInputChange, validateField, handleFormSubmission } = useForm({ initialFormState, submitAction });
+  const { formFields, errors, handleInputChange, handleFormSubmission } = useForm({ initialFormState, submitAction });
   const { email, password, name } = formFields;
 
   return(
@@ -49,7 +49,6 @@ const RegistrationForm = props => {
         placeholder="Name"
         value={name.value}
         handleChange={handleInputChange}
-        validate={validateField}
         errors={errors.name}
       />
       <TextField
@@ -59,7 +58,6 @@ const RegistrationForm = props => {
         placeholder="Email"
         value={email.value}
         handleChange={handleInputChange}
-        validate={validateField}
         errors={errors.email}
       />
       <TextField
@@ -69,7 +67,6 @@ const RegistrationForm = props => {
         placeholder="Create a password"
         value={password.value}
         handleChange={handleInputChange}
-        validate={validateField}
         errors={errors.password}
       />
       <BigButton 

@@ -12,6 +12,12 @@ const useForm = ({ initialFormState = {}, submitAction = formData => {} } = {}) 
   const resetErrors = () => setErrors(initialErrors);
 
   const handleInputChange = event => {
+    event.persist();
+    updateFieldValue(event);
+    validateField(event);
+  }
+
+  const updateFieldValue = event => {
     setFormFields({
       ...formFields,
       [event.target.name]: {
@@ -31,7 +37,7 @@ const useForm = ({ initialFormState = {}, submitAction = formData => {} } = {}) 
   }
 
   const formIsInvalid = () => {
-    return formHasErrors() && requiredFieldsAreEmpty();
+    return formHasErrors() || requiredFieldsAreEmpty();
   }
 
   const formHasErrors = () => {
@@ -39,26 +45,26 @@ const useForm = ({ initialFormState = {}, submitAction = formData => {} } = {}) 
   }
 
   const requiredFieldsAreEmpty = () => {
-    Object.values(formFields).find(field => {
-      return field.value === "" && field.required
+    return Object.values(formFields).find(field => {
+      return !field.value && field.required;
     });
   }
 
   const handleFormSubmission = event => {
     event.preventDefault();
-    if (formIsInvalid) return;
+    if (formIsInvalid()) return;
     resetErrors();
     submitAction(getFormContent());
     setFormFields(initialFormState);
   }
 
   const getFormContent = () => {
-    Object.keys(formFields).reduce((formContent, key) => {
+    return Object.keys(formFields).reduce((formContent, key) => {
       return { ...formContent, [key]: formFields[key].value };
     }, {});
   }
 
-  return { formFields, errors, setErrors, handleInputChange, validateField, handleFormSubmission };
+  return { formFields, errors, setErrors, handleInputChange, handleFormSubmission };
 }
 
 export default useForm;

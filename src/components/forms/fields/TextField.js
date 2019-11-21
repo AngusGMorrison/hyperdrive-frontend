@@ -18,7 +18,6 @@ const TextField = (props) => {
           placeholder={props.placeholder}
           value={props.value}
           onChange={props.handleChange}
-          onBlur={props.validate}
         />
 
       </div>

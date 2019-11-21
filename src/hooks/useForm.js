@@ -1,23 +1,26 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-const useForm = ({ initialFormState = {}, validators = {}, submitAction = formData => {} } = {}) => {
+const useForm = ({ initialFormState = {}, submitAction = formData => {} } = {}) => {
   
-  const [formData, setFormData] = useState(initialFormState);
+  const [formFields, setFormFields] = useState(initialFormState);
 
-  const initialErrors = Object.keys(validators).reduce((errors, key) => ({...errors, [key]: false}), {})
+  const initialErrors = Object.keys(initialFormState).reduce((errors, key) => ({...errors, [key]: false}), {})
   const [errors, setErrors] = useState(initialErrors);
-  const resetErrors = () => setErrors(initialErrors)
+  const resetErrors = () => setErrors(initialErrors);
 
   const handleInputChange = event => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value
+    setFormFields({
+      ...formFields,
+      [event.target.name]: {
+        ...formFields[event.target.name],
+        value: event.target.value
+      }
     });
   }
 
-  const handleBlur = event => {
+  const validateField = event => {
     const field = event.target;
-    const validator = validators[field.name];
+    const validator = formFields[field.name].validator;
     setErrors({
       ...errors,
       [field.name]: validator(field.value)
@@ -25,21 +28,34 @@ const useForm = ({ initialFormState = {}, validators = {}, submitAction = formDa
   }
 
   const formIsInvalid = () => {
-    return(
-      Object.values(errors).some(value => value !== null) &&
-      Object.values(formData).some(value => value === "")
-    )
+    return formHasErrors() && requiredFieldsAreEmpty();
+  }
+
+  const formHasErrors = () => {
+    return Object.values(errors).some(value => value !== null);
+  }
+
+  const requiredFieldsAreEmpty = () => {
+    Object.values(formFields).find(field => {
+      return field.value === "" && field.required
+    });
   }
 
   const handleFormSubmission = event => {
     event.preventDefault();
     if (formIsInvalid) return;
     resetErrors();
-    submitAction(formData)
-    setFormData(initialFormState)
+    submitAction(getFormContent());
+    setFormFields(initialFormState);
   }
 
-  return { formData, errors, setErrors, handleInputChange, handleFormSubmission, handleBlur }
+  const getFormContent = () => {
+    Object.keys(formFields).reduce((formContent, key) => {
+      return { ...formContent, [key]: formFields[key].value };
+    }, {});
+  }
+
+  return { formFields, errors, setErrors, handleInputChange, validateField, handleFormSubmission };
 }
 
-export default useForm
+export default useForm;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
 import { checkForNameErrors, checkForEmailErrors, checkForPasswordErrors } from '../../validators/validators';
 import API from '../../adapters/API';
@@ -11,33 +11,24 @@ import useForm from '../../hooks/useForm'
 const RegistrationForm = props => {
 
   const initialFormState = {
-    name: '',
-    email: '',
-    password: ''
-  }
-
-  const advancedFormState = {
     name: {
+      name: "name",
       value: "",
       required: true,
       validator: checkForNameErrors
     },
     email: {
+      name: "email",
       value: "",
       required: true,
       validator: checkForEmailErrors
     },
     password: {
+      name: "password",
       value: "",
       required: true,
-      validator: checkForEmailErrors
+      validator: checkForPasswordErrors
     }
-  }
-
-  const validators = {
-    name: checkForNameErrors,
-    email: checkForEmailErrors,
-    password: checkForPasswordErrors
   }
 
   const submitAction = formData => {
@@ -46,40 +37,40 @@ const RegistrationForm = props => {
       .catch(props.handleHttpError);
   }
 
-  const { formData, errors, handleInputChange, handleFormSubmission, handleBlur } = useForm({ initialFormState, validators, submitAction }) 
-  const {email, password, name} = formData;
+  const { formFields, errors, handleInputChange, validateField, handleFormSubmission } = useForm({ initialFormState, submitAction });
+  const { email, password, name } = formFields;
 
   return(
     <form className="registration" onSubmit={handleFormSubmission}>
       <TextField
+        name={name.name}
         type={FIELD_TYPES.TEXT}
-        icon={ICONS.ACCOUNT_CIRCLE}
-        name="name"
+        icon={ICONS.ACCOUNT_CIRCLE}    
         placeholder="Name"
-        value={name}
+        value={name.value}
         handleChange={handleInputChange}
+        validate={validateField}
         errors={errors.name}
-        validate={handleBlur}
       />
       <TextField
+        name={email.name}
         type={FIELD_TYPES.EMAIL}
         icon={ICONS.MAIL}
-        name="email"
         placeholder="Email"
-        value={email}
+        value={email.value}
         handleChange={handleInputChange}
+        validate={validateField}
         errors={errors.email}
-        validate={handleBlur}
       />
       <TextField
+        name={password.name}
         type={FIELD_TYPES.PASSWORD}
         icon={ICONS.KEY}
-        name="password"
         placeholder="Create a password"
-        value={password}
+        value={password.value}
         handleChange={handleInputChange}
+        validate={validateField}
         errors={errors.password}
-        validate={handleBlur}
       />
       <BigButton 
         theme={THEMES.BLUE}

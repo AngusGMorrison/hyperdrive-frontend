@@ -34,6 +34,8 @@ const useForm = ({ initialFormState = {}, submitAction = formFields => {} } = {}
       setEmptyFieldError(field);
     } else if (fieldHasValidator(field)) {
       setFieldValidatorError(field);
+    } else {
+      clearErrors(field);
     }
   }
   
@@ -78,6 +80,13 @@ const useForm = ({ initialFormState = {}, submitAction = formFields => {} } = {}
     setErrors({
       ...errors,
       [field.name]: validator(field.value)
+    });
+  }
+
+  const clearErrors = field => {
+    setErrors({
+      ...errors,
+      [field.name]: null
     });
   }
 

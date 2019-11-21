@@ -1,40 +1,57 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from '../../constants';
+import { checkForEmailErrors } from '../../validators/validators';
 import API from '../../adapters/API';
 
-import TextField from './fields/TextField'
+import TextField from './fields/TextField';
 import BigButton from '../buttons/BigButton';
+
+import useForm from '../../hooks/useForm';
 
 const SignInForm = props => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const initialFormState = {
+    email: {
+      name: 'email',
+      value: '',
+      required: true,
+      validator: checkForEmailErrors
+    },
+    password: {
+      name: 'password',
+      value: '',
+      required: true
+    }
+  }
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    props.resetErrors();
-    API.signIn({email, password})
+  const submitAction = formFields => {
+    API.signIn(formFields)
       .then(props.setTokenAndRedirect)
       .catch(props.handleHttpError);
   }
 
+  const { formFields, errors, handleInputChange, handleFormSubmission } = useForm({ initialFormState, submitAction });
+  const { email, password } = formFields;
+
   return(
-    <form className="sign-in" onSubmit={handleSubmit}>
+    <form className="sign-in" onSubmit={handleFormSubmission}>
       <TextField
+        name={email.name}
         type={FIELD_TYPES.EMAIL}
-        theme={THEMES.BLUE}
         icon={ICONS.MAIL}
         placeholder="Email"
-        value={email}
-        handleChange={setEmail}
+        value={email.value}
+        handleChange={handleInputChange}
+        errors={errors.email}
       />
       <TextField
+        name={password.name}
         type={FIELD_TYPES.PASSWORD}
-        theme={THEMES.BLUE}
         icon={ICONS.KEY}
         placeholder="Password"
-        value={password}
-        handleChange={setPassword}
+        value={password.value}
+        handleChange={handleInputChange}
+        errors={errors.password}
       />
       <BigButton 
         theme={THEMES.BLUE}

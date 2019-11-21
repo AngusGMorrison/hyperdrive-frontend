@@ -1,84 +1,76 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
-import { isValidName, isValidEmail, isValidPassword, ERROR_MESSAGES } from '../../validators/validators';
+import { checkForNameErrors, checkForEmailErrors, checkForPasswordErrors } from '../../validators/validators';
 import API from '../../adapters/API';
 
 import TextField from './fields/TextField';
 import BigButton from "../buttons/BigButton";
 
+import useForm from '../../hooks/useForm'
+
 const RegistrationForm = props => {
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({ name: false, email: false, password: false });
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    if (formIsValid()) {
-      props.resetErrors();
-      API.signUp({name, email, password})
-        .then(props.setTokenAndRedirect)
-        .catch(props.handleHttpError);
-    }   
-  }
-
-  const formIsValid = () => {
-    return name && email && password && !errors.name && !errors.email && !errors.password;
-  }
-
-  const validateName = () => {
-    if (isValidName(name)) {
-      setErrors({ ...errors, name: false});
-    } else {
-      setErrors({ ...errors, name: ERROR_MESSAGES.name })
+  const initialFormState = {
+    name: {
+      name: "name",
+      value: "",
+      required: true,
+      validator: checkForNameErrors
+    },
+    email: {
+      name: "email",
+      value: "",
+      required: true,
+      validator: checkForEmailErrors
+    },
+    password: {
+      name: "password",
+      value: "",
+      required: true,
+      validator: checkForPasswordErrors
     }
   }
 
-  const validateEmail = () => {
-    if (isValidEmail(email)) {
-      setErrors({ ...errors, email: false });
-    } else {
-      setErrors({ ...errors, email: ERROR_MESSAGES.email });
-    }
+  const submitAction = formData => {
+    API.signUp(formData)
+      .then(props.setTokenAndRedirect)
+      .catch(props.handleHttpError);
   }
 
-  const validatePassword = () => {
-    if (isValidPassword(password)) {
-      setErrors({ ...errors, password: false });
-    } else {
-      setErrors({ ...errors, password: ERROR_MESSAGES.password });
-    }
-  }
+  const { formFields, errors, handleInputChange, validateField, handleFormSubmission } = useForm({ initialFormState, submitAction });
+  const { email, password, name } = formFields;
 
   return(
-    <form className="registration" onSubmit={handleSubmit}>
+    <form className="registration" onSubmit={handleFormSubmission}>
       <TextField
+        name={name.name}
         type={FIELD_TYPES.TEXT}
-        icon={ICONS.ACCOUNT_CIRCLE}
+        icon={ICONS.ACCOUNT_CIRCLE}    
         placeholder="Name"
-        value={name}
-        handleChange={setName}
+        value={name.value}
+        handleChange={handleInputChange}
+        validate={validateField}
         errors={errors.name}
-        validate={validateName}
       />
       <TextField
+        name={email.name}
         type={FIELD_TYPES.EMAIL}
         icon={ICONS.MAIL}
         placeholder="Email"
-        value={email}
-        handleChange={setEmail}
+        value={email.value}
+        handleChange={handleInputChange}
+        validate={validateField}
         errors={errors.email}
-        validate={validateEmail}
       />
       <TextField
+        name={password.name}
         type={FIELD_TYPES.PASSWORD}
         icon={ICONS.KEY}
         placeholder="Create a password"
-        value={password}
-        handleChange={setPassword}
+        value={password.value}
+        handleChange={handleInputChange}
+        validate={validateField}
         errors={errors.password}
-        validate={validatePassword}
       />
       <BigButton 
         theme={THEMES.BLUE}

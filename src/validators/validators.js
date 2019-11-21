@@ -1,15 +1,27 @@
 import { REGEX } from '../constants';
 
-export const isValidEmail = email => {
-  return REGEX.EMAIL.test(email);
+export const checkForNameErrors = name => {
+  if (REGEX.NAME.test(name)) {
+    return null;
+  } else {
+    return ERROR_MESSAGES.name;
+  };
 }
 
-export const isValidName = name => {
-  return REGEX.NAME.test(name);
+export const checkForEmailErrors = email => {
+  if (REGEX.EMAIL.test(email)) {
+    return null;
+  } else {
+    return ERROR_MESSAGES.email;
+  }
 }
 
-export const isValidPassword = password => {
-  return REGEX.PASSWORD.test(password);
+export const checkForPasswordErrors = password => {
+  if (REGEX.PASSWORD.test(password)) {
+    return null;
+  } else {
+    return ERROR_MESSAGES.password;
+  };
 }
 
 export const ERROR_MESSAGES = {

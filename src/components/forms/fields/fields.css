@@ -1,0 +1,66 @@
+input.text-field:internal-autofill-selected {
+  color: var(--hyper-blue) !important;
+  background-color: transparent !important;
+}
+
+.text-field:-webkit-autofill,
+.text-field:-webkit-autofill:hover, 
+.text-field:-webkit-autofill:focus {
+  color: var(--hyper-blue) !important;
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.text-field {
+  display: flex;
+  height: 40px;
+  padding-left: 10px;
+  border: 2px solid white;
+  border-radius: 3px;
+  border-color: var(--hyper-blue);
+}
+
+.text-field:focus-within { 
+  box-shadow: 0 0 10px var(--hyper-blue);
+}
+
+.text-field.error {
+  border-color: var(--hyper-magenta);
+}
+
+.text-field.error:focus-within {
+  box-shadow: 0 0 10px var(--hyper-magenta);
+}
+
+.text-field.error > input {
+  color: var(--hyper-magenta);
+}
+
+.text-field-container {
+  height: 52px;
+  margin-bottom: 15px;
+}
+
+.text-field-container:last-of-type {
+  margin-bottom: 35px;
+}
+
+.field-icon {
+  margin-right: 20px;
+}
+
+.text-field input {
+  width: 100%;
+  padding-right: 10px;
+  background-color: transparent;
+  border: none;
+  font: var(--single-line-big);
+  color: var(--hyper-blue);
+}
+
+p.text-field-error {
+  margin-top: 5px;
+  margin-left: 15px;
+  font: 400 12px/1 "Menlo";
+  color: var(--hyper-magenta);
+}

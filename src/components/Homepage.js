@@ -4,23 +4,17 @@ import './Homepage.css';
 
 import HomepageFormContainer from "../containers/HomepageFormContainer";
 
-const Homepage = () => {
-
-  const redirectIfLoggedIn = () => {
-    if (localStorage.getItem('token')) {
-      return <Redirect to='/drive' />
-    }
-  }
+const Homepage = props => {
 
   return(
     <div className="homepage-grid">
       <div className="content-container" >
-        {redirectIfLoggedIn()}
-        <img className="hero-logo" src="/hyperdrive-logo-150px.jpg" />
-        <HomepageFormContainer />
+        { props.loggedIn && <Redirect to='/drive' /> }
+        <img className="hero-logo" src="/hyperdrive-logo-150px.jpg" alt="Hyperdrive logo" />
+        <HomepageFormContainer loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn} />
       </div>
     </div>
-  )
+  );
 
 }
 

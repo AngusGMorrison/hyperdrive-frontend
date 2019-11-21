@@ -1,3 +1,16 @@
+input.text-field:internal-autofill-selected {
+  color: var(--hyper-blue) !important;
+  background-color: transparent !important;
+}
+
+.text-field:-webkit-autofill,
+.text-field:-webkit-autofill:hover, 
+.text-field:-webkit-autofill:focus {
+  color: var(--hyper-blue) !important;
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .text-field {
   display: flex;
   height: 40px;

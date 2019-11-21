@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
-import { isValidName, isValidEmail, isValidPassword, ERROR_MESSAGES } from '../../validators/validators';
+import { checkForNameErrors, checkForEmailErrors, checkForPasswordErrors } from '../../validators/validators';
 import API from '../../adapters/API';
 
 import TextField from './fields/TextField';
@@ -8,25 +8,45 @@ import BigButton from "../buttons/BigButton";
 
 import useForm from '../../hooks/useForm'
 
-const initialFormState = {
-  name: '',
-  email: '',
-  password: ''
-}
-
-const validators = { name: isValidName, email: isValidEmail, password: isValidPassword }
-
 const RegistrationForm = props => {
 
-  const submitAction = formData => API.signUp(formData)
-    .then(props.setTokenAndRedirect)
-    .catch(props.handleHttpError);
+  const initialFormState = {
+    name: '',
+    email: '',
+    password: ''
+  }
 
+  const advancedFormState = {
+    name: {
+      value: "",
+      required: true,
+      validator: checkForNameErrors
+    },
+    email: {
+      value: "",
+      required: true,
+      validator: checkForEmailErrors
+    },
+    password: {
+      value: "",
+      required: true,
+      validator: checkForEmailErrors
+    }
+  }
 
-  const { formData, errors, handleInputChange, handleFormSubmission, //fieldValidators } = useForm({ initialFormState, validators, submitAction })
+  const validators = {
+    name: checkForNameErrors,
+    email: checkForEmailErrors,
+    password: checkForPasswordErrors
+  }
 
-  console.log({ formData, errors, handleInputChange, handleFormSubmission })
-  
+  const submitAction = formData => {
+    API.signUp(formData)
+      .then(props.setTokenAndRedirect)
+      .catch(props.handleHttpError);
+  }
+
+  const { formData, errors, handleInputChange, handleFormSubmission, handleBlur } = useForm({ initialFormState, validators, submitAction }) 
   const {email, password, name} = formData;
 
   return(
@@ -39,7 +59,7 @@ const RegistrationForm = props => {
         value={name}
         handleChange={handleInputChange}
         errors={errors.name}
-        // validate={validateName}
+        validate={handleBlur}
       />
       <TextField
         type={FIELD_TYPES.EMAIL}
@@ -49,7 +69,7 @@ const RegistrationForm = props => {
         value={email}
         handleChange={handleInputChange}
         errors={errors.email}
-        // validate={validateEmail}
+        validate={handleBlur}
       />
       <TextField
         type={FIELD_TYPES.PASSWORD}
@@ -59,7 +79,7 @@ const RegistrationForm = props => {
         value={password}
         handleChange={handleInputChange}
         errors={errors.password}
-        // validate={validatePassword}
+        validate={handleBlur}
       />
       <BigButton 
         theme={THEMES.BLUE}

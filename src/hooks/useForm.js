@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ERROR_MESSAGES } from '../validators/validators';
 
-const useForm = ({ initialFormState = {}, submitAction = formData => {} } = {}) => {
+const useForm = ({ initialFormState = {}, submitAction = formFields => {} } = {}) => {
   
   const [formFields, setFormFields] = useState(initialFormState);
 

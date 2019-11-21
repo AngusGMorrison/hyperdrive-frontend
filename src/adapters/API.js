@@ -1,5 +1,5 @@
 import { ServerError } from '../errors/errors';
-import ERROR_DETAILS from '../errors/error_details';
+import { THROWABLE_STATUS_CODES } from '../constants'
 
 const BASE_URL = 'http://localhost:3000';
 const SIGN_IN_URL = BASE_URL + '/sign-in';
@@ -36,8 +36,8 @@ const createConfig = (method, payload) => {
 }
 
 const objectify = response => {
-  if (response.status === 500 || response.status === 404) {
-    throw new ServerError(ERROR_DETAILS.GENERIC)
+  if (THROWABLE_STATUS_CODES.includes(response.status)) {
+    throw new ServerError(response.status)
   } else {
     return response.json();
   }

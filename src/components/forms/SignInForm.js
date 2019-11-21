@@ -27,7 +27,7 @@ const SignInForm = props => {
   const submitAction = formFields => {
     API.signIn(formFields)
       .then(props.setTokenAndRedirect)
-      .catch(props.handleHttpError);
+      .catch(props.handleHttpErrors);
   }
 
   const { formFields, errors, handleInputChange, handleFormSubmission } = useForm({ initialFormState, submitAction });

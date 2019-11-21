@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BANNER_TYPES, HOMEPAGE_FORMS, ICONS } from '../constants.js';
 import { ServerError } from '../errors/errors';
+import ERROR_DETAILS from '../errors/error_details';
 
 import BinarySelector from '../components/selectors/BinarySelector';
 import Banner from '../components/banners/Banner'
@@ -32,11 +33,24 @@ const HomepageFormContainer = props => {
     }
   }
 
-  const handleHttpError = error => {
+  const handleHttpErrors = error => {
     if (error instanceof ServerError) {
-      setServerError(error.details);
+      handleServerError(error);
     } else {
       console.error(error);
+    }
+  }
+
+  const handleServerError = error => {
+    switch (error.code) {
+      case 403:
+        setServerError(ERROR_DETAILS.INVALID_USER);
+        break;
+      case 500 || 404:
+        setServerError(ERROR_DETAILS.GENERIC);
+        break;
+      default:
+        console.log(error);
     }
   }
 
@@ -44,7 +58,7 @@ const HomepageFormContainer = props => {
     loggedIn: props.loggedIn,
     setLoggedIn: props.setLoggedIn,
     setTokenAndRedirect: setTokenAndRedirect,
-    handleHttpError: handleHttpError,
+    handleHttpErrors: handleHttpErrors,
     resetErrors: resetErrors
   }
 

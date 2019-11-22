@@ -10,7 +10,7 @@ const Homepage = props => {
     <div className="homepage-grid">
       <div className="content-container" >
         { props.loggedIn && <Redirect to='/drive' /> }
-        <img className="hero-logo" src="/hyperdrive-logo-150px.jpg" alt="Hyperdrive logo" />
+        <img className="hero-logo" src="/logos/hyperdrive-logo-150px.jpg" alt="Hyperdrive logo" />
         <HomepageFormContainer loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn} />
       </div>
     </div>

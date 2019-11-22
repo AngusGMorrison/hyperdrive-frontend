@@ -34,6 +34,10 @@ export const ICONS = {
   },
   SORT: {
     YELLOW: '/icons/ic_sort_yellow.svg'
+  },
+  SEARCH: {
+    BLUE: '/icons/ic_search_blue.svg',
+    YELLOW: '/icons/ic_search_yellow.svg'
   }
 }
 

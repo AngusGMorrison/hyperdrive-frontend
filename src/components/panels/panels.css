@@ -1,0 +1,23 @@
+.control-panel {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  width: 100%;
+  padding: 25px 20px 20px 20px;
+  background-color: var(--hyper-dark-grey);
+  box-shadow: 4px 0 4px 0 rgba(51, 56, 57, 0.08), 2px 0 2px 0 rgba(51, 56, 57, 0.12);
+}
+
+.drive-logo {
+  margin-bottom: 30px;
+}
+
+.upload-zone {
+  width: 100%;
+  height: 200px;
+  border: 2px solid var(--hyper-blue);
+}
+
+.file-panel {
+  grid-column-start: 2;
+  width: 100%;
+}

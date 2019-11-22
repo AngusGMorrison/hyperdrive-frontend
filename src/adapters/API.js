@@ -13,11 +13,7 @@ const post = (payload, route) => {
 
 const createConfig = (method, payload = null) => {
   const config = createBaseConfig(method);
-  if (payload instanceof FormData) {
-    config.body = payload;
-  } else if (payload) {
-    config.body = JSON.stringify(payload);
-  }
+  if (payload) { config.body = JSON.stringify(payload); }
   return config;
 }
 

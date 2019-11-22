@@ -11,7 +11,17 @@ const post = (payload, route) => {
     .then(objectify);
 }
 
-const createConfig = (method, payload) => {
+const createConfig = (method, payload = null) => {
+  const config = createBaseConfig(method);
+  if (payload instanceof FormData) {
+    config.body = payload;
+  } else if (payload) {
+    config.body = JSON.stringify(payload);
+  }
+  return config;
+}
+
+const createBaseConfig = method => {
   const config = {
     method,
     headers: {
@@ -20,7 +30,6 @@ const createConfig = (method, payload) => {
     }
   }
   if (localStorage.token) { config.headers["Authorization"] = localStorage.token }
-  if (payload) { config.body = JSON.stringify(payload); }
   return config;
 }
 

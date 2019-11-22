@@ -12,6 +12,7 @@ const App = () => {
     <Router>
       <div className="router-div">
         <Route exact path='/' render={() => <Homepage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+        <Route path="/drive" render={() => <Drive setLoggedIn={setLoggedIn} />} />
       </div>
     </Router>
   );

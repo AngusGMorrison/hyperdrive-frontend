@@ -54,9 +54,9 @@ const selectAndThrowServerError = response => {
   }
 }
 
-const API = {
+const authAPI = {
   signIn,
   signUp
 }
 
-export default API;
+export default authAPI;

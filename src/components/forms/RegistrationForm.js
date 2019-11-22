@@ -1,7 +1,7 @@
 import React from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
 import { checkForNameErrors, checkForEmailErrors, checkForPasswordErrors } from '../../validators/validators';
-import API from '../../adapters/API';
+import authAPI from '../../adapters/authAPI';
 
 import TextField from './fields/TextField';
 import BigButton from "../buttons/BigButton";
@@ -32,7 +32,7 @@ const RegistrationForm = props => {
   }
 
   const submitAction = formFields => {
-    API.signUp(formFields)
+    authAPI.signUp(formFields)
       .then(props.setTokenAndRedirect)
       .catch(props.handleHttpErrors);
   }

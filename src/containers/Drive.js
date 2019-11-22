@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import API from '../adapters/API';
+import authAPI from '../adapters/authAPI';
 
 const Drive = props => {
 

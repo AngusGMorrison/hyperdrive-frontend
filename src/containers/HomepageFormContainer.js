@@ -12,7 +12,6 @@ const HomepageFormContainer = props => {
 
   const [formToDisplay, setFormToDisplay] = useState(HOMEPAGE_FORMS.SIGN_IN);
   const [serverError, setServerError] = useState(null);
-  const [formErrors, setFormErrors] = useState([]);
 
   const handleFormChange = formToDisplay => {
     resetErrors();
@@ -21,16 +20,11 @@ const HomepageFormContainer = props => {
 
   const resetErrors = () => {
     setServerError(null);
-    setFormErrors([]);
   }
 
   const setTokenAndRedirect = data => {
-    if (data.errors) {
-      setFormErrors(data.errors);
-    } else {
-      localStorage.setItem('token', data.token);
-      props.setLoggedIn(true);
-    }
+    localStorage.setItem('token', data.token);
+    props.setLoggedIn(true);
   }
 
   const handleHttpErrors = error => {

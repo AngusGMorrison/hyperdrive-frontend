@@ -44,7 +44,7 @@ const HomepageFormContainer = props => {
   const handleServerError = error => {
     switch (error.code) {
       case 400:
-        handleDataError(error);
+        handleBadRequest(error);
         break;
       case 403:
         setServerError(ERROR_DETAILS.INVALID_USER);
@@ -57,7 +57,7 @@ const HomepageFormContainer = props => {
     }
   }
 
-  const handleDataError = error => {
+  const handleBadRequest = error => {
     if (emailIsTaken(error)) {
       setServerError(ERROR_DETAILS.EMAIL_IN_USE);
     } else {

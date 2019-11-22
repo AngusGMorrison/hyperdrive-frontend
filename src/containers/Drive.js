@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import authAPI from '../adapters/authAPI';
+
+import ControlPanel from '../components/controlPanel/ControlPanel'
 
 const Drive = props => {
 
@@ -15,14 +16,14 @@ const Drive = props => {
 
   return(
     <div>
-      {/* <ControlPanel
+      <ControlPanel
         setLoggedIn={props.setLoggedIn} 
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        sortType={sortType}
-        setSortType={setSortType}
+        // searchTerm={searchTerm}
+        // setSearchTerm={setSearchTerm}
+        // sortType={sortType}
+        // setSortType={setSortType}
       />
-      <FilePanel
+      {/* <FilePanel
         files={files}
       /> */}
     </div>

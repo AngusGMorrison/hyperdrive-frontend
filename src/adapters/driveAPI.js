@@ -8,8 +8,13 @@ const uploadFile = file => {
   xhr.setRequestHeader('Authorization', localStorage.token);
   xhr.responseType = 'json';
   xhr.onload = () => {
-    this.response.json()
-      .then(console.log);
+    console.log(xhr.response);
   }
   xhr.send(file);
 }
+
+const driveAPI = {
+  uploadFile
+}
+
+export default driveAPI;

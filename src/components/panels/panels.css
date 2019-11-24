@@ -1,4 +1,6 @@
 .control-panel {
+  display: flex;
+  flex-direction: column;
   grid-column-start: 1;
   grid-column-end: 2;
   width: 100%;
@@ -8,13 +10,25 @@
 }
 
 .drive-logo {
+  width: 147px;
   margin-bottom: 30px;
 }
 
 .upload-zone {
+  flex-grow: 1;
   width: 100%;
   height: 200px;
+  margin-top: 10px;
+  margin-bottom: 50px;
   border: 2px solid var(--hyper-blue);
+  border-radius: 3px;
+}
+
+.profile-widget {
+  height: 80px;
+  width: 100%;
+  border: 2px solid white;
+  border-radius: 3px;
 }
 
 .file-panel {

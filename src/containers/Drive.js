@@ -6,6 +6,7 @@ import FilePanel from '../components/panels/FilePanel';
 
 const Drive = props => {
 
+  const [userDetails, setUserDetails] = useState({});
   const [files, setFiles] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
   const [sortType, setSortType] = useState(null);
@@ -19,6 +20,7 @@ const Drive = props => {
   return(
     <div className="drive">
       <ControlPanel
+        user={userDetails}
         setLoggedIn={props.setLoggedIn} 
         // searchTerm={searchTerm}
         // setSearchTerm={setSearchTerm}

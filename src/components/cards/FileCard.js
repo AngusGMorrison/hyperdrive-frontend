@@ -1,9 +1,10 @@
 import React from 'react';
 import { ICONS, REGEX } from '../../constants';
+import './cards.css';
 
 const FileCard = ({ file }) => {
 
-  const MAX_NAME_LENGTH = 13
+  const MAX_NAME_LENGTH = 14
 
   const get_icon_src = () => {
     if (file.content_type.match(REGEX.CONTENT_TYPE_TEXT)) {
@@ -27,11 +28,11 @@ const FileCard = ({ file }) => {
 
   return(
     <div className="file-card">
-      <div>
+      <div className="file-icon-container">
         <img className="file-icon" src={get_icon_src()} alt="File icon" />
       </div>
       <div>
-        <p>{format_filename()}</p>
+        <p className="file-card-filename">{format_filename()}</p>
       </div>
     </div>
   )

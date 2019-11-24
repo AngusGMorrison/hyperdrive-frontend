@@ -41,7 +41,7 @@ const RegistrationForm = props => {
   const { email, password, name } = formFields;
 
   return(
-    <form className="registration" onSubmit={handleFormSubmission}>
+    <form className="registration" onSubmit={handleFormSubmission} autoComplete="off" >
       <TextField
         name={name.name}
         type={FIELD_TYPES.TEXT}

@@ -34,7 +34,7 @@ const SignInForm = props => {
   const { email, password } = formFields;
 
   return(
-    <form className="sign-in" onSubmit={handleFormSubmission}>
+    <form className="sign-in" onSubmit={handleFormSubmission} autoComplete="off" >
       <TextField
         name={email.name}
         type={FIELD_TYPES.EMAIL}

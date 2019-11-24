@@ -14,8 +14,10 @@ const FilePanel = props => {
   }
 
   return(
-    <div className="file-panel" >
-      {renderFiles()}
+    <div className="file-panel-container" >
+      <div className="file-panel" >
+        {renderFiles()}
+      </div>
     </div>
   )
 }

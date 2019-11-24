@@ -1,6 +1,7 @@
 import React from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from '../../constants';
 import { checkForEmailErrors } from '../../validators/validators';
+import ERROR_HANDLERS from '../../errors/errorHandlers';
 import authAPI from '../../adapters/authAPI';
 
 import TextField from './fields/TextField';
@@ -27,7 +28,9 @@ const SignInForm = props => {
   const submitAction = formFields => {
     authAPI.signIn(formFields)
       .then(props.setTokenAndRedirect)
-      .catch(props.handleHttpErrors);
+      .catch(error => {
+        ERROR_HANDLERS.handleHttpErrors(error, props.serverErrorHandler)
+      });
   }
 
   const { formFields, errors, handleInputChange, handleFormSubmission } = useForm({ initialFormState, submitAction });

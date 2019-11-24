@@ -43,7 +43,6 @@
   grid-template-rows: repeat(minmax(169px, 1fr));
   grid-gap: 2rem;
   width: 100%;
-  
 }
 
 .spacer {

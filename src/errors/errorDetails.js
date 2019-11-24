@@ -14,6 +14,10 @@ const ERROR_DETAILS = {
   EMAIL_IN_USE: {
     heading: "That email is taken",
     body: "Sign in or use another email."
+  },
+  UNAUTHORIZED: {
+    heading: "You don't have access to that drive",
+    body: "Please sign in to view your files."
   }
 }
 

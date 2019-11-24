@@ -47,6 +47,10 @@ export const ICONS = {
   },
 }
 
+export const LOCAL_STORAGE_KEYS = {
+  TOKEN: "token"
+}
+
 export const POSITIONS = {
   LEFT: 'left',
   RIGHT: 'right'

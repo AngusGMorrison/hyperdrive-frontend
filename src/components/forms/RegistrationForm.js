@@ -1,5 +1,6 @@
 import React from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
+import ERROR_HANDLERS from '../../errors/errorHandlers';
 import { checkForNameErrors, checkForEmailErrors, checkForPasswordErrors } from '../../validators/validators';
 import authAPI from '../../adapters/authAPI';
 
@@ -34,7 +35,9 @@ const RegistrationForm = props => {
   const submitAction = formFields => {
     authAPI.signUp(formFields)
       .then(props.setTokenAndRedirect)
-      .catch(props.handleHttpErrors);
+      .catch(error => {
+        ERROR_HANDLERS.handleHttpErrors(error, props.serverErrorHandler)
+      });
   }
 
   const { formFields, errors, handleInputChange, handleFormSubmission } = useForm({ initialFormState, submitAction });

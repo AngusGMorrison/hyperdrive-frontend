@@ -16,7 +16,6 @@ const FileCard = ({ file }) => {
 
   const format_filename = () => {
     const name = file.filename.match(REGEX.FILENAME_PARTS)[1]
-    console.log(name);
     if (name.length > MAX_NAME_LENGTH) {
       const formatted_name = name.slice(0, MAX_NAME_LENGTH);
       return formatted_name + '..' + file.extension

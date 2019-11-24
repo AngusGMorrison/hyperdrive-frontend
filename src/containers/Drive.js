@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import driveAPI from '../adapters/driveAPI';
+import ERROR_HANDLERS from '../errors/errorHandlers';
+import ERROR_DETAILS from '../errors/errorDetails';
 import './drive.css';
 
 import ControlPanel from '../components/panels/ControlPanel'
@@ -11,15 +13,31 @@ const Drive = props => {
   const [files, setFiles] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortType, setSortType] = useState(null);
+  
 
   useEffect(() => {
     driveAPI.getFilesInFolder()
       .then(data => {
         setUserDetails(data.user);
         setFiles(data.user.files);
+      })
+      .catch(error => {
+        ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
       });
     //Handle 403s here with forced logout and redirect
   }, []);
+
+  const handleServerError = error => {
+    switch (error.code) {
+      case 403:
+        props.setServerError(ERROR_DETAILS.UNAUTHORIZED);
+        props.logout()
+        props.history.push('/');
+        break;
+      default:
+        console.error(error);
+    }
+  }
 
   return(
     <div className="drive">
@@ -33,6 +51,7 @@ const Drive = props => {
       />
       <FilePanel
         files={files}
+        serverError={props.serverError}
       />
     </div>
   )

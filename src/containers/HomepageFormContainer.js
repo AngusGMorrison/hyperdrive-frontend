@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { BANNER_TYPES, HOMEPAGE_FORMS, ICONS } from '../constants.js';
 import { ServerError } from '../errors/errors';
-import ERROR_DETAILS from '../errors/error_details';
+import ERROR_HANDLERS from '../errors/errorHandlers';
+import ERROR_DETAILS from '../errors/errorDetails';
 
 import BinarySelector from '../components/selectors/BinarySelector';
 import Banner from '../components/banners/Banner'
@@ -25,14 +26,6 @@ const HomepageFormContainer = props => {
   const setTokenAndRedirect = data => {
     localStorage.setItem('token', data.token);
     props.setLoggedIn(true);
-  }
-
-  const handleHttpErrors = error => {
-    if (error instanceof ServerError) {
-      handleServerError(error);
-    } else {
-      console.error(error);
-    }
   }
 
   const handleServerError = error => {
@@ -68,7 +61,7 @@ const HomepageFormContainer = props => {
     loggedIn: props.loggedIn,
     setLoggedIn: props.setLoggedIn,
     setTokenAndRedirect: setTokenAndRedirect,
-    handleHttpErrors: handleHttpErrors,
+    serverErrorHandler: handleServerError,
     resetErrors: resetErrors
   }
 

@@ -5,8 +5,6 @@ import FileCard from "../cards/FileCard";
 
 const FilePanel = props => {
 
-  console.log(props.files)
-
   const renderFiles = () => {
     return props.files.map(file => {
       return <FileCard key={file.id} file={file} />

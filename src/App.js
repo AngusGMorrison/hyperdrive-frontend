@@ -11,6 +11,11 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('token'));
   const [serverError, setServerError] = useState(null);
 
+  // const logIn = token => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEYS.token, token);
+  //   setLoggedIn(true);
+  // }
+  
   const logout = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.token);
     setLoggedIn(false);
@@ -19,8 +24,8 @@ const App = () => {
   return (
     <Router>
       <div className="router-div">
-        <Route exact path='/' render={() => <Homepage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-        <Route path="/drive" render={routerProps => <Drive {...routerProps} setLoggedIn={setLoggedIn} serverError={serverError} setServerError={setServerError} logout={logout} />} />
+        <Route exact path='/' render={() => <Homepage loggedIn={loggedIn} setLoggedIn={setLoggedIn} logout={logout} serverError={serverError} />} />
+        <Route path="/drive" render={routerProps => <Drive {...routerProps} serverError={serverError} setServerError={setServerError} logout={logout} />} />
       </div>
     </Router>
   );

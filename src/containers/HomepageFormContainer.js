@@ -40,7 +40,7 @@ const HomepageFormContainer = props => {
         setServerError(ERROR_DETAILS.GENERIC);
         break;
       default:
-        console.log(error);
+        console.error(error);
     }
   }
 

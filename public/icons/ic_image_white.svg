@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+    <title>ic_image</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_image" transform="translate(-9.000000, -9.000000)">
+            <g id="Icon-24px">
+                <g>
+                    <polygon id="Shape" points="0 0 74 0 74 74 0 74"></polygon>
+                    <path d="M64.75,58.5833333 L64.75,15.4166667 C64.75,12.025 61.975,9.25 58.5833333,9.25 L15.4166667,9.25 C12.025,9.25 9.25,12.025 9.25,15.4166667 L9.25,58.5833333 C9.25,61.975 12.025,64.75 15.4166667,64.75 L58.5833333,64.75 C61.975,64.75 64.75,61.975 64.75,58.5833333 L64.75,58.5833333 Z M26.2083333,41.625 L33.9166667,50.9058333 L44.7083333,37 L58.5833333,55.5 L15.4166667,55.5 L26.2083333,41.625 L26.2083333,41.625 Z" id="Shape" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

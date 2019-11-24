@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import './panels.css';
 
-const FilePanel = () => {
+import FileCard from "../cards/FileCard";
+
+const FilePanel = props => {
+
+  console.log(props.files)
+
+  const renderFiles = () => {
+    return props.files.map(file => {
+      return <FileCard key={file.id} file={file} />
+    });
+  }
+
   return(
-    <div className="file-panel" ></div>
+    <div className="file-panel" >
+      {renderFiles()}
+    </div>
   )
 }
 

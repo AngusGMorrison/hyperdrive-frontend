@@ -2,8 +2,8 @@ import API, { BASE_URL } from './API';
 
 const DRIVE_URL = BASE_URL + '/drive'
 
-const getDrive = () => {
-  
+const getFilesInFolder = () => {
+  return API.ajax("GET", DRIVE_URL);
 }
 
 const uploadFile = (file, progressCallback, completionCallback) => {
@@ -23,6 +23,7 @@ const computeUploadProgress = (event, callback) => {
 }
 
 const driveAPI = {
+  getFilesInFolder,
   uploadFile
 }
 

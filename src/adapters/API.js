@@ -4,6 +4,17 @@ import { ServerError } from '../errors/errors';
 export const BASE_URL = 'http://localhost:3000';
 export const TEST_URL = BASE_URL + '/test';
 
+const ajax = (method, route, payload = null) => {
+  const config = createConfig(method, payload);
+  return fetch(route, config)
+    .then(objectify);
+}
+
+const get = route => {
+  const config = createBaseConfig("GET");
+  return fetch(route, config)
+    .then(objectify);
+}
 
 const post = (payload, route) => {
   const config = createConfig("POST", payload);

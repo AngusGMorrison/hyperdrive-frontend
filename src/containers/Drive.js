@@ -24,19 +24,22 @@ const Drive = props => {
       .catch(error => {
         ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
       });
-    //Handle 403s here with forced logout and redirect
   }, []);
 
   const handleServerError = error => {
     switch (error.code) {
       case 403:
-        props.setServerError(ERROR_DETAILS.UNAUTHORIZED);
-        props.logout()
-        props.history.push('/');
+        forbidAccess();
         break;
       default:
         console.error(error);
     }
+  }
+
+  const forbidAccess = () => {
+    props.setServerError(ERROR_DETAILS.UNAUTHORIZED);
+    props.logout()
+    props.history.push('/');
   }
 
   return(

@@ -32,7 +32,7 @@ const Drive = props => {
 
   useEffect(() => {
     setFilesToRender(getFilesToRender());
-  }, [files]);
+  }, [files, sortType, searchTerm]);
 
   const setDriveState = driveData => {
     setUserDetails(driveData.user);
@@ -55,20 +55,20 @@ const Drive = props => {
   }
 
   const getFilesToRender = () => {
-    const filesToRender = searchFiles()
-    return sortFiles(filesToRender);
+    const searchResults = searchFiles()
+    return sortFiles(searchResults);
   }
 
   const searchFiles = () => {
-    if (!searchTerm) return files;
+    if (!searchTerm) return [ ...files ];
     return files.filter(file => {
       return file.filename.includes(searchTerm);
     });
   }
 
-  const sortFiles = files => {
+  const sortFiles = filesToSort => {
     const sortFunction = sortType === SORT_TYPES.NAME ? sortByName : sortByCreatedAt;
-    return files.sort(sortFunction);
+    return filesToSort.sort(sortFunction);
   }
 
   const sortByName = (a, b) => {

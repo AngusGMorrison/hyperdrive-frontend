@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, withRouter, Switch } from 'react-router-dom';
+import { withRouter, Switch, Route } from 'react-router-dom';
 import { LOCAL_STORAGE_KEYS } from "./constants";
 import './App.css';
 
@@ -17,8 +17,9 @@ const App = withRouter(({ history }) => {
   // }
   
   const logout = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.token);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
     setLoggedIn(false);
+    history.push('/');
   }
 
   return (

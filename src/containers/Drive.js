@@ -38,8 +38,7 @@ const Drive = props => {
 
   const forbidAccess = () => {
     props.setServerError(ERROR_DETAILS.UNAUTHORIZED);
-    props.logout()
-    props.history.push('/');
+    props.logout();
   }
 
   return(

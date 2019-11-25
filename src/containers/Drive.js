@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
 import driveAPI from '../adapters/driveAPI';
 import ERROR_HANDLERS from '../errors/errorHandlers';
 import ERROR_DETAILS from '../errors/errorDetails';

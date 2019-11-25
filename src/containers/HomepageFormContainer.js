@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BANNER_TYPES, HOMEPAGE_FORMS, ICONS } from '../constants.js';
+import { BANNER_TYPES, ICONS } from '../constants.js';
 import ERROR_DETAILS from '../errors/errorDetails';
 
 import BinarySelector from '../components/selectors/BinarySelector';
@@ -9,7 +9,12 @@ import RegistrationForm from '../components/forms/RegistrationForm';
 
 const HomepageFormContainer = props => {
 
-  const [formToDisplay, setFormToDisplay] = useState(HOMEPAGE_FORMS.SIGN_IN);
+  const FORMS = {
+    SIGN_IN: 'sign in',
+    REGISTER: 'register'
+  }
+
+  const [formToDisplay, setFormToDisplay] = useState(FORMS.SIGN_IN);
 
   const handleFormChange = formToDisplay => {
     resetErrors();
@@ -61,8 +66,8 @@ const HomepageFormContainer = props => {
         heading={"Welcome to Hyperdrive"}
         icon={ICONS.SORT.YELLOW}
         selectedOption={formToDisplay}
-        option1={HOMEPAGE_FORMS.REGISTER}
-        option2={HOMEPAGE_FORMS.SIGN_IN}
+        option1={FORMS.REGISTER}
+        option2={FORMS.SIGN_IN}
         handleClick={handleFormChange}
       />
       {
@@ -74,7 +79,7 @@ const HomepageFormContainer = props => {
         />
       }
       { 
-        formToDisplay === HOMEPAGE_FORMS.SIGN_IN ?
+        formToDisplay === FORMS.SIGN_IN ?
           <SignInForm { ...formProps } /> :
           <RegistrationForm { ...formProps } />
       }

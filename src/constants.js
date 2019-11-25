@@ -8,11 +8,6 @@ export const FIELD_TYPES = {
   EMAIL: "email"
 }
 
-export const HOMEPAGE_FORMS = {
-  SIGN_IN: 'sign in',
-  REGISTER: 'register'
-}
-
 export const ICONS = {
   ACCOUNT_CIRCLE: {
     BLUE: '/icons/ic_account_circle_blue.svg',

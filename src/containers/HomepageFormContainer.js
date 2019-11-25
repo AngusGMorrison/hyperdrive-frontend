@@ -23,11 +23,6 @@ const HomepageFormContainer = props => {
     setServerError(null);
   }
 
-  const setTokenAndRedirect = data => {
-    localStorage.setItem('token', data.token);
-    props.setLoggedIn(true);
-  }
-
   const handleServerError = error => {
     switch (error.code) {
       case 400:
@@ -59,7 +54,6 @@ const HomepageFormContainer = props => {
 
   const formProps = {
     logIn: props.logIn,
-    setTokenAndRedirect: setTokenAndRedirect,
     serverErrorHandler: handleServerError,
     resetErrors: resetErrors
   }

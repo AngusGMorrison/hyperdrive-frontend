@@ -13,6 +13,7 @@ const Drive = props => {
   const [userDetails, setUserDetails] = useState({});
 
   const [files, setFiles] = useState([]);
+  const [filesToRender, setFilesToRender] = useState([]);
 
   const addFileToState = file => {
     setFiles([ ...files, file ]);
@@ -28,6 +29,10 @@ const Drive = props => {
         ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
       });
   }, []);
+
+  useEffect(() => {
+    setFilesToRender(getFilesToRender());
+  }, [files]);
 
   const setDriveState = driveData => {
     setUserDetails(driveData.user);
@@ -98,7 +103,7 @@ const Drive = props => {
   }
   
   const closeContextMenu = event => {
-    event.preventDefault()
+    event.preventDefault();
     contextMenu.isOpen && setContextMenu(initialContextMenu);
   }
 
@@ -114,7 +119,7 @@ const Drive = props => {
         logOut={props.logOut}
       />
       <FilePanel
-        files={getFilesToRender()}
+        files={filesToRender}
         serverError={props.serverError}
         contextMenu={contextMenu}
         openContextMenu={openContextMenu}

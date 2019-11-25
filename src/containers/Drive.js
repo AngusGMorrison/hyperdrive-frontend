@@ -76,7 +76,6 @@ const Drive = props => {
   }
 
   const sortByCreatedAt = (a, b) => {
-    console.log("sorting")
     return b.id - a.id;
   }
 

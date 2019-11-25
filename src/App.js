@@ -3,8 +3,9 @@ import { withRouter, Switch, Route } from 'react-router-dom';
 import { LOCAL_STORAGE_KEYS } from "./constants";
 import './App.css';
 
-import Homepage from './components/Homepage';
+import Homepage from './components/pages/Homepage';
 import Drive from './containers/Drive';
+import PageNotFound from './components/pages/PageNotFound'
 
 const App = withRouter(({ history }) => {
 
@@ -46,6 +47,7 @@ const App = withRouter(({ history }) => {
           />
         )}
       />
+      <Route render={() => <PageNotFound />} />
     </Switch>
   );
 });

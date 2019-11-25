@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import './Homepage.css';
 
-import HomepageFormContainer from "../containers/HomepageFormContainer";
+import HomepageFormContainer from "../../containers/HomepageFormContainer";
 
 const Homepage = props => {
 

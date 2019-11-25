@@ -30,9 +30,8 @@ const App = withRouter(({ history }) => {
           <Homepage
             logIn={logIn}
             loggedIn={loggedIn}
-            setLoggedIn={setLoggedIn}
-            logOut={logOut}
             serverError={serverError}
+            setServerError={setServerError}
           />
         )}
       />

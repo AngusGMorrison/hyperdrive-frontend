@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { BANNER_TYPES, HOMEPAGE_FORMS, ICONS } from '../constants.js';
-import { ServerError } from '../errors/errors';
-import ERROR_HANDLERS from '../errors/errorHandlers';
 import ERROR_DETAILS from '../errors/errorDetails';
 
 import BinarySelector from '../components/selectors/BinarySelector';
@@ -12,7 +10,6 @@ import RegistrationForm from '../components/forms/RegistrationForm';
 const HomepageFormContainer = props => {
 
   const [formToDisplay, setFormToDisplay] = useState(HOMEPAGE_FORMS.SIGN_IN);
-  const [serverError, setServerError] = useState(null);
 
   const handleFormChange = formToDisplay => {
     resetErrors();
@@ -20,7 +17,7 @@ const HomepageFormContainer = props => {
   }
 
   const resetErrors = () => {
-    setServerError(null);
+    props.setServerError(null);
   }
 
   const handleServerError = error => {
@@ -29,10 +26,10 @@ const HomepageFormContainer = props => {
         handleBadRequest(error);
         break;
       case 403:
-        setServerError(ERROR_DETAILS.INVALID_USER);
+        props.setServerError(ERROR_DETAILS.INVALID_USER);
         break;
       case 500 || 404:
-        setServerError(ERROR_DETAILS.GENERIC);
+        props.setServerError(ERROR_DETAILS.GENERIC);
         break;
       default:
         console.error(error);
@@ -41,9 +38,9 @@ const HomepageFormContainer = props => {
 
   const handleBadRequest = error => {
     if (emailIsTaken(error)) {
-      setServerError(ERROR_DETAILS.EMAIL_IN_USE);
+      props.setServerError(ERROR_DETAILS.EMAIL_IN_USE);
     } else {
-      setServerError(ERROR_DETAILS.BAD_REQUEST);
+      props.setServerError(ERROR_DETAILS.BAD_REQUEST);
     }
   }
 
@@ -69,17 +66,17 @@ const HomepageFormContainer = props => {
         handleClick={handleFormChange}
       />
       {
-        serverError &&
+        props.serverError &&
         <Banner
           type={BANNER_TYPES.ERROR}
           icon={ICONS.CLOUD_OFF.DARK}
-          content={serverError}
+          content={props.serverError}
         />
       }
       { 
         formToDisplay === HOMEPAGE_FORMS.SIGN_IN ?
-        <SignInForm { ...formProps } /> :
-        <RegistrationForm { ...formProps } />
+          <SignInForm { ...formProps } /> :
+          <RegistrationForm { ...formProps } />
       }
     </div>
   );

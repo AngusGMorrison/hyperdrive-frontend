@@ -106,14 +106,18 @@ const Drive = props => {
       }
     });
   }
-  
-  const closeContextMenu = event => {
+
+  const closeContextMenuNoDefault = (event) => {
     event.preventDefault();
+    closeContextMenu();
+  }
+  
+  const closeContextMenu = () => {
     contextMenu.isOpen && setContextMenu(initialContextMenu);
   }
 
   return(
-    <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
+    <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenuNoDefault}>
       <ControlPanel
         user={userDetails}
         searchTerm={searchTerm}

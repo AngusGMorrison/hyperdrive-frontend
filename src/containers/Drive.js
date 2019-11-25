@@ -50,6 +50,7 @@ const Drive = props => {
         setSearchTerm={setSearchTerm}
         // sortType={sortType}
         // setSortType={setSortType}
+        logOut={props.logOut}
       />
       <FilePanel
         files={files}

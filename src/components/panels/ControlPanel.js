@@ -12,10 +12,10 @@ const ControlPanel = props => {
   return(
     <div className="control-panel">
       <img className="drive-logo" src="/logos/hyperdrive-logo-50px.jpg" alt="Hyperdrive logo" />
-      <SearchField name="search" placeholder="Search" value={props.searchTerm} setSearchTerm={props.setSearchTerm} />
+      <SearchField name="search" placeholder="Search drive" value={props.searchTerm} setSearchTerm={props.setSearchTerm} />
       <BinarySelector heading="Sort by:" icon={ICONS.SORT.YELLOW} option1="name" option2="updated at" handleClick={() => {}} />
       <UploadForm />
-      <ProfileWidget />
+      <ProfileWidget logOut={props.logOut} />
     </div>
     
   )

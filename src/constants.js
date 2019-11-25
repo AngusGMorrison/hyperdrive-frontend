@@ -23,6 +23,9 @@ export const ICONS = {
     BLUE: '/icons/ic_key_blue.svg',
     MAGENTA: '/icons/ic_key_magenta.svg'
   },
+  LOGOUT: {
+    WHITE: '/icons/ic_logout_white.svg'
+  },
   MAIL: {
     BLUE: '/icons/ic_mail_blue.svg',
     MAGENTA: '/icons/ic_mail_magenta.svg'

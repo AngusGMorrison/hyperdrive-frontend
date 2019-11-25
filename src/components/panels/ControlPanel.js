@@ -3,7 +3,7 @@ import { ICONS, SORT_TYPES } from '../../constants';
 import './panels.css'
 
 import SearchField from '../forms/fields/SearchField';
-import BinarySelector from '../selectors/BinarySelector';
+import BinarySelector from '../menus/BinarySelector';
 import UploadForm from '../forms/UploadForm';
 import ProfileWidget from '../profile/ProfileWidget';
 

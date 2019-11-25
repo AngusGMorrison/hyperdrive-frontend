@@ -1,7 +1,7 @@
 import React from 'react';
 import './selectors.css'
 
-import SelectorButton from './SelectorButton'
+import SelectorButton from '../buttons/SelectorButton'
 import { POSITIONS } from '../../constants'
 
 const BinarySelector = props => {

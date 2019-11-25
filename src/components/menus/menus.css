@@ -1,0 +1,5 @@
+.context-menu {
+  width: 188px;
+  position: absolute;
+  background-color: var(--hyper-blue);
+}

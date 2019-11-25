@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BANNER_TYPES, ICONS } from '../constants.js';
 import ERROR_DETAILS from '../errors/errorDetails';
 
-import BinarySelector from '../components/selectors/BinarySelector';
+import BinarySelector from '../components/menus/BinarySelector';
 import Banner from '../components/banners/Banner'
 import SignInForm from '../components/forms/SignInForm';
 import RegistrationForm from '../components/forms/RegistrationForm';

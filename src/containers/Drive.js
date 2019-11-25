@@ -75,10 +75,35 @@ const Drive = props => {
     return b.id - a.id;
   }
 
+  const initialContextMenu = {
+    isOpen: false,
+    fileId: null,
+    position: {
+      top: 0,
+      left: 0
+    }
+  }
 
+  const [contextMenu, setContextMenu] = useState(initialContextMenu);
+
+  const openContextMenu = (fileId, mouseCoords) => {
+    setContextMenu({
+      isOpen: true,
+      fileId: fileId,
+      position: {
+        top: mouseCoords.y - 10,
+        left: mouseCoords.x - 10
+      }
+    });
+  }
+  
+  const closeContextMenu = event => {
+    event.preventDefault()
+    contextMenu.isOpen && setContextMenu(initialContextMenu);
+  }
 
   return(
-    <div className="drive">
+    <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
       <ControlPanel
         user={userDetails}
         searchTerm={searchTerm}
@@ -91,6 +116,9 @@ const Drive = props => {
       <FilePanel
         files={getFilesToRender()}
         serverError={props.serverError}
+        contextMenu={contextMenu}
+        openContextMenu={openContextMenu}
+        closeContextMenu={closeContextMenu}
       />
     </div>
   )

@@ -58,8 +58,7 @@ const HomepageFormContainer = props => {
   }
 
   const formProps = {
-    loggedIn: props.loggedIn,
-    setLoggedIn: props.setLoggedIn,
+    logIn: props.logIn,
     setTokenAndRedirect: setTokenAndRedirect,
     serverErrorHandler: handleServerError,
     resetErrors: resetErrors

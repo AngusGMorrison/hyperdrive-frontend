@@ -28,6 +28,7 @@ const App = withRouter(({ history }) => {
         exact path='/'
         render={() => (
           <Homepage
+            logIn={logIn}
             loggedIn={loggedIn}
             setLoggedIn={setLoggedIn}
             logOut={logOut}

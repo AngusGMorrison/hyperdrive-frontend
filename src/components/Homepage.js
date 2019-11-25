@@ -10,12 +10,14 @@ const Homepage = props => {
 
   return(
     <div className="homepage-grid">
+      { props.loggedIn && <Redirect to='/drive' /> }
+
       <div className="content-container" >
-        { props.loggedIn && <Redirect to='/drive' /> }
         { props.serverError && <Banner type={BANNER_TYPES.ERROR} icon={ICONS.CLOUD_OFF.DARK} content={props.serverError} />}
         <img className="hero-logo" src="/logos/hyperdrive-logo-150px.jpg" alt="Hyperdrive logo" />
-        <HomepageFormContainer loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn} logout={props.logout} />
+        <HomepageFormContainer logIn={props.logIn} loggedIn={props.loggedIn} setLoggedIn={props.setLoggedIn} logOut={props.logOut} />
       </div>
+
     </div>
   );
 

@@ -34,7 +34,7 @@ const RegistrationForm = props => {
 
   const submitAction = formFields => {
     authAPI.signUp(formFields)
-      .then(props.setTokenAndRedirect)
+      .then(data => props.logIn(data.token))
       .catch(error => {
         ERROR_HANDLERS.handleHttpErrors(error, props.serverErrorHandler)
       });

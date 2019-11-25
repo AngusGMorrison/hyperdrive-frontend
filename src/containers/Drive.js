@@ -19,6 +19,12 @@ const Drive = props => {
     setFiles([ ...files, file ]);
   }
 
+  const removeDeletedFile = deletedFileId => {
+    setFiles(files.filter(file => {
+      return file.id !== deletedFileId;
+    }));
+  }
+
   const [searchTerm, setSearchTerm] = useState('');
   const [sortType, setSortType] = useState(SORT_TYPES.CREATED_AT);
   
@@ -123,7 +129,7 @@ const Drive = props => {
         serverError={props.serverError}
         contextMenu={contextMenu}
         openContextMenu={openContextMenu}
-        closeContextMenu={closeContextMenu}
+        removeDeletedFile={removeDeletedFile}
       />
     </div>
   )

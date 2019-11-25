@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import driveAPI from '../../adapters/driveAPI';
 import './panels.css';
 
 import FileCard from '../cards/FileCard';
@@ -12,6 +13,27 @@ const FilePanel = props => {
     });
   }
 
+  const downloadFile = () => {}
+
+  const deleteFile = fileId => {
+    const confirmation = window.confirm("Delete this file? This can't be undone.")
+    if (!confirmation) return;
+    driveAPI.deleteFile(fileId)
+      .then(() => props.removeDeletedFile(fileId))
+      .catch(console.error);
+  }
+
+  const contextActions = [
+    {
+      label: "Download",
+      onClick: downloadFile
+    },
+    {
+      label: "Delete",
+      onClick: deleteFile,
+    },
+  ]
+
   return(
     <div className="file-panel-container" >
       <div className="file-panel" >
@@ -20,7 +42,7 @@ const FilePanel = props => {
           props.contextMenu.isOpen &&
           <ContextMenu
             attributes={props.contextMenu}
-            closeContextMenu={props.closeContextMenu}
+            actions={contextActions}
           />
         }
       </div>

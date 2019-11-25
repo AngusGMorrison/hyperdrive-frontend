@@ -22,9 +22,14 @@ const computeUploadProgress = (event, callback) => {
   }
 }
 
+const deleteFile = fileId => {
+  return API.ajax("DELETE", DRIVE_URL, { file_id: fileId });
+}
+
 const driveAPI = {
   getFilesInFolder,
-  uploadFile
+  uploadFile,
+  deleteFile
 }
 
 export default driveAPI;

@@ -2,12 +2,18 @@ import React from 'react';
 
 import './menus.css';
 
-const ContextMenu = ({ attributes, hideContextMenu }) => {
+const ContextMenu = ({ attributes, actions }) => {
+
+  const renderActions = () => {
+    return actions.map(action => {
+      return <li key={action.label} onClick={() => action.onClick(attributes.fileId)}>{action.label}</li>
+    })
+  }
+
   return(
     <div className="context-menu" style={attributes.position} >
       <ul>
-        <li>Download</li>
-        <li>Delete</li>
+        {renderActions()}
       </ul>
     </div>
   );

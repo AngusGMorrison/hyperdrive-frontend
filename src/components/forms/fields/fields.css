@@ -1,22 +1,33 @@
-input.text-field:internal-autofill-selected {
-  color: var(--hyper-blue) !important;
-  background-color: transparent !important;
+.field-container {
+  height: 52px;
+  margin-bottom: 15px;
 }
 
-.text-field:-webkit-autofill,
-.text-field:-webkit-autofill:hover, 
-.text-field:-webkit-autofill:focus {
-  color: var(--hyper-blue) !important;
-  background-color: transparent !important;
-  transition: background-color 5000s ease-in-out 0s;
+.field-container:last-of-type {
+  margin-bottom: 35px;
 }
 
-.text-field {
+.field {
   display: flex;
   height: 40px;
   padding-left: 10px;
   border: 2px solid white;
   border-radius: 3px;
+}
+
+.field.error {
+  border-color: var(--hyper-magenta);
+}
+
+.field.error:focus-within {
+  box-shadow: 0 0 10px var(--hyper-magenta);
+}
+
+.field.error > input {
+  color: var(--hyper-magenta);
+}
+
+.text-field {
   border-color: var(--hyper-blue);
 }
 
@@ -24,38 +35,33 @@ input.text-field:internal-autofill-selected {
   box-shadow: 0 0 10px var(--hyper-blue);
 }
 
-.text-field.error {
-  border-color: var(--hyper-magenta);
+.search-field {
+  border-color: var(--hyper-yellow);
 }
 
-.text-field.error:focus-within {
-  box-shadow: 0 0 10px var(--hyper-magenta);
-}
-
-.text-field.error > input {
-  color: var(--hyper-magenta);
-}
-
-.text-field-container {
-  height: 52px;
-  margin-bottom: 15px;
-}
-
-.text-field-container:last-of-type {
-  margin-bottom: 35px;
+.search-field:focus-within { 
+  box-shadow: 0 0 10px var(--hyper-yellow);
 }
 
 .field-icon {
   margin-right: 20px;
 }
 
-.text-field input {
+.field input {
   width: 100%;
   padding-right: 10px;
   background-color: transparent;
   border: none;
   font: var(--single-line-big);
+  color: white;
+}
+
+.text-field input {
   color: var(--hyper-blue);
+}
+
+.search-field input {
+  color: var(--hyper-yellow);
 }
 
 p.text-field-error {

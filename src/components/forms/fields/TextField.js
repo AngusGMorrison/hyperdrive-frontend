@@ -3,8 +3,8 @@ import './fields.css';
 
 const TextField = (props) => {
   return(
-    <div className="text-field-container">
-      <div className={`text-field ${props.errors ? `error` : ``}`}>
+    <div className="field-container">
+      <div className={`text-field field ${props.errors ? `error` : ``}`}>
         
         <img
           className="field-icon"

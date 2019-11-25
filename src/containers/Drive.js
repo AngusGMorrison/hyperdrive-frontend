@@ -46,8 +46,8 @@ const Drive = props => {
     <div className="drive">
       <ControlPanel
         user={userDetails}
-        // searchTerm={searchTerm}
-        // setSearchTerm={setSearchTerm}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
         // sortType={sortType}
         // setSortType={setSortType}
       />

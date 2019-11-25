@@ -63,6 +63,11 @@ export const REGEX = {
   FILENAME_PARTS: new RegExp(/^(.+?)(\.[^.]*$|$)/) 
 }
 
+export const SORT_TYPES = {
+  NAME: "name",
+  CREATED_AT: "created_at"
+}
+
 export const THEMES = {
   BLUE: 'blue'
 }

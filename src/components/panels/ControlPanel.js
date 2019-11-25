@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICONS } from '../../constants';
+import { ICONS, SORT_TYPES } from '../../constants';
 import './panels.css'
 
 import SearchField from '../forms/fields/SearchField';
@@ -13,7 +13,14 @@ const ControlPanel = props => {
     <div className="control-panel">
       <img className="drive-logo" src="/logos/hyperdrive-logo-50px.jpg" alt="Hyperdrive logo" />
       <SearchField name="search" placeholder="Search drive" value={props.searchTerm} setSearchTerm={props.setSearchTerm} />
-      <BinarySelector heading="Sort by:" icon={ICONS.SORT.YELLOW} option1="name" option2="updated at" handleClick={() => {}} />
+      <BinarySelector
+        heading="Sort by:"
+        icon={ICONS.SORT.YELLOW}
+        option1={SORT_TYPES.NAME}
+        option2={SORT_TYPES.CREATED_AT}
+        selectedOption={props.sortType}
+        handleClick={props.setSortType}
+      />
       <UploadForm />
       <ProfileWidget logOut={props.logOut} />
     </div>

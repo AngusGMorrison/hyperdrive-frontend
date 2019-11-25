@@ -11,7 +11,13 @@ import FilePanel from '../components/panels/FilePanel';
 const Drive = props => {
 
   const [userDetails, setUserDetails] = useState({});
+
   const [files, setFiles] = useState([]);
+
+  const addFileToState = file => {
+    setFiles([ ...files, file ]);
+  }
+
   const [searchTerm, setSearchTerm] = useState('');
   const [sortType, setSortType] = useState(SORT_TYPES.CREATED_AT);
   
@@ -24,7 +30,6 @@ const Drive = props => {
   }, []);
 
   const setDriveState = driveData => {
-    console.log(driveData)
     setUserDetails(driveData.user);
     setFiles(driveData.user.files);
   }
@@ -37,6 +42,11 @@ const Drive = props => {
       default:
         console.error(error);
     }
+  }
+
+  const forbidAccess = () => {
+    props.setServerError(ERROR_DETAILS.UNAUTHORIZED);
+    props.logOut();
   }
 
   const getFilesToRender = () => {
@@ -61,13 +71,11 @@ const Drive = props => {
   }
 
   const sortByCreatedAt = (a, b) => {
-    return new Date(b.created_at) - new Date(a.created_at);
+    console.log("sorting")
+    return b.id - a.id;
   }
 
-  const forbidAccess = () => {
-    props.setServerError(ERROR_DETAILS.UNAUTHORIZED);
-    props.logOut();
-  }
+
 
   return(
     <div className="drive">
@@ -77,6 +85,7 @@ const Drive = props => {
         setSearchTerm={setSearchTerm}
         sortType={sortType}
         setSortType={setSortType}
+        addFileToState={addFileToState}
         logOut={props.logOut}
       />
       <FilePanel

@@ -10,11 +10,12 @@ const UploadForm = props => {
     event.preventDefault();
     const file = new FormData(event.target);
     driveAPI.uploadFile(file, setUploadProgress, handleResponse);
+    event.target.reset();
   }
 
   const handleResponse = response => {
     setUploadProgress(initialProgress);
-    console.log(response);
+    props.addFileToState(response.files[0]);
   }
 
   return(

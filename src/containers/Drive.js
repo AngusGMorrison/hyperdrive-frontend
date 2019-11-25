@@ -117,6 +117,7 @@ const Drive = props => {
         setSortType={setSortType}
         addFileToState={addFileToState}
         logOut={props.logOut}
+        
       />
       <FilePanel
         files={filesToRender}

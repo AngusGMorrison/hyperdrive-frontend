@@ -26,6 +26,7 @@ const FileCard = ({ file, openContextMenu }) => {
 
   const handleRightClick = event => {
     event.preventDefault();
+    event.stopPropagation();
     const mouseCoords = {
       x: event.pageX,
       y: event.pageY

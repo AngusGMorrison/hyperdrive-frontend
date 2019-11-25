@@ -8,7 +8,7 @@ import Drive from './containers/Drive';
 
 const App = withRouter(({ history }) => {
 
-  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('token'));
+  const [loggedIn, setLoggedIn] = useState(localStorage.hasOwnProperty(LOCAL_STORAGE_KEYS.TOKEN));
   const [serverError, setServerError] = useState(null);
 
   // const logIn = token => {

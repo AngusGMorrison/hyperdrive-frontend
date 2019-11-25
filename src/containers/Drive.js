@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import driveAPI from '../adapters/driveAPI';
 import ERROR_HANDLERS from '../errors/errorHandlers';
 import ERROR_DETAILS from '../errors/errorDetails';
@@ -14,17 +15,18 @@ const Drive = props => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortType, setSortType] = useState(null);
   
-
   useEffect(() => {
     driveAPI.getFilesInFolder()
-      .then(data => {
-        setUserDetails(data.user);
-        setFiles(data.user.files);
-      })
+      .then(renderDrive)
       .catch(error => {
         ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
       });
   }, []);
+
+  const renderDrive = driveData => {
+    setUserDetails(driveData.user);
+    setFiles(driveData.user.files);
+  }
 
   const handleServerError = error => {
     switch (error.code) {
@@ -38,14 +40,13 @@ const Drive = props => {
 
   const forbidAccess = () => {
     props.setServerError(ERROR_DETAILS.UNAUTHORIZED);
-    props.logout();
+    props.logOut();
   }
 
   return(
     <div className="drive">
       <ControlPanel
         user={userDetails}
-        setLoggedIn={props.setLoggedIn} 
         // searchTerm={searchTerm}
         // setSearchTerm={setSearchTerm}
         // sortType={sortType}

@@ -11,12 +11,12 @@ const App = withRouter(({ history }) => {
   const [loggedIn, setLoggedIn] = useState(localStorage.hasOwnProperty(LOCAL_STORAGE_KEYS.TOKEN));
   const [serverError, setServerError] = useState(null);
 
-  // const logIn = token => {
-  //   localStorage.setItem(LOCAL_STORAGE_KEYS.token, token);
-  //   setLoggedIn(true);
-  // }
+  const logIn = token => {
+    localStorage.setItem(LOCAL_STORAGE_KEYS.TOKEN, token);
+    setLoggedIn(true);
+  }
   
-  const logout = () => {
+  const logOut = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
     setLoggedIn(false);
     history.push('/');
@@ -30,7 +30,7 @@ const App = withRouter(({ history }) => {
           <Homepage
             loggedIn={loggedIn}
             setLoggedIn={setLoggedIn}
-            logout={logout}
+            logOut={logOut}
             serverError={serverError}
           />
         )}
@@ -42,7 +42,7 @@ const App = withRouter(({ history }) => {
             {...routerProps}
             serverError={serverError}
             setServerError={setServerError}
-            logout={logout}
+            logOut={logOut}
           />
         )}
       />

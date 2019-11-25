@@ -24,8 +24,28 @@ const App = withRouter(({ history }) => {
 
   return (
     <Switch>
-      <Route exact path='/' render={() => <Homepage loggedIn={loggedIn} setLoggedIn={setLoggedIn} logout={logout} serverError={serverError} />} />
-      <Route path="/drive" render={routerProps => <Drive {...routerProps} serverError={serverError} setServerError={setServerError} logout={logout} />} />
+      <Route
+        exact path='/'
+        render={() => (
+          <Homepage
+            loggedIn={loggedIn}
+            setLoggedIn={setLoggedIn}
+            logout={logout}
+            serverError={serverError}
+          />
+        )}
+      />
+      <Route
+        path="/drive"
+        render={routerProps => (
+          <Drive
+            {...routerProps}
+            serverError={serverError}
+            setServerError={setServerError}
+            logout={logout}
+          />
+        )}
+      />
     </Switch>
   );
 });

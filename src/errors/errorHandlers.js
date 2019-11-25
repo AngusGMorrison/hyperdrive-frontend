@@ -1,7 +1,6 @@
 import { ServerError } from './errors';
 
 const handleHttpErrors = (error, serverErrorHandler) => {
-  console.log(serverErrorHandler);
   if (error instanceof ServerError) {
     serverErrorHandler(error);
   } else {

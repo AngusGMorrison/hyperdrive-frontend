@@ -19,10 +19,18 @@ const FilePanel = props => {
 
   const downloadFile = file => {
     driveAPI.downloadFile(file)
-      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleDownloadError));
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
   }
 
-  const handleDownloadError = error => {
+  const deleteFile = file => {
+    const confirmation = window.confirm("Delete this file? This can't be undone.")
+    if (!confirmation) return;
+    driveAPI.deleteFile(file)
+      .then(() => props.removeDeletedFile(file))
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
+  }
+
+  const handleFileError = error => {
     switch (error.code) {
       case 403:
         props.forbidAccess();
@@ -34,14 +42,6 @@ const FilePanel = props => {
         props.setServerError(ERROR_DETAILS.GENERIC)
         break;
     }
-  }
-
-  const deleteFile = file => {
-    const confirmation = window.confirm("Delete this file? This can't be undone.")
-    if (!confirmation) return;
-    driveAPI.deleteFile(file)
-      .then(() => props.removeDeletedFile(file))
-      .catch(console.error);
   }
 
   const contextActions = [

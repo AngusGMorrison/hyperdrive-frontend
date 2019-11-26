@@ -17,7 +17,7 @@ const ERROR_DETAILS = {
   },
   FILE_NOT_FOUND: {
     heading: "File not found",
-    body: "It may have been moved or deleted."
+    body: "It may have been moved or deleted. Try refreshing the page."
   },
   UNAUTHORIZED: {
     heading: "You don't have access to that drive",

@@ -27,7 +27,7 @@ const SignInForm = props => {
 
   const submitAction = formFields => {
     authAPI.signIn(formFields)
-      .then(data => props.logIn(data.token))
+      .then(props.resetErrorsAndLogin)
       .catch(error => {
         ERROR_HANDLERS.handleHttpErrors(error, props.serverErrorHandler)
       });

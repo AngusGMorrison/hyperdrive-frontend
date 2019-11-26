@@ -10,7 +10,6 @@ import PageNotFound from './components/pages/PageNotFound'
 const App = withRouter(({ history }) => {
 
   const [loggedIn, setLoggedIn] = useState(localStorage.hasOwnProperty(LOCAL_STORAGE_KEYS.TOKEN));
-  const [serverError, setServerError] = useState(null);
 
   const logIn = token => {
     localStorage.setItem(LOCAL_STORAGE_KEYS.TOKEN, token);
@@ -22,6 +21,8 @@ const App = withRouter(({ history }) => {
     setLoggedIn(false);
     history.push('/');
   }
+
+  const [serverError, setServerError] = useState(null);
 
   return (
     <Switch>

@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import driveAPI from '../../adapters/driveAPI';
+import { BANNER_TYPES, ICONS } from '../../constants';
+import ERROR_HANDLERS from '../../errors/errorHandlers';
+import ERROR_DETAILS from '../../errors/errorDetails';
 import './panels.css';
 
+import Banner from '../banners/Banner';
 import FileCard from '../cards/FileCard';
 import ContextMenu from '../menus/ContextMenu';
 
@@ -15,7 +19,21 @@ const FilePanel = props => {
 
   const downloadFile = file => {
     driveAPI.downloadFile(file)
-      .catch(console.error);
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleDownloadError));
+  }
+
+  const handleDownloadError = error => {
+    switch (error.code) {
+      case 403:
+        props.forbidAccess();
+        break;
+      case 404:
+        props.setServerError(ERROR_DETAILS.FILE_NOT_FOUND);
+        break;
+      default:
+        props.setServerError(ERROR_DETAILS.GENERIC)
+        break;
+    }
   }
 
   const deleteFile = file => {
@@ -39,6 +57,14 @@ const FilePanel = props => {
 
   return(
     <div className="file-panel-container" >
+      { 
+        props.serverError &&
+        <Banner
+          type={BANNER_TYPES.ERROR}
+          icon={ICONS.CLOUD_OFF.DARK}
+          content={props.serverError}
+        />
+      }
       <div className="file-panel" >
         { renderFiles() }
         { 

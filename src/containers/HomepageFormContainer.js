@@ -17,12 +17,13 @@ const HomepageFormContainer = props => {
   const [formToDisplay, setFormToDisplay] = useState(FORMS.SIGN_IN);
 
   const handleFormChange = formToDisplay => {
-    resetErrors();
+    props.setServerError(null);
     setFormToDisplay(formToDisplay);
   }
 
-  const resetErrors = () => {
+  const resetErrorsAndLogin = responseData => {
     props.setServerError(null);
+    props.logIn(responseData.token);
   }
 
   const handleServerError = error => {
@@ -55,9 +56,8 @@ const HomepageFormContainer = props => {
   }
 
   const formProps = {
-    logIn: props.logIn,
+    resetErrorsAndLogin: resetErrorsAndLogin,
     serverErrorHandler: handleServerError,
-    resetErrors: resetErrors
   }
 
   return(

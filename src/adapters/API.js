@@ -48,7 +48,8 @@ const selectAndThrowServerError = response => {
 }
 
 const API = {
-  ajax
+  ajax,
+  selectAndThrowServerError
 }
 
 export default API;

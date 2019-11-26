@@ -1,6 +1,6 @@
 import download from 'downloadjs';
 import API, { BASE_URL } from './API';
-import { LOCAL_STORAGE_KEYS } from '../constants';
+import { LOCAL_STORAGE_KEYS, THROWABLE_STATUS_CODES } from '../constants';
 
 const DRIVE_URL = BASE_URL + '/drive';
 
@@ -26,12 +26,18 @@ const computeUploadProgress = (event, callback) => {
 
 const downloadFile = file => {
   const config = {
-    headers: {
-      'Authorization': localStorage[LOCAL_STORAGE_KEYS.TOKEN]
-    }
+    headers: { 'Authorization': localStorage[LOCAL_STORAGE_KEYS.TOKEN] }
   }
   return fetch(DRIVE_URL + `/${file.id}`, config)
-    .then(download.bind(true, file.filename, file.content_type))
+    .then(res => tryDownload(res, file));
+}
+
+const tryDownload = (response, file) => {
+  if (THROWABLE_STATUS_CODES.includes(response.status)) {
+    API.selectAndThrowServerError(response);
+  } else {
+    download(response.blob(), file.filename, file.content_type)
+  }
 }
 
 const deleteFile = file => {

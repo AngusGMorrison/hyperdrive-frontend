@@ -132,9 +132,11 @@ const Drive = props => {
       <FilePanel
         files={filesToRender}
         serverError={props.serverError}
+        setServerError={props.setServerError}
         contextMenu={contextMenu}
         openContextMenu={openContextMenu}
         removeDeletedFile={removeDeletedFile}
+        forbidAccess={forbidAccess}
       />
     </div>
   )

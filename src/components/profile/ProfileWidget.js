@@ -1,5 +1,6 @@
 import React from 'react';
 import { ICONS } from '../../constants';
+import './profile.css'
 
 const ProfileWidget = ({ user, logOut }) => {
 
@@ -49,7 +50,7 @@ const ProfileWidget = ({ user, logOut }) => {
         <span className="storage-tracker">{formatStorageTracker()}</span>
       </div>
       <div className="icon-controls" >
-        <img src={ICONS.LOGOUT.WHITE} alt="Logout icon" onClick={logOut} />
+        <img className="icon-button" src={ICONS.LOGOUT.WHITE} alt="Logout icon" onClick={logOut} title="Log out" />
       </div>
     </div>
   )

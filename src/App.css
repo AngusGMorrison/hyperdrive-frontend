@@ -8,6 +8,7 @@ body {
   --single-line-big: 700 18px/18px "Menlo";
   --body-big: 700 16px/1.4 "Menlo";
   --body: 400 14px/1.4 "Menlo";
+  --body-bold: bold 700 14px/1.4 "Menlo";
 
   background-color: var(--hyper-dark-grey);
 }

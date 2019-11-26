@@ -24,13 +24,6 @@
   border-radius: 3px;
 }
 
-.profile-widget {
-  height: 80px;
-  width: 100%;
-  border: 2px solid white;
-  border-radius: 3px;
-}
-
 .file-panel-container {
   overflow: auto;
   padding: 2rem;

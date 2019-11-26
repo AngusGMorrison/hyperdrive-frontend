@@ -42,7 +42,7 @@ const Drive = props => {
 
   const setDriveState = driveData => {
     setUserDetails(driveData.user);
-    setFiles(driveData.files);
+    setFiles(driveData.documents);
   }
 
   const handleServerError = error => {

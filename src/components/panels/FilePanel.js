@@ -26,7 +26,7 @@ const FilePanel = props => {
     const confirmation = window.confirm("Delete this file? This can't be undone.")
     if (!confirmation) return;
     driveAPI.deleteFile(file)
-      .then(() => props.removeDeletedFile(file))
+      .then(data => props.removeFileAndUpdateUser(file, data.user))
       .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
   }
 

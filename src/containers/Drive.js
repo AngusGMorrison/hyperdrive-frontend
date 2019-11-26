@@ -20,11 +20,11 @@ const Drive = props => {
     setUserDetails({ ...userDetails });
   }
 
-  const removeDeletedFile = deletedFile => {
+  const removeFileAndUpdateUser = (deletedFile, userDetails) => {
     setFiles(files.filter(file => {
       return file.id !== deletedFile.id;
     }));
-
+    setUserDetails({...userDetails});
   }
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -136,7 +136,7 @@ const Drive = props => {
         setServerError={props.setServerError}
         contextMenu={contextMenu}
         openContextMenu={openContextMenu}
-        removeDeletedFile={removeDeletedFile}
+        removeFileAndUpdateUser={removeFileAndUpdateUser}
         forbidAccess={forbidAccess}
       />
     </div>

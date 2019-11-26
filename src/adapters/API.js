@@ -49,6 +49,7 @@ const selectAndThrowServerError = response => {
 
 const API = {
   ajax,
+  objectify,
   selectAndThrowServerError
 }
 

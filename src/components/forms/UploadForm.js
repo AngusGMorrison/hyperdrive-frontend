@@ -15,7 +15,7 @@ const UploadForm = props => {
 
   const handleResponse = response => {
     setUploadProgress(initialProgress);
-    props.addFileToState(response.documents[0]);
+    props.addFileAndUpdateUser(response.documents[0], response.user);
   }
 
   return(

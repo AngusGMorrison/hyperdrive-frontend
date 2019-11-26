@@ -27,7 +27,7 @@ const ControlPanel = props => {
         handleClick={props.setSortType}
       />
       <UploadForm
-        addFileToState={props.addFileToState}
+        addFileAndUpdateUser={props.addFileAndUpdateUser}
       />
       <ProfileWidget logOut={props.logOut} />
     </div>

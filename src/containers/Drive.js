@@ -15,8 +15,9 @@ const Drive = props => {
   const [files, setFiles] = useState([]);
   const [filesToRender, setFilesToRender] = useState([]);
 
-  const addFileToState = file => {
+  const addFileAndUpdateUser = (file, userDetails) => {
     setFiles([ ...files, file ]);
+    setUserDetails({ ...userDetails });
   }
 
   const removeDeletedFile = deletedFile => {
@@ -125,7 +126,7 @@ const Drive = props => {
         setSearchTerm={setSearchTerm}
         sortType={sortType}
         setSortType={setSortType}
-        addFileToState={addFileToState}
+        addFileAndUpdateUser={addFileAndUpdateUser}
         logOut={props.logOut}
         
       />

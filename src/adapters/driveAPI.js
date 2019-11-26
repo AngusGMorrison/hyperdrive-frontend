@@ -1,6 +1,8 @@
+import download from 'downloadjs';
 import API, { BASE_URL } from './API';
+import { LOCAL_STORAGE_KEYS } from '../constants';
 
-const DRIVE_URL = BASE_URL + '/drive'
+const DRIVE_URL = BASE_URL + '/drive';
 
 const getFilesInFolder = () => {
   return API.ajax("GET", DRIVE_URL);
@@ -22,13 +24,24 @@ const computeUploadProgress = (event, callback) => {
   }
 }
 
-const deleteFile = fileId => {
-  return API.ajax("DELETE", DRIVE_URL, { file_id: fileId });
+const downloadFile = file => {
+  const config = {
+    headers: {
+      'Authorization': localStorage[LOCAL_STORAGE_KEYS.TOKEN]
+    }
+  }
+  return fetch(DRIVE_URL + `/${file.id}`, config)
+    .then(download.bind(true, file.filename, file.content_type))
+}
+
+const deleteFile = file => {
+  return API.ajax("DELETE", DRIVE_URL + `/${file.id}`);
 }
 
 const driveAPI = {
   getFilesInFolder,
   uploadFile,
+  downloadFile,
   deleteFile
 }
 

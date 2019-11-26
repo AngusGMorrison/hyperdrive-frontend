@@ -31,7 +31,7 @@ const FileCard = ({ file, openContextMenu }) => {
       x: event.pageX,
       y: event.pageY
     }
-    openContextMenu(file.id, mouseCoords);
+    openContextMenu(file, mouseCoords);
   }
 
   return(

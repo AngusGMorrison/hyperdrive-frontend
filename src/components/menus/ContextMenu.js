@@ -6,7 +6,7 @@ const ContextMenu = ({ attributes, actions }) => {
 
   const renderActions = () => {
     return actions.map(action => {
-      return <li key={action.label} onClick={() => action.onClick(attributes.fileId)}>{action.label}</li>
+      return <li key={action.label} onClick={() => action.onClick(attributes.file)}>{action.label}</li>
     })
   }
 

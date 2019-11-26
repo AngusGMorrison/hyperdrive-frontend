@@ -13,13 +13,16 @@ const FilePanel = props => {
     });
   }
 
-  const downloadFile = () => {}
+  const downloadFile = file => {
+    driveAPI.downloadFile(file)
+      .catch(console.error);
+  }
 
-  const deleteFile = fileId => {
+  const deleteFile = file => {
     const confirmation = window.confirm("Delete this file? This can't be undone.")
     if (!confirmation) return;
-    driveAPI.deleteFile(fileId)
-      .then(() => props.removeDeletedFile(fileId))
+    driveAPI.deleteFile(file)
+      .then(() => props.removeDeletedFile(file))
       .catch(console.error);
   }
 

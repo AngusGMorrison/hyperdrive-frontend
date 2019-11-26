@@ -19,9 +19,9 @@ const Drive = props => {
     setFiles([ ...files, file ]);
   }
 
-  const removeDeletedFile = deletedFileId => {
+  const removeDeletedFile = deletedFile => {
     setFiles(files.filter(file => {
-      return file.id !== deletedFileId;
+      return file.id !== deletedFile.id;
     }));
 
   }
@@ -97,10 +97,10 @@ const Drive = props => {
 
   const [contextMenu, setContextMenu] = useState(initialContextMenu);
 
-  const openContextMenu = (fileId, mouseCoords) => {
+  const openContextMenu = (file, mouseCoords) => {
     setContextMenu({
       isOpen: true,
-      fileId: fileId,
+      file: file,
       position: {
         top: mouseCoords.y - 10,
         left: mouseCoords.x - 10

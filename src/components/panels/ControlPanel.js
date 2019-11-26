@@ -29,7 +29,12 @@ const ControlPanel = props => {
       <UploadForm
         addFileAndUpdateUser={props.addFileAndUpdateUser}
       />
-      <ProfileWidget logOut={props.logOut} />
+      { props.user &&
+        <ProfileWidget
+          user={props.user}
+          logOut={props.logOut}
+        />
+      }
     </div>
     
   )

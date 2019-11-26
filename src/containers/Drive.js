@@ -9,8 +9,8 @@ import ControlPanel from '../components/panels/ControlPanel'
 import FilePanel from '../components/panels/FilePanel';
 
 const Drive = props => {
-
-  const [userDetails, setUserDetails] = useState({});
+  
+  const [userDetails, setUserDetails] = useState(null);
 
   const [files, setFiles] = useState([]);
   const [filesToRender, setFilesToRender] = useState([]);

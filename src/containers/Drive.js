@@ -23,6 +23,7 @@ const Drive = props => {
     setFiles(files.filter(file => {
       return file.id !== deletedFileId;
     }));
+
   }
 
   const [searchTerm, setSearchTerm] = useState('');

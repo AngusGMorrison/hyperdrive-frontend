@@ -13,7 +13,7 @@ const useContextMenu = () => {
     }
   }
 
-  const [contextMenu, setContextMenu] = useState(initialContextMenu);
+  const [ contextMenu, setContextMenu ] = useState(initialContextMenu);
 
   const openContextMenu = (file, mouseCoords) => {
     setContextMenu({

@@ -65,7 +65,8 @@ export const REGEX = {
 
 export const SORT_TYPES = {
   NAME: "name",
-  CREATED_AT: "created at"
+  CREATED_AT: "created at",
+  UPDATED_AT: "updated at"
 }
 
 export const THEMES = {

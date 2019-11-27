@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import driveAPI from '../adapters/driveAPI';
-import { SORT_TYPES } from '../constants';
 import ERROR_HANDLERS from '../errors/errorHandlers';
 import ERROR_DETAILS from '../errors/errorDetails';
 import './drive.css';
@@ -8,28 +7,17 @@ import './drive.css';
 import ControlPanel from '../components/panels/ControlPanel'
 import FilePanel from '../components/panels/FilePanel';
 import useContextMenu from '../hooks/useContextMenu';
+import useFileSort from '../hooks/useFileSort';
 
 const Drive = props => {
   
-  const [userDetails, setUserDetails] = useState(null);
-  const [files, setFiles] = useState([]);
-  const [filesToRender, setFilesToRender] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortType, setSortType] = useState(SORT_TYPES.CREATED_AT);
+  const [ userDetails, setUserDetails ] = useState(null);
+  const [ files, setFiles ] = useState([]);
+  const [ filesToRender, setFilesToRender ] = useState([]);
+  const [ searchTerm, setSearchTerm ] = useState('');
   const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
+  const { sortType, setSortType, sortFiles } = useFileSort();
 
-  const addFileAndUpdateUser = (file, userDetails) => {
-    setFiles([ ...files, file ]);
-    setUserDetails({ ...userDetails });
-  }
-
-  const removeFileAndUpdateUser = (deletedFile, userDetails) => {
-    setFiles(files.filter(file => {
-      return file.id !== deletedFile.id;
-    }));
-    setUserDetails({...userDetails});
-  }
-  
   useEffect(() => {
     driveAPI.getFilesInFolder()
       .then(setDriveState)
@@ -74,17 +62,16 @@ const Drive = props => {
     });
   }
 
-  const sortFiles = filesToSort => {
-    const sortFunction = sortType === SORT_TYPES.NAME ? sortByName : sortByCreatedAt;
-    return filesToSort.sort(sortFunction);
+  const addFileAndUpdateUser = (file, userDetails) => {
+    setFiles([ ...files, file ]);
+    setUserDetails({ ...userDetails });
   }
 
-  const sortByName = (a, b) => {
-    return (a.filename).localeCompare(b.filename);
-  }
-
-  const sortByCreatedAt = (a, b) => {
-    return b.id - a.id;
+  const removeFileAndUpdateUser = (deletedFile, userDetails) => {
+    setFiles(files.filter(file => {
+      return file.id !== deletedFile.id;
+    }));
+    setUserDetails({...userDetails});
   }
 
   return(

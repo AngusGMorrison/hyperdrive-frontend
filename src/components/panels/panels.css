@@ -32,7 +32,7 @@
 .file-panel {
   grid-column-start: 2;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(188px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
   grid-template-rows: repeat(minmax(169px, 1fr));
   grid-gap: 2rem;
   width: 100%;

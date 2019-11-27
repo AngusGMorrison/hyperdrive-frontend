@@ -36,7 +36,8 @@ const tryDownload = (response, file) => {
   if (THROWABLE_STATUS_CODES.includes(response.status)) {
     API.selectAndThrowServerError(response);
   } else {
-    download(response.blob(), file.filename, file.content_type)
+    response.blob()
+      .then(blob => download(blob, file.filename, file.content_type))
   }
 }
 

@@ -1,6 +1,7 @@
 .file-card {
   display: flex;
   flex-direction: column;
+  /* max-width: 188px; */
   padding: 38px 20px 16px 20px;
   background-color: var(--hyper-dark-grey);
   border-radius: 3px;

@@ -7,13 +7,16 @@ import './drive.css';
 
 import ControlPanel from '../components/panels/ControlPanel'
 import FilePanel from '../components/panels/FilePanel';
+import useContextMenu from '../hooks/useContextMenu';
 
 const Drive = props => {
   
   const [userDetails, setUserDetails] = useState(null);
-
   const [files, setFiles] = useState([]);
   const [filesToRender, setFilesToRender] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortType, setSortType] = useState(SORT_TYPES.CREATED_AT);
+  const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
 
   const addFileAndUpdateUser = (file, userDetails) => {
     setFiles([ ...files, file ]);
@@ -26,9 +29,6 @@ const Drive = props => {
     }));
     setUserDetails({...userDetails});
   }
-
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortType, setSortType] = useState(SORT_TYPES.CREATED_AT);
   
   useEffect(() => {
     driveAPI.getFilesInFolder()
@@ -37,10 +37,6 @@ const Drive = props => {
         ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
       });
   }, []);
-
-  useEffect(() => {
-    setFilesToRender(getFilesToRender());
-  }, [files, sortType, searchTerm]);
 
   const setDriveState = driveData => {
     setUserDetails(driveData.user);
@@ -61,6 +57,10 @@ const Drive = props => {
     props.setServerError(ERROR_DETAILS.UNAUTHORIZED);
     props.logOut();
   }
+
+  useEffect(() => {
+    setFilesToRender(getFilesToRender());
+  }, [files, sortType, searchTerm]);
 
   const getFilesToRender = () => {
     const searchResults = searchFiles()
@@ -87,39 +87,8 @@ const Drive = props => {
     return b.id - a.id;
   }
 
-  const initialContextMenu = {
-    isOpen: false,
-    fileId: null,
-    position: {
-      top: 0,
-      left: 0
-    }
-  }
-
-  const [contextMenu, setContextMenu] = useState(initialContextMenu);
-
-  const openContextMenu = (file, mouseCoords) => {
-    setContextMenu({
-      isOpen: true,
-      file: file,
-      position: {
-        top: mouseCoords.y - 10,
-        left: mouseCoords.x - 10
-      }
-    });
-  }
-
-  const closeContextMenuNoDefault = (event) => {
-    event.preventDefault();
-    closeContextMenu();
-  }
-  
-  const closeContextMenu = () => {
-    contextMenu.isOpen && setContextMenu(initialContextMenu);
-  }
-
   return(
-    <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenuNoDefault}>
+    <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
       <ControlPanel
         user={userDetails}
         searchTerm={searchTerm}

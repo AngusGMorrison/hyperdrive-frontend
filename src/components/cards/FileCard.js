@@ -2,7 +2,7 @@ import React from 'react';
 import { ICONS, REGEX } from '../../constants';
 import './cards.css';
 
-const FileCard = ({ file, openContextMenu }) => {
+const FileCard = ({ file, openContextMenu, setSelectedFile }) => {
 
   const MAX_NAME_LENGTH = 14
 
@@ -24,7 +24,11 @@ const FileCard = ({ file, openContextMenu }) => {
     }
   }
 
-  const handleRightClick = event => {
+  const handleClick = () => {
+    setSelectedFile(file);
+  }
+
+  const handleContextMenu = event => {
     event.preventDefault();
     event.stopPropagation();
     const mouseCoords = {
@@ -35,7 +39,7 @@ const FileCard = ({ file, openContextMenu }) => {
   }
 
   return(
-    <div className="file-card" onContextMenu={handleRightClick}>
+    <div className="file-card" onClick={handleClick} onContextMenu={handleContextMenu}>
       <div className="file-icon-container">
         <img className="file-icon" src={get_icon_src()} alt="File icon" />
       </div>

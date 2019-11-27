@@ -6,6 +6,7 @@ import './drive.css';
 
 import ControlPanel from '../components/panels/ControlPanel'
 import FilePanel from '../components/panels/FilePanel';
+import DetailsPanel from '../components/panels/DetailsPanel';
 import useContextMenu from '../hooks/useContextMenu';
 import useFileSort from '../hooks/useFileSort';
 
@@ -17,6 +18,7 @@ const Drive = props => {
   const [ searchTerm, setSearchTerm ] = useState('');
   const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
   const { sortType, setSortType, sortFiles } = useFileSort();
+  const [ selectedFile, setSelectedFile ] = useState(null);
 
   useEffect(() => {
     driveAPI.getFilesInFolder()
@@ -76,25 +78,37 @@ const Drive = props => {
 
   return(
     <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
-      <ControlPanel
-        user={userDetails}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        sortType={sortType}
-        setSortType={setSortType}
-        addFileAndUpdateUser={addFileAndUpdateUser}
-        logOut={props.logOut}
-        
-      />
-      <FilePanel
-        files={filesToRender}
-        serverError={props.serverError}
-        setServerError={props.setServerError}
-        contextMenu={contextMenu}
-        openContextMenu={openContextMenu}
-        removeFileAndUpdateUser={removeFileAndUpdateUser}
-        forbidAccess={forbidAccess}
-      />
+      <div className="panel-container">
+        <div className="static-panels" >
+          <ControlPanel
+            user={userDetails}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            sortType={sortType}
+            setSortType={setSortType}
+            addFileAndUpdateUser={addFileAndUpdateUser}
+            logOut={props.logOut}
+            
+          />
+          <FilePanel
+            files={filesToRender}
+            setSelectedFile={setSelectedFile}
+            serverError={props.serverError}
+            setServerError={props.setServerError}
+            contextMenu={contextMenu}
+            openContextMenu={openContextMenu}
+            removeFileAndUpdateUser={removeFileAndUpdateUser}
+            forbidAccess={forbidAccess}
+          />
+        </div>
+      </div>
+      {
+        selectedFile &&
+        <DetailsPanel
+          file={selectedFile}
+          setSelectedFile={setSelectedFile}
+        />
+      }
     </div>
   )
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from "../../constants";
+import ERROR_HANDLERS from '../../errors/errorHandlers';
 import { checkForNameErrors, checkForEmailErrors, checkForPasswordErrors } from '../../validators/validators';
-import API from '../../adapters/API';
+import authAPI from '../../adapters/authAPI';
 
 import TextField from './fields/TextField';
 import BigButton from "../buttons/BigButton";
@@ -32,16 +33,18 @@ const RegistrationForm = props => {
   }
 
   const submitAction = formFields => {
-    API.signUp(formFields)
-      .then(props.setTokenAndRedirect)
-      .catch(props.handleHttpErrors);
+    authAPI.signUp(formFields)
+      .then(props.resetErrorsAndLogin)
+      .catch(error => {
+        ERROR_HANDLERS.handleHttpErrors(error, props.serverErrorHandler)
+      });
   }
 
   const { formFields, errors, handleInputChange, handleFormSubmission } = useForm({ initialFormState, submitAction });
   const { email, password, name } = formFields;
 
   return(
-    <form className="registration" onSubmit={handleFormSubmission}>
+    <form className="registration" onSubmit={handleFormSubmission} autoComplete="off" >
       <TextField
         name={name.name}
         type={FIELD_TYPES.TEXT}

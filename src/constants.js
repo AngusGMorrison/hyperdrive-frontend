@@ -8,11 +8,6 @@ export const FIELD_TYPES = {
   EMAIL: "email"
 }
 
-export const HOMEPAGE_FORMS = {
-  SIGN_IN: 'sign in',
-  REGISTER: 'register'
-}
-
 export const ICONS = {
   ACCOUNT_CIRCLE: {
     BLUE: '/icons/ic_account_circle_blue.svg',
@@ -21,20 +16,37 @@ export const ICONS = {
   CLOUD_OFF: {
     DARK: '/icons/ic_cloud_off_dark.svg'
   },
+  IMAGE: {
+    WHITE: '/icons/ic_image_white.svg'
+  },
   KEY: {
     BLUE: '/icons/ic_key_blue.svg',
     MAGENTA: '/icons/ic_key_magenta.svg'
+  },
+  LOGOUT: {
+    WHITE: '/icons/ic_logout_white.svg'
   },
   MAIL: {
     BLUE: '/icons/ic_mail_blue.svg',
     MAGENTA: '/icons/ic_mail_magenta.svg'
   },
+  SORT: {
+    YELLOW: '/icons/ic_sort_yellow.svg'
+  },
+  SEARCH: {
+    BLUE: '/icons/ic_search_blue.svg',
+    YELLOW: '/icons/ic_search_yellow.svg'
+  },
+  TEXT: {
+    WHITE: '/icons/ic_format_align_left_white.svg'
+  },
   THUMBS_UP: {
     DARK: '/icons/ic_thumb_up_dark.svg',
   },
-  SORT: {
-    YELLOW: '/icons/ic_sort_yellow.svg'
-  }
+}
+
+export const LOCAL_STORAGE_KEYS = {
+  TOKEN: "token"
 }
 
 export const POSITIONS = {
@@ -45,7 +57,15 @@ export const POSITIONS = {
 export const REGEX = {
   EMAIL: new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
   NAME: new RegExp(/^(?=.{2,50}$)([A-Za-zÀ-ÖØ-öø-ÿ]+[- ']?[A-Za-zÀ-ÖØ-öø-ÿ]+)+$/),
-  PASSWORD: new RegExp(/^(?=.*[A-Za-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&^£$`'<>])[A-Za-z\d@$!%*#?&^£$`'<>]{8,}$/)
+  PASSWORD: new RegExp(/^(?=.*[A-Za-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&^£$`'<>])[A-Za-z\d@$!%*#?&^£$`'<>]{8,}$/),
+  CONTENT_TYPE_TEXT: new RegExp(/^text/),
+  CONTENT_TYPE_IMAGE: new RegExp(/^image/),
+  FILENAME_PARTS: new RegExp(/^(.+?)(\.[^.]*$|$)/) 
+}
+
+export const SORT_TYPES = {
+  NAME: "name",
+  CREATED_AT: "created at"
 }
 
 export const THEMES = {

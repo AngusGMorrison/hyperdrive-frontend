@@ -1,7 +1,8 @@
 import React from 'react';
 import { FIELD_TYPES, ICONS, THEMES } from '../../constants';
 import { checkForEmailErrors } from '../../validators/validators';
-import API from '../../adapters/API';
+import ERROR_HANDLERS from '../../errors/errorHandlers';
+import authAPI from '../../adapters/authAPI';
 
 import TextField from './fields/TextField';
 import BigButton from '../buttons/BigButton';
@@ -25,16 +26,18 @@ const SignInForm = props => {
   }
 
   const submitAction = formFields => {
-    API.signIn(formFields)
-      .then(props.setTokenAndRedirect)
-      .catch(props.handleHttpErrors);
+    authAPI.signIn(formFields)
+      .then(props.resetErrorsAndLogin)
+      .catch(error => {
+        ERROR_HANDLERS.handleHttpErrors(error, props.serverErrorHandler)
+      });
   }
 
   const { formFields, errors, handleInputChange, handleFormSubmission } = useForm({ initialFormState, submitAction });
   const { email, password } = formFields;
 
   return(
-    <form className="sign-in" onSubmit={handleFormSubmission}>
+    <form className="sign-in" onSubmit={handleFormSubmission} autoComplete="off" >
       <TextField
         name={email.name}
         type={FIELD_TYPES.EMAIL}

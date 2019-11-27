@@ -1,67 +1,52 @@
 import React, { useState } from 'react';
-import { BANNER_TYPES, HOMEPAGE_FORMS, ICONS } from '../constants.js';
-import { ServerError } from '../errors/errors';
-import ERROR_DETAILS from '../errors/error_details';
+import { BANNER_TYPES, ICONS } from '../constants.js';
+import ERROR_DETAILS from '../errors/errorDetails';
 
-import BinarySelector from '../components/selectors/BinarySelector';
+import BinarySelector from '../components/menus/BinarySelector';
 import Banner from '../components/banners/Banner'
 import SignInForm from '../components/forms/SignInForm';
 import RegistrationForm from '../components/forms/RegistrationForm';
 
 const HomepageFormContainer = props => {
 
-  const [formToDisplay, setFormToDisplay] = useState(HOMEPAGE_FORMS.SIGN_IN);
-  const [serverError, setServerError] = useState(null);
-  const [formErrors, setFormErrors] = useState([]);
+  const FORMS = {
+    SIGN_IN: 'sign in',
+    REGISTER: 'register'
+  }
+
+  const [formToDisplay, setFormToDisplay] = useState(FORMS.SIGN_IN);
 
   const handleFormChange = formToDisplay => {
-    resetErrors();
+    props.setServerError(null);
     setFormToDisplay(formToDisplay);
   }
 
-  const resetErrors = () => {
-    setServerError(null);
-    setFormErrors([]);
-  }
-
-  const setTokenAndRedirect = data => {
-    if (data.errors) {
-      setFormErrors(data.errors);
-    } else {
-      localStorage.setItem('token', data.token);
-      props.setLoggedIn(true);
-    }
-  }
-
-  const handleHttpErrors = error => {
-    if (error instanceof ServerError) {
-      handleServerError(error);
-    } else {
-      console.error(error);
-    }
+  const resetErrorsAndLogin = responseData => {
+    props.setServerError(null);
+    props.logIn(responseData.token);
   }
 
   const handleServerError = error => {
     switch (error.code) {
       case 400:
-        handleDataError(error);
+        handleBadRequest(error);
         break;
       case 403:
-        setServerError(ERROR_DETAILS.INVALID_USER);
+        props.setServerError(ERROR_DETAILS.INVALID_USER);
         break;
       case 500 || 404:
-        setServerError(ERROR_DETAILS.GENERIC);
+        props.setServerError(ERROR_DETAILS.GENERIC);
         break;
       default:
-        console.log(error);
+        console.error(error);
     }
   }
 
-  const handleDataError = error => {
+  const handleBadRequest = error => {
     if (emailIsTaken(error)) {
-      setServerError(ERROR_DETAILS.EMAIL_IN_USE);
+      props.setServerError(ERROR_DETAILS.EMAIL_IN_USE);
     } else {
-      setServerError(ERROR_DETAILS.BAD_REQUEST);
+      props.setServerError(ERROR_DETAILS.BAD_REQUEST);
     }
   }
 
@@ -71,11 +56,8 @@ const HomepageFormContainer = props => {
   }
 
   const formProps = {
-    loggedIn: props.loggedIn,
-    setLoggedIn: props.setLoggedIn,
-    setTokenAndRedirect: setTokenAndRedirect,
-    handleHttpErrors: handleHttpErrors,
-    resetErrors: resetErrors
+    resetErrorsAndLogin: resetErrorsAndLogin,
+    serverErrorHandler: handleServerError,
   }
 
   return(
@@ -84,22 +66,22 @@ const HomepageFormContainer = props => {
         heading={"Welcome to Hyperdrive"}
         icon={ICONS.SORT.YELLOW}
         selectedOption={formToDisplay}
-        option1={HOMEPAGE_FORMS.REGISTER}
-        option2={HOMEPAGE_FORMS.SIGN_IN}
+        option1={FORMS.REGISTER}
+        option2={FORMS.SIGN_IN}
         handleClick={handleFormChange}
       />
       {
-        serverError &&
+        props.serverError &&
         <Banner
           type={BANNER_TYPES.ERROR}
           icon={ICONS.CLOUD_OFF.DARK}
-          content={serverError}
+          content={props.serverError}
         />
       }
       { 
-        formToDisplay === HOMEPAGE_FORMS.SIGN_IN ?
-        <SignInForm { ...formProps } /> :
-        <RegistrationForm { ...formProps } />
+        formToDisplay === FORMS.SIGN_IN ?
+          <SignInForm { ...formProps } /> :
+          <RegistrationForm { ...formProps } />
       }
     </div>
   );

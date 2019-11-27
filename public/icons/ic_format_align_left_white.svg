@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+    <title>ic_format_align_left</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="file-card" transform="translate(-66.000000, -47.000000)">
+            <g id="ic_format_align_left" transform="translate(57.000000, 38.000000)">
+                <g id="Icon-24px">
+                    <g>
+                        <path d="M46.3333333,46.3333333 L9,46.3333333 L9,52.5555556 L46.3333333,52.5555556 L46.3333333,46.3333333 L46.3333333,46.3333333 Z M46.3333333,21.4444444 L9,21.4444444 L9,27.6666667 L46.3333333,27.6666667 L46.3333333,21.4444444 L46.3333333,21.4444444 Z M9,40.1111111 L65,40.1111111 L65,33.8888889 L9,33.8888889 L9,40.1111111 L9,40.1111111 Z M9,65 L65,65 L65,58.7777778 L9,58.7777778 L9,65 L9,65 Z M9,9 L9,15.2222222 L65,15.2222222 L65,9 L9,9 L9,9 Z" id="Shape" fill="#FFFFFF"></path>
+                        <polygon id="Shape" points="0 0 74 0 74 74 0 74"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

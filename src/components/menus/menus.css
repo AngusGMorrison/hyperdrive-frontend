@@ -1,0 +1,28 @@
+.context-menu {
+  width: 188px;
+  position: absolute;
+  background-color: var(--hyper-dark-grey);
+  border: 2px solid var(--hyper-yellow);
+  border-radius: 3px;
+  box-shadow: 0 4px 4px 0 rgba(51, 56, 57, 0.12), 0 8px 8px 0 rgba(51, 56, 57, 0.08);
+}
+
+.context-menu:hover {
+  cursor: pointer;
+}
+
+.context-menu ul {
+  padding: 0;
+  margin: 0;
+}
+
+.context-menu li {
+  padding: 10px 15px;
+  list-style: none;
+  color: var(--hyper-yellow);
+}
+
+.context-menu li:hover {
+  background-color: var(--hyper-yellow);
+  color: var(--hyper-dark-grey);
+}

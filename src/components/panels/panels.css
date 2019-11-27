@@ -1,0 +1,43 @@
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  width: 100%;
+  padding: 25px 20px 20px 20px;
+  background-color: var(--hyper-dark-grey);
+  box-shadow: 4px 0 4px 0 rgba(51, 56, 57, 0.08), 2px 0 2px 0 rgba(51, 56, 57, 0.12);
+}
+
+.drive-logo {
+  width: 147px;
+  margin-bottom: 30px;
+}
+
+.upload-zone {
+  flex-grow: 1;
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  border: 2px solid var(--hyper-blue);
+  border-radius: 3px;
+}
+
+.file-panel-container {
+  overflow: auto;
+  padding: 2rem;
+}
+
+.file-panel {
+  grid-column-start: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+  grid-template-rows: repeat(minmax(169px, 1fr));
+  grid-gap: 2rem;
+  width: 100%;
+}
+
+.spacer {
+  height: 50px;
+}

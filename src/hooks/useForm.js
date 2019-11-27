@@ -6,7 +6,7 @@ const useForm = ({ initialFormState = {}, submitAction = formFields => {} } = {}
   const [formFields, setFormFields] = useState(initialFormState);
 
   const initialErrors = Object.keys(initialFormState).reduce((errors, key) => {
-    return {...errors, [key]: false}
+    return {...errors, [key]: null}
   }, {});
   
   const [errors, setErrors] = useState(initialErrors);

@@ -1,35 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import driveAPI from '../adapters/driveAPI';
-import { SORT_TYPES } from '../constants';
 import ERROR_HANDLERS from '../errors/errorHandlers';
 import ERROR_DETAILS from '../errors/errorDetails';
 import './drive.css';
 
 import ControlPanel from '../components/panels/ControlPanel'
 import FilePanel from '../components/panels/FilePanel';
+import DetailsPanel from '../components/panels/DetailsPanel';
+import useContextMenu from '../hooks/useContextMenu';
+import useFileSort from '../hooks/useFileSort';
 
 const Drive = props => {
   
-  const [userDetails, setUserDetails] = useState(null);
+  const [ userDetails, setUserDetails ] = useState(null);
+  const [ files, setFiles ] = useState([]);
+  const [ filesToRender, setFilesToRender ] = useState([]);
+  const [ searchTerm, setSearchTerm ] = useState('');
+  const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
+  const { sortType, setSortType, sortFiles } = useFileSort();
+  const [ selectedFile, setSelectedFile ] = useState(null);
 
-  const [files, setFiles] = useState([]);
-  const [filesToRender, setFilesToRender] = useState([]);
-
-  const addFileAndUpdateUser = (file, userDetails) => {
-    setFiles([ ...files, file ]);
-    setUserDetails({ ...userDetails });
-  }
-
-  const removeFileAndUpdateUser = (deletedFile, userDetails) => {
-    setFiles(files.filter(file => {
-      return file.id !== deletedFile.id;
-    }));
-    setUserDetails({...userDetails});
-  }
-
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortType, setSortType] = useState(SORT_TYPES.CREATED_AT);
-  
   useEffect(() => {
     driveAPI.getFilesInFolder()
       .then(setDriveState)
@@ -37,10 +27,6 @@ const Drive = props => {
         ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
       });
   }, []);
-
-  useEffect(() => {
-    setFilesToRender(getFilesToRender());
-  }, [files, sortType, searchTerm]);
 
   const setDriveState = driveData => {
     setUserDetails(driveData.user);
@@ -62,6 +48,10 @@ const Drive = props => {
     props.logOut();
   }
 
+  useEffect(() => {
+    setFilesToRender(getFilesToRender());
+  }, [files, sortType, searchTerm]);
+
   const getFilesToRender = () => {
     const searchResults = searchFiles()
     return sortFiles(searchResults);
@@ -74,71 +64,51 @@ const Drive = props => {
     });
   }
 
-  const sortFiles = filesToSort => {
-    const sortFunction = sortType === SORT_TYPES.NAME ? sortByName : sortByCreatedAt;
-    return filesToSort.sort(sortFunction);
+  const addFileAndUpdateUser = (file, userDetails) => {
+    setFiles([ ...files, file ]);
+    setUserDetails({ ...userDetails });
   }
 
-  const sortByName = (a, b) => {
-    return (a.filename).localeCompare(b.filename);
-  }
-
-  const sortByCreatedAt = (a, b) => {
-    return b.id - a.id;
-  }
-
-  const initialContextMenu = {
-    isOpen: false,
-    fileId: null,
-    position: {
-      top: 0,
-      left: 0
-    }
-  }
-
-  const [contextMenu, setContextMenu] = useState(initialContextMenu);
-
-  const openContextMenu = (file, mouseCoords) => {
-    setContextMenu({
-      isOpen: true,
-      file: file,
-      position: {
-        top: mouseCoords.y - 10,
-        left: mouseCoords.x - 10
-      }
-    });
-  }
-
-  const closeContextMenuNoDefault = (event) => {
-    event.preventDefault();
-    closeContextMenu();
-  }
-  
-  const closeContextMenu = () => {
-    contextMenu.isOpen && setContextMenu(initialContextMenu);
+  const removeFileAndUpdateUser = (deletedFile, userDetails) => {
+    setFiles(files.filter(file => {
+      return file.id !== deletedFile.id;
+    }));
+    setUserDetails({...userDetails});
   }
 
   return(
-    <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenuNoDefault}>
-      <ControlPanel
-        user={userDetails}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        sortType={sortType}
-        setSortType={setSortType}
-        addFileAndUpdateUser={addFileAndUpdateUser}
-        logOut={props.logOut}
-        
-      />
-      <FilePanel
-        files={filesToRender}
-        serverError={props.serverError}
-        setServerError={props.setServerError}
-        contextMenu={contextMenu}
-        openContextMenu={openContextMenu}
-        removeFileAndUpdateUser={removeFileAndUpdateUser}
-        forbidAccess={forbidAccess}
-      />
+    <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
+      <div className="panel-container">
+        <div className="static-panels" >
+          <ControlPanel
+            user={userDetails}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            sortType={sortType}
+            setSortType={setSortType}
+            addFileAndUpdateUser={addFileAndUpdateUser}
+            logOut={props.logOut}
+            
+          />
+          <FilePanel
+            files={filesToRender}
+            setSelectedFile={setSelectedFile}
+            serverError={props.serverError}
+            setServerError={props.setServerError}
+            contextMenu={contextMenu}
+            openContextMenu={openContextMenu}
+            removeFileAndUpdateUser={removeFileAndUpdateUser}
+            forbidAccess={forbidAccess}
+          />
+        </div>
+      </div>
+      {
+        selectedFile &&
+        <DetailsPanel
+          file={selectedFile}
+          setSelectedFile={setSelectedFile}
+        />
+      }
     </div>
   )
 }

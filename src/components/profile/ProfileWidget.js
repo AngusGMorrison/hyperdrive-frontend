@@ -4,8 +4,6 @@ import './profile.css'
 
 const ProfileWidget = ({ user, logOut }) => {
 
-  console.log(user);
-
   const getUserInitial = () => {
     return user.name.charAt(0);
   }

@@ -13,6 +13,9 @@ export const ICONS = {
     BLUE: '/icons/ic_account_circle_blue.svg',
     MAGENTA: '/icons/ic_account_circle_magenta.svg'
   },
+  CLOSE: {
+    DARK: '/icons/ic_close_dark.svg'
+  },
   CLOUD_OFF: {
     DARK: '/icons/ic_cloud_off_dark.svg'
   },
@@ -65,7 +68,8 @@ export const REGEX = {
 
 export const SORT_TYPES = {
   NAME: "name",
-  CREATED_AT: "created at"
+  CREATED_AT: "created at",
+  UPDATED_AT: "updated at"
 }
 
 export const THEMES = {

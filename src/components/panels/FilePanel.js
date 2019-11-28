@@ -13,7 +13,14 @@ const FilePanel = props => {
 
   const renderFiles = () => {
     return props.files.map(file => {
-      return <FileCard key={file.id} file={file} openContextMenu={props.openContextMenu} />
+      return(
+        <FileCard
+          key={file.id}
+          file={file}
+          openContextMenu={props.openContextMenu}
+          setSelectedFile={props.setSelectedFile}
+        />
+      );
     });
   }
 

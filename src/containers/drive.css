@@ -1,6 +1,7 @@
 .drive {
-  display: grid;
-  grid-template-columns: 475px minmax(0, 1fr);
-  height: 100vh;
+  display: flex;
   background-color: var(--hyper-light-grey);
 }
+
+
+

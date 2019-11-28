@@ -29,12 +29,62 @@
 
 .upload-zone {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 200px;
   margin-top: 10px;
   margin-bottom: 50px;
   border: 2px solid var(--hyper-blue);
   border-radius: 3px;
+}
+
+.upload-zone.dragged-over {
+  box-shadow: 0 0 10px var(--hyper-blue);
+}
+
+.upload-zone label {
+  color: var(--hyper-blue);
+  margin-bottom: 20px;
+}
+
+.upload-zone label:hover {
+  cursor: pointer;
+}
+
+.upload-icon {
+  margin-bottom: 20px;
+}
+
+.manual-file-input {
+  display: none;
+}
+
+.upload-progress.hidden {
+  visibility: hidden;
+}
+
+.upload-progress {
+  width: 76%;
+  height: 16px;
+  -webkit-appearance: none;
+  -moz-appearance:none;
+  background-color: var(--hyper-dark-grey);
+  border: 2px solid var(--hyper-blue);
+}
+
+.upload-progress::-webkit-progress-bar {
+  background-color: var(--hyper-dark-grey);
+}
+
+.upload-progress::-webkit-progress-value {
+  background-color: var(--hyper-blue);
+}
+
+progress::-moz-progress-bar {
+  background: var(--hyper-blue);
 }
 
 .file-panel-container {

@@ -19,6 +19,9 @@ export const ICONS = {
   CLOUD_OFF: {
     DARK: '/icons/ic_cloud_off_dark.svg'
   },
+  CLOUD_UPLOAD: {
+    BLUE: '/icons/ic_cloud_upload_blue.svg'
+  },
   IMAGE: {
     WHITE: '/icons/ic_image_white.svg'
   },

@@ -72,12 +72,21 @@ const FilePanel = props => {
           content={props.serverError}
         />
       }
+      <FolderPanel 
+        folders={props.files.folders}
+        contextMenu={props.contextMenu}
+      />
+      <DocumentPanel
+        documents={props.files.documents}
+        contextMenu={props.contextMenu}
+      />
       <div className="file-panel" >
         { renderFiles() }
         { 
           props.contextMenu.isOpen &&
           <ContextMenu
             attributes={props.contextMenu}
+            // Move to document panel
             actions={contextActions}
           />
         }

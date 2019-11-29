@@ -13,15 +13,20 @@ import useFileSort from '../hooks/useFileSort';
 const Drive = props => {
   
   const [ userDetails, setUserDetails ] = useState(null);
-  const [ files, setFiles ] = useState([]);
-  const [ filesToRender, setFilesToRender ] = useState([]);
+  // const [ files, setFiles ] = useState([]);
+  
   const [ searchTerm, setSearchTerm ] = useState('');
   const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
   const { sortType, setSortType, sortFiles } = useFileSort();
   const [ selectedFile, setSelectedFile ] = useState(null);
 
+  const initialFolder = { id: null, documents: [], subfolders: [] }
+  const [ currentFolder, setCurrentFolder ] = useState(initialFolder);
+  const initialFilesToRender = { folders: [], documents: [] }
+  const [ filesToRender, setFilesToRender ] = useState(initialFilesToRender);
+
   useEffect(() => {
-    driveAPI.getFilesInFolder()
+    driveAPI.getFilesInFolder(currentFolder)
       .then(setDriveState)
       .catch(error => {
         ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
@@ -30,7 +35,7 @@ const Drive = props => {
 
   const setDriveState = driveData => {
     setUserDetails(driveData.user);
-    setFiles(driveData.documents);
+    setCurrentFolder(driveData.folder);
   }
 
   const handleServerError = error => {
@@ -49,8 +54,8 @@ const Drive = props => {
   }
 
   useEffect(() => {
-    setFilesToRender(getFilesToRender());
-  }, [files, sortType, searchTerm]);
+    setFilesToRender({ documents: getFilesToRender(), folders: currentFolder.subfolders });
+  }, [currentFolder, sortType, searchTerm]);
 
   const getFilesToRender = () => {
     const searchResults = searchFiles()
@@ -58,23 +63,23 @@ const Drive = props => {
   }
 
   const searchFiles = () => {
-    if (!searchTerm) return [ ...files ];
-    return files.filter(file => {
+    if (!searchTerm) return [ ...currentFolder.files ];
+    return currentFolder.files.filter(file => {
       return file.filename.includes(searchTerm);
     });
   }
 
-  const addFileAndUpdateUser = (file, userDetails) => {
-    setFiles([ ...files, file ]);
-    setUserDetails({ ...userDetails });
-  }
+  // const addFileAndUpdateUser = (file, userDetails) => {
+  //   setFiles([ ...files, file ]);
+  //   setUserDetails({ ...userDetails });
+  // }
 
-  const removeFileAndUpdateUser = (deletedFile, userDetails) => {
-    setFiles(files.filter(file => {
-      return file.id !== deletedFile.id;
-    }));
-    setUserDetails({...userDetails});
-  }
+  // const removeFileAndUpdateUser = (deletedFile, userDetails) => {
+  //   setFiles(files.filter(file => {
+  //     return file.id !== deletedFile.id;
+  //   }));
+  //   setUserDetails({...userDetails});
+  // }
 
   return(
     <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
@@ -86,18 +91,18 @@ const Drive = props => {
             setSearchTerm={setSearchTerm}
             sortType={sortType}
             setSortType={setSortType}
-            addFileAndUpdateUser={addFileAndUpdateUser}
+            // addFileAndUpdateUser={addFileAndUpdateUser}
             logOut={props.logOut}
             
           />
           <FilePanel
-            files={filesToRender}
+            files={filesToRender.documents}
             setSelectedFile={setSelectedFile}
             serverError={props.serverError}
             setServerError={props.setServerError}
             contextMenu={contextMenu}
             openContextMenu={openContextMenu}
-            removeFileAndUpdateUser={removeFileAndUpdateUser}
+            // removeFileAndUpdateUser={removeFileAndUpdateUser}
             forbidAccess={forbidAccess}
           />
         </div>

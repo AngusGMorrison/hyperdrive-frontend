@@ -6,23 +6,13 @@ import ERROR_DETAILS from '../../errors/errorDetails';
 import './panels.css';
 
 import Banner from '../banners/Banner';
-import FileCard from '../cards/FileCard';
+import FolderPanel from './FolderPanel';
+import DocumentPanel from './DocumentPanel';
 import ContextMenu from '../menus/ContextMenu';
 
 const FilePanel = props => {
 
-  const renderFiles = () => {
-    return props.files.map(file => {
-      return(
-        <FileCard
-          key={file.id}
-          file={file}
-          openContextMenu={props.openContextMenu}
-          setSelectedFile={props.setSelectedFile}
-        />
-      );
-    });
-  }
+  console.log(props.files)
 
   const downloadFile = file => {
     driveAPI.downloadFile(file)
@@ -54,7 +44,7 @@ const FilePanel = props => {
   const contextActions = [
     {
       label: "Download",
-      onClick: downloadFile
+      onClick: downloadFile,
     },
     {
       label: "Delete",
@@ -72,25 +62,32 @@ const FilePanel = props => {
           content={props.serverError}
         />
       }
-      <FolderPanel 
-        folders={props.files.folders}
-        contextMenu={props.contextMenu}
-      />
-      <DocumentPanel
-        documents={props.files.documents}
-        contextMenu={props.contextMenu}
-      />
-      <div className="file-panel" >
-        { renderFiles() }
-        { 
-          props.contextMenu.isOpen &&
-          <ContextMenu
-            attributes={props.contextMenu}
-            // Move to document panel
-            actions={contextActions}
-          />
-        }
-      </div>
+      {
+        props.files.folders.length > 0 &&
+        <FolderPanel 
+          folders={props.files.folders}
+          contextMenu={props.contextMenu}
+          openContextMenu={props.openContextMenu}
+          setSelectedFile={props.setSelectedFile}
+        />
+      }
+      {
+        props.files.documents.length > 0 &&
+        <DocumentPanel
+          documents={props.files.documents}
+          contextMenu={props.contextMenu}
+          openContextMenu={props.openContextMenu}
+          setSelectedFile={props.setSelectedFile}
+        />
+      }
+      
+      { 
+        props.contextMenu.isOpen &&
+        <ContextMenu
+          attributes={props.contextMenu}
+          actions={contextActions}
+        />
+      }
     </div>
   )
 }

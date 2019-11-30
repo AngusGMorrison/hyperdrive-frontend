@@ -88,12 +88,20 @@ progress::-moz-progress-bar {
 }
 
 .file-panel-container {
+  --file-grid-columns: repeat(auto-fill, minmax(188px, 1fr));
+  grid-column-start: 2;
   overflow: auto;
   padding: 2rem;
 }
 
-.file-panel {
-  grid-column-start: 2;
+.folder-grid {
+  display: grid;
+  grid-template-columns: var(--file-grid-columns);
+  grid-gap: 2rem;
+  width: 100%;
+}
+
+.document-panel {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
   grid-template-rows: repeat(minmax(169px, 1fr));
@@ -123,4 +131,8 @@ progress::-moz-progress-bar {
   display: flex;
   width: 100%;
   justify-content: flex-end;
+}
+
+h2.file-panel-heading {
+  font: var(--heading-small);
 }

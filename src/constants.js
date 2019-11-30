@@ -22,6 +22,9 @@ export const ICONS = {
   CLOUD_UPLOAD: {
     BLUE: '/icons/ic_cloud_upload_blue.svg'
   },
+  FOLDER: {
+    WHITE: '/icons/ic_folder_white.svg'
+  },
   IMAGE: {
     WHITE: '/icons/ic_image_white.svg'
   },

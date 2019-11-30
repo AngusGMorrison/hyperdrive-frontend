@@ -5,6 +5,7 @@ body {
   --hyper-blue: #7AFFE0;
   --hyper-magenta: #F61DB7;
 
+  --heading-small: 700 16px/1.4 "Menlo";
   --single-line-big: 700 18px/18px "Menlo";
   --body-big: 700 16px/1.4 "Menlo";
   --body: 400 14px/1.4 "Menlo";

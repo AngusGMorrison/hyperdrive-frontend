@@ -54,7 +54,8 @@ const Drive = props => {
   }
 
   useEffect(() => {
-    setFilesToRender({ documents: getFilesToRender(), folders: currentFolder.subfolders });
+    console.log(currentFolder)
+    setFilesToRender({ documents: currentFolder.documents, folders: currentFolder.subfolders });
   }, [currentFolder, sortType, searchTerm]);
 
   const getFilesToRender = () => {
@@ -69,10 +70,10 @@ const Drive = props => {
     });
   }
 
-  // const addFileAndUpdateUser = (file, userDetails) => {
-  //   setFiles([ ...files, file ]);
-  //   setUserDetails({ ...userDetails });
-  // }
+  const updateDrive = (folder, userDetails) => {
+    setCurrentFolder(folder);
+    setUserDetails(userDetails);
+  }
 
   // const removeFileAndUpdateUser = (deletedFile, userDetails) => {
   //   setFiles(files.filter(file => {
@@ -91,12 +92,12 @@ const Drive = props => {
             setSearchTerm={setSearchTerm}
             sortType={sortType}
             setSortType={setSortType}
-            // addFileAndUpdateUser={addFileAndUpdateUser}
+            updateDrive={updateDrive}
             logOut={props.logOut}
             
           />
           <FilePanel
-            files={filesToRender.documents}
+            files={filesToRender}
             setSelectedFile={setSelectedFile}
             serverError={props.serverError}
             setServerError={props.setServerError}

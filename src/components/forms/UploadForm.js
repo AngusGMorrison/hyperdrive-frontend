@@ -48,12 +48,12 @@ const UploadForm = props => {
   }
 
   const uploadFile = formData => {
-    driveAPI.uploadFile(formData, setUploadProgress, handleResponse);
+    driveAPI.uploadFile(formData, props.currentFolder, setUploadProgress, handleResponse);
   }
 
   const handleResponse = response => {
     setUploadProgress(initialProgress);
-    props.addFileAndUpdateUser(response.documents[0], response.user);
+    props.updateDrive(response.folder, response.user);
     setIsUploading(false);
   }
 

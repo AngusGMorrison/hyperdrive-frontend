@@ -27,7 +27,8 @@ const ControlPanel = props => {
         handleClick={props.setSortType}
       />
       <UploadForm
-        addFileAndUpdateUser={props.addFileAndUpdateUser}
+        currentFolder={props.currentFolder}
+        updateDrive={props.updateDrive}
       />
       { props.user &&
         <ProfileWidget

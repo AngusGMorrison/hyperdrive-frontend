@@ -3,15 +3,17 @@ import API, { BASE_URL } from './API';
 import { LOCAL_STORAGE_KEYS, THROWABLE_STATUS_CODES } from '../constants';
 
 const DRIVE_URL = BASE_URL + '/drive';
+const FOLDER_URL = BASE_URL + '/folders';
 
 const getFilesInFolder = folder => {
   const route = folder.id ? (DRIVE_URL + `folders/${folder.id}`) : DRIVE_URL
   return API.ajax("GET", route);
 }
 
-const uploadFile = (file, progressCallback, completionCallback) => {
+const uploadFile = (file, folder, progressCallback, completionCallback) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', DRIVE_URL, true);
+  const path = FOLDER_URL + `/${folder.id}`;
+  xhr.open('POST', path, true);
   xhr.setRequestHeader('Authorization', localStorage.token);
   xhr.responseType = 'json';
   xhr.upload.onprogress = event => computeUploadProgress(event, progressCallback);

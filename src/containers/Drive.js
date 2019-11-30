@@ -92,6 +92,7 @@ const Drive = props => {
             setSearchTerm={setSearchTerm}
             sortType={sortType}
             setSortType={setSortType}
+            currentFolder={currentFolder}
             updateDrive={updateDrive}
             logOut={props.logOut}
             

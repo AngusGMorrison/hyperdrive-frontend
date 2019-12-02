@@ -26,6 +26,12 @@ const Drive = props => {
 
   useEffect(() => changeFolder(currentFolder), []);
 
+  const changeFolder = targetFolder => {
+    driveAPI.getFolder(targetFolder)
+      .then(setDriveState)
+      .catch(handleErrors);
+  }
+
   const setDriveState = driveData => {
     setUserDetails(driveData.user);
     setCurrentFolder(driveData.folder);
@@ -77,12 +83,6 @@ const Drive = props => {
   //   }));
   //   setUserDetails({...userDetails});
   // }
-
-  const changeFolder = targetFolder => {
-    driveAPI.getFolder(targetFolder)
-      .then(setDriveState)
-      .catch(handleErrors);
-  }
 
   return(
     <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>

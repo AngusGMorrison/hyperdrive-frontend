@@ -16,38 +16,43 @@ const NavBar = ({ currentFolder }) => {
 
   const renderMultipleNavFolderLinks = () => {
     const fileTree = getVisibleFileTree();
-    const navLinks =  fileTree.map((element, index) => {
-      if (element.id) {
-        return <NavFolderLink key={element.id} content={element} hasArrow={index < fileTree.length} />
-      } else if (element.collapsedFolders) {
-        return <NavFolderLink key={"collapsed"} content={element} hasArrow={index < fileTree.length} />
-      }  
-    });
+    const navLinks = getNavLinksFromFileTree(fileTree);
     navLinks.unshift(renderCurrentFolder());
-    navLinks.reverse();
-    return navLinks;
+    return navLinks.reverse();
   }
 
   const getVisibleFileTree = () => {
-    const parents = currentFolder.parent_folders;
-    if (parents.length > MAX_PARENTS_TO_SHOW) {
-      const visibleFileTree = [
-        ...parents.slice(0, MAX_PARENTS_TO_SHOW - 1),
-        { collapsedFolders: parents.slice(MAX_PARENTS_TO_SHOW - 1, parents.length - 1) },
-        parents[parents.length - 1]
-      ];
+    const fileTree = currentFolder.parent_folders;
+    if (fileTree.length > MAX_PARENTS_TO_SHOW) {
+      const visibleFileTree = collapseFolders(fileTree);
       return visibleFileTree;
     } else {
-      return parents;
+      return fileTree;
     }
+  }
+
+  const collapseFolders = fileTree => {
+    return [ 
+      ...fileTree.slice(0, MAX_PARENTS_TO_SHOW - 1),
+      { collapsedFolders: fileTree.slice(MAX_PARENTS_TO_SHOW - 1, fileTree.length - 1) },
+      fileTree[fileTree.length - 1]
+    ];
+  }
+
+  const getNavLinksFromFileTree = fileTree => {
+    return fileTree.map((element, index) => {
+      return(
+        <NavFolderLink
+          key={element.id ? element.id : "collapsed"}
+          content={element}
+          hasArrow={index < fileTree.length}
+        />
+      )
+    });
   }
 
   const renderCurrentFolder = () => {
     return <NavFolderLink key={currentFolder.id} content={currentFolder} />
-  }
-
-  const hasArrow = (index, length) => {
-    return index < length
   }
 
   return (

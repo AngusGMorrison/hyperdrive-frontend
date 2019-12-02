@@ -1,6 +1,7 @@
 import React from 'react';
 
 import FileCard from '../cards/FileCard';
+import ContextMenu from '../menus/ContextMenu';
 
 const DocumentPanel = props => {
 
@@ -12,6 +13,8 @@ const DocumentPanel = props => {
           file={document}
           openContextMenu={props.openContextMenu}
           setSelectedFile={props.setSelectedFile}
+          downloadFile={props.downloadFile}
+          deleteFile={props.deleteFile}
         />
       );
     });

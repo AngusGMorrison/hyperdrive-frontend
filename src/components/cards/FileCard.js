@@ -2,9 +2,20 @@ import React from 'react';
 import { ICONS, REGEX } from '../../constants';
 import './cards.css';
 
-const FileCard = ({ file, openContextMenu, setSelectedFile }) => {
+const FileCard = ({ file, openContextMenu, setSelectedFile, downloadFile, deleteFile }) => {
 
   const MAX_NAME_LENGTH = 14
+
+  const contextActions = [
+    {
+      label: "Download",
+      onClick: downloadFile,
+    },
+    {
+      label: "Delete",
+      onClick: deleteFile,
+    }
+  ]
 
   const get_icon_src = () => {
     if (file.content_type.match(REGEX.CONTENT_TYPE_TEXT)) {
@@ -35,7 +46,7 @@ const FileCard = ({ file, openContextMenu, setSelectedFile }) => {
       x: event.pageX,
       y: event.pageY
     }
-    openContextMenu(file, mouseCoords);
+    openContextMenu(file, mouseCoords, contextActions);
   }
 
   return(

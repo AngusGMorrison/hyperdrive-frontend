@@ -4,9 +4,10 @@ import { LOCAL_STORAGE_KEYS, THROWABLE_STATUS_CODES } from '../constants';
 
 const DRIVE_URL = BASE_URL + '/drive';
 const FOLDER_URL = DRIVE_URL + '/folders';
+const DOCUMENT_URL = DRIVE_URL + '/documents';
 
 const getFolder = folder => {
-  const route = folder.id ? (DRIVE_URL + `/folders/${folder.id}`) : DRIVE_URL
+  const route = folder.id ? (FOLDER_URL + `/${folder.id}`) : DRIVE_URL
   return API.ajax("GET", route);
 }
 
@@ -45,7 +46,8 @@ const tryDownload = (response, file) => {
 }
 
 const deleteFile = file => {
-  return API.ajax("DELETE", DRIVE_URL + `/${file.id}`);
+  const routePrefix = file.type === "document" ? DOCUMENT_URL : FOLDER_URL;
+  return API.ajax("DELETE", routePrefix + `/${file.id}`); 
 }
 
 const driveAPI = {

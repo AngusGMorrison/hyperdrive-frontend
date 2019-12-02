@@ -13,6 +13,7 @@ const FolderPanel = props => {
           changeFolder={props.changeFolder}
           openContextMenu={props.openContextMenu}
           setSelectedFile={props.setSelectedFile}
+          deleteFile={props.deleteFile}
         />
       )
     })

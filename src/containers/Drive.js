@@ -5,7 +5,7 @@ import ERROR_DETAILS from '../errors/errorDetails';
 import './drive.css';
 
 import ControlPanel from '../components/panels/ControlPanel'
-import FilePanel from '../components/panels/FilePanel';
+import FileContainer from './FileContainer';
 import DetailsPanel from '../components/panels/DetailsPanel';
 import useContextMenu from '../hooks/useContextMenu';
 import useFileSort from '../hooks/useFileSort';
@@ -13,7 +13,6 @@ import useFileSort from '../hooks/useFileSort';
 const Drive = props => {
   
   const [ userDetails, setUserDetails ] = useState(null);
-  // const [ files, setFiles ] = useState([]);
   
   const [ searchTerm, setSearchTerm ] = useState('');
   const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
@@ -97,7 +96,8 @@ const Drive = props => {
             logOut={props.logOut}
             
           />
-          <FilePanel
+          <FileContainer
+            currentFolder={currentFolder}
             files={filesToRender}
             setSelectedFile={setSelectedFile}
             serverError={props.serverError}

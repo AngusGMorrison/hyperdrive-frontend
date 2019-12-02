@@ -1,18 +1,16 @@
 import React from 'react';
-import driveAPI from '../../adapters/driveAPI';
-import { BANNER_TYPES, ICONS } from '../../constants';
-import ERROR_HANDLERS from '../../errors/errorHandlers';
-import ERROR_DETAILS from '../../errors/errorDetails';
-import './panels.css';
+import driveAPI from '../adapters/driveAPI';
+import { BANNER_TYPES, ICONS } from '../constants';
+import ERROR_HANDLERS from '../errors/errorHandlers';
+import ERROR_DETAILS from '../errors/errorDetails';
+import '../components/panels/panels.css';
 
-import Banner from '../banners/Banner';
-import FolderPanel from './FolderPanel';
-import DocumentPanel from './DocumentPanel';
-import ContextMenu from '../menus/ContextMenu';
+import Banner from '../components/banners/Banner';
+import FolderPanel from '../components/panels/FolderPanel';
+import DocumentPanel from '../components/panels/DocumentPanel';
+import ContextMenu from '../components/menus/ContextMenu';
 
-const FilePanel = props => {
-
-  console.log(props.files)
+const FileContainer = props => {
 
   const downloadFile = file => {
     driveAPI.downloadFile(file)
@@ -53,7 +51,7 @@ const FilePanel = props => {
   ]
 
   return(
-    <div className="file-panel-container" >
+    <div className="file-container" >
       { 
         props.serverError &&
         <Banner
@@ -62,6 +60,9 @@ const FilePanel = props => {
           content={props.serverError}
         />
       }
+      {/* <NavBar
+        currentFolder={props.currentFolder}
+      /> */}
       {
         props.files.folders.length > 0 &&
         <FolderPanel 
@@ -92,4 +93,4 @@ const FilePanel = props => {
   )
 }
 
-export default FilePanel;
+export default FileContainer;

@@ -36,7 +36,7 @@ const UploadForm = props => {
     formData.append('file', event.dataTransfer.files[0]);
     uploadFile(formData);
     setIsUploading(true);
-    event.target.reset();
+    // event.target.reset();
   }
 
   const handleManualSubmit = event => {
@@ -53,6 +53,7 @@ const UploadForm = props => {
 
   const handleResponse = response => {
     setUploadProgress(initialProgress);
+    console.log(response);
     props.updateDrive(response.folder, response.user);
     setIsUploading(false);
   }

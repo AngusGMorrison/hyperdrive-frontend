@@ -18,9 +18,11 @@ const DocumentPanel = props => {
   }
 
   return(
-    <div className="document-panel" >
+    <div className="document-panel file-panel" >
       <h2 className="file-panel-heading">Files</h2>
-      { renderDocuments() }
+      <div className="file-grid">
+        { renderDocuments() }
+      </div>
     </div>
   )
 

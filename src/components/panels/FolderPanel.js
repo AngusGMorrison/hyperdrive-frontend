@@ -18,9 +18,9 @@ const FolderPanel = props => {
   }
 
   return (
-    <div className="folder-panel">
+    <div className="folder-panel file-panel">
       <h2 className="file-panel-heading">Folders</h2>
-      <div className="folder-grid">
+      <div className="file-grid">
         { renderFolders() }
       </div>
     </div>

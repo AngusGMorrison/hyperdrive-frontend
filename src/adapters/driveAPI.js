@@ -3,7 +3,7 @@ import API, { BASE_URL } from './API';
 import { LOCAL_STORAGE_KEYS, THROWABLE_STATUS_CODES } from '../constants';
 
 const DRIVE_URL = BASE_URL + '/drive';
-const FOLDER_URL = BASE_URL + '/folders';
+const FOLDER_URL = DRIVE_URL + '/folders';
 
 const getFilesInFolder = folder => {
   const route = folder.id ? (DRIVE_URL + `folders/${folder.id}`) : DRIVE_URL

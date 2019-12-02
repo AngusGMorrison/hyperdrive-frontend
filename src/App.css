@@ -41,3 +41,10 @@ input:-webkit-autofill:focus {
   transition: all 5000s ease-in-out 0s;
   transition-property: font, color, background-color, font-family;
 }
+
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+}

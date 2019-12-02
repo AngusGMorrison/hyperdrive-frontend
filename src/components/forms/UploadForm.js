@@ -36,7 +36,6 @@ const UploadForm = props => {
     formData.append('file', event.dataTransfer.files[0]);
     uploadFile(formData);
     setIsUploading(true);
-    // event.target.reset();
   }
 
   const handleManualSubmit = event => {

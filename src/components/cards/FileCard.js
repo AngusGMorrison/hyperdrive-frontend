@@ -39,7 +39,7 @@ const FileCard = ({ file, openContextMenu, setSelectedFile }) => {
   }
 
   return(
-    <div className="file-card card" onClick={handleClick} onContextMenu={handleContextMenu}>
+    <div className="file-card card no-select" onClick={handleClick} onContextMenu={handleContextMenu}>
       <div className="file-icon-container">
         <img className="file-icon" src={get_icon_src()} alt="File icon" />
       </div>

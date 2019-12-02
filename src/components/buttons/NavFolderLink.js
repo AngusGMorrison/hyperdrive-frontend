@@ -3,13 +3,14 @@ import { ICONS } from '../../constants';
 
 const NavFolderLink = props => {
 
-  console.log("Props", props);
-
   const MAX_NAME_LENGTH = 20
+
+  const handleFolderClick = () => {
+    props.changeFolder(props.content);
+  }
 
   const formatFolderName = () => {
     const name = props.content.name;
-    name.replace(/ /g, "&nbsp")
     if (name.length > MAX_NAME_LENGTH) {
       return name.slice(0, MAX_NAME_LENGTH) + '...';
     } else {
@@ -23,7 +24,12 @@ const NavFolderLink = props => {
         {
           props.content.collapsedFolders ?
             <button className="nav-folder-button">...</button> :
-            <button className="nav-folder-button">{ formatFolderName() }</button>
+            <button
+              className="nav-folder-button"
+              onClick={props.changeFolder ? props.changeFolder : null }
+            >
+              { formatFolderName() }
+            </button>
         }
         {
           props.hasArrow &&

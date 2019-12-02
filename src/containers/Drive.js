@@ -29,16 +29,14 @@ const Drive = props => {
   const changeFolder = targetFolder => {
     driveAPI.getFolder(targetFolder)
       .then(setDriveState)
-      .catch(handleErrors);
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleServerError));
   }
 
   const setDriveState = driveData => {
+    console.log(driveData);
     setUserDetails(driveData.user);
     setCurrentFolder(driveData.folder);
-  }
-
-  const handleErrors = error => {
-    ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
+    setSelectedFile(null);
   }
 
   const handleServerError = error => {
@@ -77,12 +75,32 @@ const Drive = props => {
     setUserDetails(userDetails);
   }
 
-  // const removeFileAndUpdateUser = (deletedFile, userDetails) => {
-  //   setFiles(files.filter(file => {
-  //     return file.id !== deletedFile.id;
-  //   }));
-  //   setUserDetails({...userDetails});
-  // }
+  const deleteFile = file => {
+    const confirmation = window.confirm("Delete this file? This can't be undone.")
+    if (!confirmation) return;
+    driveAPI.deleteFile(file)
+      .then(setDriveState)
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
+  }
+
+  const downloadFile = file => {
+    driveAPI.downloadFile(file)
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
+  }
+
+  const handleFileError = error => {
+    switch (error.code) {
+      case 403:
+        props.forbidAccess();
+        break;
+      case 404:
+        props.setServerError(ERROR_DETAILS.FILE_NOT_FOUND);
+        break;
+      default:
+        props.setServerError(ERROR_DETAILS.GENERIC)
+        break;
+    }
+  }
 
   return(
     <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
@@ -109,9 +127,10 @@ const Drive = props => {
               setServerError={props.setServerError}
               contextMenu={contextMenu}
               openContextMenu={openContextMenu}
-              // removeFileAndUpdateUser={removeFileAndUpdateUser}
               forbidAccess={forbidAccess}
               changeFolder={changeFolder}
+              deleteFile={deleteFile}
+              downloadFile={downloadFile}
             />
           }
         </div>

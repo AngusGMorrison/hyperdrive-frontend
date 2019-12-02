@@ -13,41 +13,41 @@ import ContextMenu from '../components/menus/ContextMenu';
 
 const FileContainer = props => {
 
-  const downloadFile = file => {
-    driveAPI.downloadFile(file)
-      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
-  }
+  // const downloadFile = file => {
+  //   driveAPI.downloadFile(file)
+  //     .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
+  // }
 
-  const deleteFile = file => {
-    const confirmation = window.confirm("Delete this file? This can't be undone.")
-    if (!confirmation) return;
-    driveAPI.deleteFile(file)
-      .then(data => props.removeFileAndUpdateUser(file, data.user))
-      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
-  }
+  // const deleteFile = file => {
+  //   const confirmation = window.confirm("Delete this file? This can't be undone.")
+  //   if (!confirmation) return;
+  //   driveAPI.deleteFile(file)
+  //     .then(data => props.removeFileAndUpdateUser(file, data.user))
+  //     .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
+  // }
 
-  const handleFileError = error => {
-    switch (error.code) {
-      case 403:
-        props.forbidAccess();
-        break;
-      case 404:
-        props.setServerError(ERROR_DETAILS.FILE_NOT_FOUND);
-        break;
-      default:
-        props.setServerError(ERROR_DETAILS.GENERIC)
-        break;
-    }
-  }
+  // const handleFileError = error => {
+  //   switch (error.code) {
+  //     case 403:
+  //       props.forbidAccess();
+  //       break;
+  //     case 404:
+  //       props.setServerError(ERROR_DETAILS.FILE_NOT_FOUND);
+  //       break;
+  //     default:
+  //       props.setServerError(ERROR_DETAILS.GENERIC)
+  //       break;
+  //   }
+  // }
 
   const contextActions = [
     {
       label: "Download",
-      onClick: downloadFile,
+      onClick: props.downloadFile,
     },
     {
       label: "Delete",
-      onClick: deleteFile,
+      onClick: props.deleteFile,
     },
   ]
 
@@ -63,6 +63,7 @@ const FileContainer = props => {
       }
       <NavBar
         currentFolder={props.currentFolder}
+        changeFolder={props.changeFolder}
       />
       {
         props.files.folders.length > 0 &&

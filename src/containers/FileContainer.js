@@ -6,6 +6,7 @@ import ERROR_DETAILS from '../errors/errorDetails';
 import '../components/panels/panels.css';
 
 import Banner from '../components/banners/Banner';
+import NavBar from '../components/menus/NavBar';
 import FolderPanel from '../components/panels/FolderPanel';
 import DocumentPanel from '../components/panels/DocumentPanel';
 import ContextMenu from '../components/menus/ContextMenu';
@@ -60,13 +61,14 @@ const FileContainer = props => {
           content={props.serverError}
         />
       }
-      {/* <NavBar
+      <NavBar
         currentFolder={props.currentFolder}
-      /> */}
+      />
       {
         props.files.folders.length > 0 &&
         <FolderPanel 
           folders={props.files.folders}
+          changeFolder={props.changeFolder}
           contextMenu={props.contextMenu}
           openContextMenu={props.openContextMenu}
           setSelectedFile={props.setSelectedFile}

@@ -13,6 +13,9 @@ export const ICONS = {
     BLUE: '/icons/ic_account_circle_blue.svg',
     MAGENTA: '/icons/ic_account_circle_magenta.svg'
   },
+  ARROW_RIGHT: {
+    DARK: '/icons/ic_keyboard_arrow_right_dark.svg'
+  },
   CLOSE: {
     DARK: '/icons/ic_close_dark.svg'
   },

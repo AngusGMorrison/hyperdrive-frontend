@@ -24,17 +24,15 @@ const Drive = props => {
   const initialFilesToRender = { folders: [], documents: [] }
   const [ filesToRender, setFilesToRender ] = useState(initialFilesToRender);
 
-  useEffect(() => {
-    driveAPI.getFilesInFolder(currentFolder)
-      .then(setDriveState)
-      .catch(error => {
-        ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
-      });
-  }, []);
+  useEffect(() => changeFolder(currentFolder), []);
 
   const setDriveState = driveData => {
     setUserDetails(driveData.user);
     setCurrentFolder(driveData.folder);
+  }
+
+  const handleErrors = error => {
+    ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
   }
 
   const handleServerError = error => {
@@ -53,7 +51,6 @@ const Drive = props => {
   }
 
   useEffect(() => {
-    console.log(currentFolder)
     setFilesToRender({ documents: currentFolder.documents, folders: currentFolder.subfolders });
   }, [currentFolder, sortType, searchTerm]);
 
@@ -81,6 +78,12 @@ const Drive = props => {
   //   setUserDetails({...userDetails});
   // }
 
+  const changeFolder = targetFolder => {
+    driveAPI.getFolder(targetFolder)
+      .then(setDriveState)
+      .catch(handleErrors);
+  }
+
   return(
     <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
       <div className="panel-container">
@@ -96,17 +99,21 @@ const Drive = props => {
             logOut={props.logOut}
             
           />
-          <FileContainer
-            currentFolder={currentFolder}
-            files={filesToRender}
-            setSelectedFile={setSelectedFile}
-            serverError={props.serverError}
-            setServerError={props.setServerError}
-            contextMenu={contextMenu}
-            openContextMenu={openContextMenu}
-            // removeFileAndUpdateUser={removeFileAndUpdateUser}
-            forbidAccess={forbidAccess}
-          />
+          {
+            currentFolder.id &&
+            <FileContainer
+              currentFolder={currentFolder}
+              files={filesToRender}
+              setSelectedFile={setSelectedFile}
+              serverError={props.serverError}
+              setServerError={props.setServerError}
+              contextMenu={contextMenu}
+              openContextMenu={openContextMenu}
+              // removeFileAndUpdateUser={removeFileAndUpdateUser}
+              forbidAccess={forbidAccess}
+              changeFolder={changeFolder}
+            />
+          }
         </div>
       </div>
       {

@@ -5,8 +5,8 @@ import { LOCAL_STORAGE_KEYS, THROWABLE_STATUS_CODES } from '../constants';
 const DRIVE_URL = BASE_URL + '/drive';
 const FOLDER_URL = DRIVE_URL + '/folders';
 
-const getFilesInFolder = folder => {
-  const route = folder.id ? (DRIVE_URL + `folders/${folder.id}`) : DRIVE_URL
+const getFolder = folder => {
+  const route = folder.id ? (DRIVE_URL + `/folders/${folder.id}`) : DRIVE_URL
   return API.ajax("GET", route);
 }
 
@@ -49,7 +49,7 @@ const deleteFile = file => {
 }
 
 const driveAPI = {
-  getFilesInFolder,
+  getFolder,
   uploadFile,
   downloadFile,
   deleteFile

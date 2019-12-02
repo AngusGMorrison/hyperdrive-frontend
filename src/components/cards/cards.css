@@ -5,15 +5,15 @@
   box-shadow: 0 2px 2px 0 rgba(51, 56, 57, 0.08), 0 2px 4px 0 rgba(51, 56, 57, 0.12);
 }
 
+.card:hover {
+  cursor: pointer;
+}
+
 .file-card {
   display: flex;
   flex-direction: column;
   padding: 38px 20px 16px 20px;
   
-}
-
-.file-card:hover {
-  cursor: pointer;
 }
 
 .file-icon-container {

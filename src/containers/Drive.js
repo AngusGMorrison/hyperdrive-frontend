@@ -45,7 +45,8 @@ const Drive = props => {
         forbidAccess();
         break;
       default:
-        console.error(error);
+        props.setServerError(ERROR_DETAILS.GENERIC)
+        break;
     }
   }
 
@@ -102,6 +103,12 @@ const Drive = props => {
     }
   }
 
+  const createFolder = folderDetails => {
+    driveAPI.createFolder(folderDetails, currentFolder)
+      .then(setDriveState)
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleServerError))
+  }
+
   return(
     <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
       <div className="panel-container">
@@ -115,6 +122,7 @@ const Drive = props => {
             currentFolder={currentFolder}
             updateDrive={updateDrive}
             logOut={props.logOut}
+            createFolder={createFolder}
             
           />
           {

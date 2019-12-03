@@ -1,0 +1,42 @@
+.modal-page-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+}
+
+.modal {
+  position: relative;
+  background-color: var(--hyper-dark-grey);
+  z-index: 2;
+  border-radius: 3px;
+  width: 500px;
+  box-shadow: 0px 8px 8px 0 rgba(0, 0, 0, 0.24), 0px 4px 4px 0 rgba(0, 0, 0, 0.12);
+  padding: 30px 24px;
+}
+
+.modal-header-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+h3.modal-heading {
+  color: white;
+  white-space: nowrap;
+  margin: 0 10px 0 0;
+}
+
+.modal-button-container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+
+

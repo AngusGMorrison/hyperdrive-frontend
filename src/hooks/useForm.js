@@ -135,7 +135,7 @@ const useForm = ({ initialFormState = {}, submitAction = formFields => {} } = {}
     }, {});
   }
 
-  return { formFields, errors, setErrors, handleInputChange, handleFormSubmission };
+  return { formFields, setFormFields, errors, setErrors, resetErrors, handleInputChange, handleFormSubmission };
 }
 
 export default useForm;

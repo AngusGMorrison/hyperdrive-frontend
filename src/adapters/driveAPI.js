@@ -50,11 +50,16 @@ const deleteFile = file => {
   return API.ajax("DELETE", routePrefix + `/${file.id}`); 
 }
 
+const createFolder = folderDetails => {
+
+}
+
 const driveAPI = {
   getFolder,
   uploadFile,
   downloadFile,
-  deleteFile
+  deleteFile,
+  createFolder
 }
 
 export default driveAPI;

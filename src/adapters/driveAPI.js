@@ -32,7 +32,7 @@ const downloadFile = file => {
   const config = {
     headers: { 'Authorization': localStorage[LOCAL_STORAGE_KEYS.TOKEN] }
   }
-  return fetch(DRIVE_URL + `/${file.id}`, config)
+  return fetch(DOCUMENT_URL + `/${file.id}`, config)
     .then(res => tryDownload(res, file));
 }
 

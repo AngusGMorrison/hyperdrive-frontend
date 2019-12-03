@@ -12,7 +12,7 @@ const FolderCard = props => {
 
   const handleDoubleClick = event => {
     event.stopPropagation();
-    props.changeFolder(props.folder);
+    props.loadFolder(props.folder);
   }
 
   const handleContextMenu = event => {
@@ -26,7 +26,11 @@ const FolderCard = props => {
   }
 
   return(
-    <div className="folder-card card no-select" onDoubleClick={handleDoubleClick} onContextMenu={handleContextMenu}>
+    <div
+      className="folder-card card no-select"
+      onDoubleClick={handleDoubleClick}
+      onContextMenu={handleContextMenu}
+    >
       <img className="folder-icon" src={ICONS.FOLDER.WHITE} alt="Folder icon" />
       <p className="card-filename">{props.folder.name}</p>
     </div>

@@ -22,13 +22,13 @@ const FileContainer = props => {
       }
       <NavBar
         currentFolder={props.currentFolder}
-        changeFolder={props.changeFolder}
+        loadFolder={props.loadFolder}
       />
       {
         props.files.folders.length > 0 &&
         <FolderPanel 
           folders={props.files.folders}
-          changeFolder={props.changeFolder}
+          loadFolder={props.loadFolder}
           contextMenu={props.contextMenu}
           openContextMenu={props.openContextMenu}
           setSelectedFile={props.setSelectedFile}

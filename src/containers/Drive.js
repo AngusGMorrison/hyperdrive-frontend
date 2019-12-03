@@ -24,9 +24,9 @@ const Drive = props => {
   const initialFilesToRender = { folders: [], documents: [] }
   const [ filesToRender, setFilesToRender ] = useState(initialFilesToRender);
 
-  useEffect(() => changeFolder(currentFolder), []);
+  useEffect(() => loadFolder(currentFolder), []);
 
-  const changeFolder = targetFolder => {
+  const loadFolder = targetFolder => {
     driveAPI.getFolder(targetFolder)
       .then(setDriveState)
       .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleServerError));
@@ -128,7 +128,7 @@ const Drive = props => {
               contextMenu={contextMenu}
               openContextMenu={openContextMenu}
               forbidAccess={forbidAccess}
-              changeFolder={changeFolder}
+              loadFolder={loadFolder}
               deleteFile={deleteFile}
               downloadFile={downloadFile}
             />

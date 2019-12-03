@@ -6,7 +6,7 @@ const NavFolderLink = props => {
   const MAX_NAME_LENGTH = 20
 
   const handleFolderClick = () => {
-    props.changeFolder(props.content);
+    props.loadFolder(props.content);
   }
 
   const formatFolderName = () => {
@@ -26,7 +26,7 @@ const NavFolderLink = props => {
             <button className="nav-folder-button">...</button> :
             <button
               className="nav-folder-button"
-              onClick={props.changeFolder ? props.changeFolder : null }
+              onClick={props.loadFolder ? handleFolderClick : null }
             >
               { formatFolderName() }
             </button>

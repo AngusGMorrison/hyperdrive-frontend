@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import NavFolderLink from '../buttons/NavFolderLink';
 
-const NavBar = ({ currentFolder, changeFolder }) => {
+const NavBar = ({ currentFolder, loadFolder }) => {
 
   const MAX_PARENTS_TO_SHOW = 2
 
@@ -46,7 +46,7 @@ const NavBar = ({ currentFolder, changeFolder }) => {
           key={element.id ? element.id : "collapsed"}
           content={element}
           hasArrow={index < fileTree.length}
-          changeFolder={element.id ? changeFolder : null}
+          loadFolder={element.id ? loadFolder : null}
         />
       )
     });

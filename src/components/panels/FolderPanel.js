@@ -10,7 +10,7 @@ const FolderPanel = props => {
         <FolderCard
           key={folder.id}
           folder={folder}
-          changeFolder={props.changeFolder}
+          loadFolder={props.loadFolder}
           openContextMenu={props.openContextMenu}
           setSelectedFile={props.setSelectedFile}
           deleteFile={props.deleteFile}

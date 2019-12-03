@@ -50,8 +50,9 @@ const deleteFile = file => {
   return API.ajax("DELETE", routePrefix + `/${file.id}`); 
 }
 
-const createFolder = folderDetails => {
-
+const createFolder = (folderDetails, currentFolder) => {
+  const payload = { folder: folderDetails, parent_folder_id: currentFolder.id }
+  return API.ajax("POST", FOLDER_URL, payload);
 }
 
 const driveAPI = {

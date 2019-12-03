@@ -126,10 +126,12 @@ const useForm = ({ initialFormState = {}, submitAction = formFields => {} } = {}
 
   const submitForm = () => {
     resetErrors();
+    setFormFields(initialFormState);
     submitAction(getFormContent());
   }
 
   const getFormContent = () => {
+    console.log("Getting form content");
     return Object.keys(formFields).reduce((formContent, key) => {
       return { ...formContent, [key]: formFields[key].value };
     }, {});

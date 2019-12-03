@@ -9,7 +9,6 @@ import SmallButton from '../components/buttons/SmallButton';
 
 const useModal = (content = {}) => {
 
-  
   const [ modalIsVisible, setModalIsVisible ] = useState(false);
 
   const { formFields, setFormFields, errors, resetErrors, handleInputChange, handleFormSubmission } = useForm({ initialFormState: content.form.fields, submitAction: content.buttons.primary.action });
@@ -28,7 +27,7 @@ const useModal = (content = {}) => {
 
   const renderForm = () => {
     return(
-      <form className="modal-form" onSubmit={handleFormSubmission} autoComplete="off" >
+      <form className="modal-form" autoComplete="off" >
         { renderFormFields() }
         { renderButtons() }
       </form>
@@ -58,11 +57,11 @@ const useModal = (content = {}) => {
       return(
         <div className="modal-button-container" >
           { Object.entries(content.buttons).map(([ k, v ]) => {
-              if (k === 'cancel') {
-                return <SmallButton action={handleClose} theme={THEMES.SECONDARY}>{v.text}</SmallButton>
-              } else {
-                return <SmallButton action={v.action} theme={THEMES.BLUE}>{v.text}</SmallButton>
-              }
+            if (k === 'cancel') {
+              return <SmallButton action={handleClose} theme={THEMES.SECONDARY}>{v.text}</SmallButton>
+            } else {
+              return <SmallButton action={handleFormSubmission} theme={THEMES.BLUE}>{v.text}</SmallButton>
+            }
           })}
         </div>
       )

@@ -116,6 +116,12 @@ const Drive = props => {
       .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleServerError))
   }
 
+  const moveFile = (file, destinationFolder) => {
+    driveAPI.moveFile(file, destinationFolder)
+      .then(setDriveState)
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
+  }
+
   return(
     <div className="drive" onClick={closeContextMenu} onContextMenu={closeContextMenu}>
       <div className="panel-container">
@@ -146,6 +152,7 @@ const Drive = props => {
               loadFolder={loadFolder}
               deleteFile={deleteFile}
               downloadFile={downloadFile}
+              moveFile={moveFile}
             />
           }
         </div>

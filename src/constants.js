@@ -8,6 +8,11 @@ export const FIELD_TYPES = {
   EMAIL: "email"
 }
 
+export const FILE_TYPES = {
+  DOCUMENT: 'document',
+  FOLDER: 'folder'
+}
+
 export const ICONS = {
   ACCOUNT_CIRCLE: {
     BLUE: '/icons/ic_account_circle_blue.svg',

@@ -32,6 +32,7 @@ const UploadForm = props => {
   const handleDrop = event => {
     event.preventDefault();
     setIsDraggedOver(false);
+    if (!event.dataTransfer.files[0]) return;
     const formData = new FormData();
     formData.append('file', event.dataTransfer.files[0]);
     uploadFile(formData);

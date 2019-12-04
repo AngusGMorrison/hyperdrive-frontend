@@ -36,3 +36,12 @@ p.card-filename {
 .folder-icon {
   margin-right: 10px;
 }
+
+.card.dragged-over {
+  box-shadow: 0 0 6px 3px var(--hyper-blue);
+}
+
+.card.dragged {
+  opacity: 0.25;
+  transition: opacity 0.3s ease-in-out;
+}

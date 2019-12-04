@@ -33,6 +33,7 @@ const FileContainer = props => {
           openContextMenu={props.openContextMenu}
           setSelectedFile={props.setSelectedFile}
           deleteFile={props.deleteFile}
+          moveFile={props.moveFile}
         />
       }
       {

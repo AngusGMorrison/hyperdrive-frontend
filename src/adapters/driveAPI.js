@@ -1,13 +1,13 @@
 import download from 'downloadjs';
 import API, { BASE_URL } from './API';
-import { LOCAL_STORAGE_KEYS, THROWABLE_STATUS_CODES } from '../constants';
+import { FILE_TYPES, LOCAL_STORAGE_KEYS, THROWABLE_STATUS_CODES } from '../constants';
 
 const DRIVE_URL = BASE_URL + '/drive';
 const FOLDER_URL = DRIVE_URL + '/folders';
 const DOCUMENT_URL = DRIVE_URL + '/documents';
 
 const getFolder = folder => {
-  const route = folder.id ? (FOLDER_URL + `/${folder.id}`) : DRIVE_URL
+  const route = folder.id ? (FOLDER_URL + `/${folder.id}`) : FOLDER_URL
   return API.ajax("GET", route);
 }
 
@@ -55,12 +55,25 @@ const createFolder = (folderDetails, currentFolder) => {
   return API.ajax("POST", FOLDER_URL, payload);
 }
 
+const moveFile = (file, destinationFolder) => {
+  const payload = { destination_folder_id: destinationFolder.id };
+  if (file.type === FILE_TYPES.DOCUMENT) {
+    return API.ajax('PATCH', DOCUMENT_URL + `/${file.id}`, payload);
+  } else if (file.type === FILE_TYPES.FOLDER) {
+    return API.ajax('PATCH', FOLDER_URL + `/${file.id}`, payload);
+  } else {
+    throw new Error("Unknown file type");
+  }
+   
+}
+
 const driveAPI = {
   getFolder,
   uploadFile,
   downloadFile,
   deleteFile,
-  createFolder
+  createFolder,
+  moveFile
 }
 
 export default driveAPI;

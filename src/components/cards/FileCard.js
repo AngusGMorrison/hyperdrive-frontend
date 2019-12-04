@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ICONS, REGEX } from '../../constants';
 import './cards.css';
+
+import useDragFile from '../../hooks/useDragFile';
 
 const FileCard = ({ file, openContextMenu, setSelectedFile, downloadFile, deleteFile }) => {
 
@@ -49,10 +51,19 @@ const FileCard = ({ file, openContextMenu, setSelectedFile, downloadFile, delete
     openContextMenu(file, mouseCoords, contextActions);
   }
 
+  const { isDragged, handleDragStart, handleDragEnd } = useDragFile(file);
+
   return(
-    <div className="file-card card no-select" onClick={handleClick} onContextMenu={handleContextMenu}>
+    <div
+      className={`file-card card no-select ${isDragged ? 'dragged' : null}`}
+      onClick={handleClick}
+      onContextMenu={handleContextMenu}
+      draggable
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
       <div className="file-icon-container">
-        <img className="file-icon" src={get_icon_src()} alt="File icon" />
+        <img className="file-icon" src={get_icon_src()} alt="File icon" draggable={false} />
       </div>
       <div>
         <p className="card-filename">{format_filename()}</p>

@@ -56,7 +56,7 @@ const Drive = props => {
   }
 
   useEffect(() => {
-    setFilesToRender({ documents: currentFolder.documents, folders: currentFolder.subfolders });
+    setFilesToRender(getFilesToRender());
   }, [currentFolder, sortType, searchTerm]);
 
   const getFilesToRender = () => {
@@ -65,10 +65,17 @@ const Drive = props => {
   }
 
   const searchFiles = () => {
-    if (!searchTerm) return [ ...currentFolder.files ];
-    return currentFolder.files.filter(file => {
-      return file.filename.includes(searchTerm);
-    });
+    if (!searchTerm) return { documents: [ ...currentFolder.documents ], folders: [ ...currentFolder.subfolders ] };
+    return {
+      documents: searchFileType("documents"),
+      folders: searchFileType("subfolders")
+    };
+  }
+
+  const searchFileType = fileType => {
+    return currentFolder[fileType].filter(file => {
+      return file.name.toLowerCase().includes(searchTerm.toLowerCase());
+    })
   }
 
   const updateDrive = (folder, userDetails) => {

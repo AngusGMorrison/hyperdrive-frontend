@@ -26,12 +26,12 @@ const FileCard = ({ file, openContextMenu, setSelectedFile, downloadFile, delete
   }
 
   const format_filename = () => {
-    const name = file.filename.match(REGEX.FILENAME_PARTS)[1]
+    const name = file.name.match(REGEX.FILENAME_PARTS)[1]
     if (name.length > MAX_NAME_LENGTH) {
       const formatted_name = name.slice(0, MAX_NAME_LENGTH);
       return formatted_name + '..' + file.extension
     } else {
-      return file.filename;
+      return file.name;
     }
   }
 

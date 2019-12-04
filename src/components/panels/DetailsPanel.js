@@ -4,7 +4,7 @@ import { ICONS } from '../../constants';
 
 const DetailsPanel = ({ file, setSelectedFile }) => {
 
-  const unrenderedProperties = ["id", "filename"]
+  const unrenderedProperties = ["id", "name"]
 
   const renderFileDetails = () => {
     return Object.entries(file).map(([k, v]) => {
@@ -34,7 +34,7 @@ const DetailsPanel = ({ file, setSelectedFile }) => {
         <div className="close-icon-container">
           <img className="close-icon icon-button" src={ICONS.CLOSE.DARK} onClick={closePanel} alt="Close details panel" />
         </div>
-        <h3>{file.filename}</h3>
+        <h3>{file.name}</h3>
         <table>
           {renderFileDetails()}
         </table>

@@ -41,7 +41,7 @@ const tryDownload = (response, file) => {
     API.selectAndThrowServerError(response);
   } else {
     response.blob()
-      .then(blob => download(blob, file.filename, file.content_type))
+      .then(blob => download(blob, file.name, file.content_type))
   }
 }
 

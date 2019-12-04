@@ -1,62 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ICONS, FIELD_TYPES, SORT_TYPES, THEMES } from '../../constants';
 import { checkForFolderNameErrors } from '../../validators/validators';
 import './panels.css'
 
-import useModal from '../../hooks/useModal';
-
+import Modal from '../modals/Modal.js'
 import BigButton from '../buttons/BigButton';
 import SearchField from '../forms/fields/SearchField';
 import BinarySelector from '../menus/BinarySelector';
 import UploadForm from '../forms/UploadForm';
 import ProfileWidget from '../profile/ProfileWidget';
 
-
 const ControlPanel = props => {
 
+  const [ newFolderModalIsVisible, setNewFolderModalIsVisible ] = useState(false);
+
+  const newFolderForm = {
+    name: {
+      name: 'name',
+      type: FIELD_TYPES.TEXT,
+      icon: ICONS.FOLDER,
+      placeholder: 'Enter folder name',
+      value: '',
+      required: true,
+      validator: checkForFolderNameErrors
+    }
+  }
+
   const newFolderSubmitAction = newFolderDetails => {
-    setModalIsVisible(false);
+    setNewFolderModalIsVisible(false);
     props.createFolder(newFolderDetails);
   }
 
-  const newFolderModalContent = {
-    heading: 'New Folder',
-    form: {
-      fields: {
-        name: {
-          name: 'name',
-          type: FIELD_TYPES.TEXT,
-          icon: ICONS.FOLDER,
-          placeholder: 'Enter folder name',
-          value: '',
-          required: true,
-          validator: checkForFolderNameErrors
-        }
-      },
+  const newFolderButtons = {
+    primary: {
+      text: "Create",
+      action: newFolderSubmitAction
     },
-    buttons: {
-      primary: {
-        text: "Create",
-        action: newFolderSubmitAction
-      },
-      cancel: {
-        text: "Cancel"
-      }
-    },   
-    closeIcon: true
+    cancel: {
+      text: "Cancel"
+    }
   }
 
-  const { modalIsVisible, setModalIsVisible, renderModal } = useModal(newFolderModalContent);
-
   const handleNewFolderClick = () => {
-    setModalIsVisible(true);
+    setNewFolderModalIsVisible(true);
   }
 
   return(
     <div className="control-panel">
       {
-        modalIsVisible &&
-        renderModal()
+        newFolderModalIsVisible &&
+        <Modal
+          heading="New folder"
+          form={newFolderForm}
+          buttons={newFolderButtons}
+          toggleVisible={setNewFolderModalIsVisible}
+          hasCloseIcon
+        />
       }
       <img className="drive-logo" src="/logos/hyperdrive-logo-50px.jpg" alt="Hyperdrive logo" />
       <SearchField

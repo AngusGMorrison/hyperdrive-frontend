@@ -10,6 +10,7 @@ const TextField = (props) => {
           className="field-icon"
           src={props.errors ? props.icon.MAGENTA : props.icon.BLUE }
           alt="Text field icon"
+          draggable={false}
         />
 
         <input

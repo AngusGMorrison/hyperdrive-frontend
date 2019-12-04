@@ -48,7 +48,7 @@ const ProfileWidget = ({ user, logOut }) => {
         <span className="storage-tracker">{formatStorageTracker()}</span>
       </div>
       <div className="icon-controls" >
-        <img className="icon-button" src={ICONS.LOGOUT.WHITE} alt="Logout icon" onClick={logOut} title="Log out" />
+        <img className="icon-button" src={ICONS.LOGOUT.WHITE} alt="Logout icon" onClick={logOut} title="Log out" draggable={false} />
       </div>
     </div>
   )

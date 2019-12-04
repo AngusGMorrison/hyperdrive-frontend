@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import NavFolderLink from '../buttons/NavFolderLink';
 
-const NavBar = ({ currentFolder, loadFolder }) => {
+const NavBar = ({ currentFolder, loadFolder, moveFile }) => {
 
   const MAX_PARENTS_TO_SHOW = 2
 
@@ -47,13 +47,15 @@ const NavBar = ({ currentFolder, loadFolder }) => {
           content={element}
           hasArrow={index < fileTree.length}
           loadFolder={element.id ? loadFolder : null}
+          currentFolder={currentFolder}
+          moveFile={moveFile}
         />
       )
     });
   }
 
   const renderCurrentFolder = () => {
-    return <NavFolderLink key={currentFolder.id} content={currentFolder} />
+    return <NavFolderLink key={currentFolder.id} content={currentFolder} currentFolder={currentFolder}/>
   }
 
   return (

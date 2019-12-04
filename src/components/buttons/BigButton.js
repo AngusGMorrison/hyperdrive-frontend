@@ -7,7 +7,7 @@ const BigButton = props => {
       className={`button big-button ${props.theme}`}
       onClick={props.action ? props.action : null}
     >
-      <img className="field-icon" src={props.icon} alt="Button icon" />
+      <img className="field-icon" src={props.icon} alt="Button icon" draggable={false} />
       <div className="button-text">{props.text}</div>
     </button>
   )

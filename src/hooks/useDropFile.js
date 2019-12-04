@@ -16,25 +16,33 @@ const useDropFile = (target, dropAction) => {
 
   const handleDrop = event => {
     event.preventDefault();
+    event.stopPropagation();
     setIsDraggedOver(false);
     const droppedFile = parseDataTransfer(event.dataTransfer);
-    if (fileIsTarget(droppedFile)) return;
+    if (!isValid(droppedFile)) return;
     dropAction(droppedFile, target);
   }
 
   const parseDataTransfer = dataTransfer => {
     try {
       const droppedData = dataTransfer.getData('text');
-      const droppedFile = JSON.parse(droppedData);
-      return droppedFile;
+      return JSON.parse(droppedData);
     } catch (e) {
-      // Develop
-      console.error(e);
+      console.error("Couldn't parse dropped object. It probably wasn't a file.")
     }
+    
   }
 
-  const fileIsTarget = (file) => {
+  const isValid = droppedFile => {
+    return droppedFile && isAFile(droppedFile) && !isOwnTarget(droppedFile)
+  }
+
+  const isOwnTarget = file => {
     return (file.id === target.id) && (file.created_at === target.created_at);
+  }
+
+  const isAFile = droppedFile => {
+    return droppedFile.type ? true : false
   }
 
   return { isDraggedOver, handleDragOver, handleDragLeave, handleDrop }

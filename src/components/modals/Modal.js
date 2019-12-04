@@ -94,7 +94,7 @@ const Modal = ({heading = "", body="", form = {}, buttons = {}, toggleVisible = 
             {
               hasCloseIcon &&
               <div className="close-icon-container" >
-                <img className="close-icon icon-button" src={ICONS.CLOSE.WHITE} alt="Close button" onClick={handleClose} />
+                <img className="close-icon icon-button" src={ICONS.CLOSE.WHITE} alt="Close button" onClick={handleClose} draggable={false} />
               </div>
 
             }

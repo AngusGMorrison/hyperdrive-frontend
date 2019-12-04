@@ -1,6 +1,8 @@
 import React from 'react';
 import { ICONS } from '../../constants';
 
+import useDropFile from '../../hooks/useDropFile';
+
 const NavFolderLink = props => {
 
   const MAX_NAME_LENGTH = 20
@@ -18,6 +20,17 @@ const NavFolderLink = props => {
     }
   }
 
+  const { isDraggedOver, handleDragOver, handleDragLeave, handleDrop }
+    = useDropFile(props.content, props.moveFile);
+
+  const isValidDropTarget = () => {
+    return(
+      props.currentFolder.level !== "__root__" &&
+      props.content.level &&
+      props.content.id !== props.currentFolder.id
+    )
+  }
+
   return (
     <div className="nav-folder-link-container">
       <div className="nav-folder-link">
@@ -25,8 +38,11 @@ const NavFolderLink = props => {
           props.content.collapsedFolders ?
             <button className="nav-folder-button">...</button> :
             <button
-              className="nav-folder-button"
+              className={`nav-folder-button ${isValidDropTarget() && isDraggedOver && 'dragged'}`}
               onClick={props.loadFolder ? handleFolderClick : null }
+              onDragOver={isValidDropTarget() && handleDragOver}
+              onDragLeave={isValidDropTarget() && handleDragLeave}
+              onDrop={isValidDropTarget() && handleDrop}
             >
               { formatFolderName() }
             </button>

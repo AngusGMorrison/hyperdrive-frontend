@@ -32,7 +32,7 @@ const DetailsPanel = ({ file, setSelectedFile }) => {
     <div className="details-panel" >
       <div className="details-content">
         <div className="close-icon-container">
-          <img className="close-icon icon-button" src={ICONS.CLOSE.DARK} onClick={closePanel} alt="Close details panel" />
+          <img className="close-icon icon-button" src={ICONS.CLOSE.DARK} onClick={closePanel} alt="Close details panel" draggable={false} />
         </div>
         <h3>{file.name}</h3>
         <table>

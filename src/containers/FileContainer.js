@@ -23,6 +23,7 @@ const FileContainer = props => {
       <NavBar
         currentFolder={props.currentFolder}
         loadFolder={props.loadFolder}
+        moveFile={props.moveFile}
       />
       {
         props.files.folders.length > 0 &&

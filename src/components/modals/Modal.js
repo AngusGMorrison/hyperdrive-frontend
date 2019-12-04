@@ -85,34 +85,6 @@ const Modal = ({heading = "", body="", form = {}, buttons = {}, toggleVisible = 
     return <SmallButton action={handleClose} theme={THEMES.SECONDARY}>{button.text}</SmallButton>
   }
 
-  // const renderModal = () => {
-  //   return(
-  //     <div className="modal-page-overlay" onClick={handleOverlayClick}>
-  //       <div className="modal" >
-  //         <div className="modal-content-container" >
-  //           <div className="modal-header-container">
-  //             <h3 className="modal-heading">{ content.heading }</h3>
-  //             {
-  //               content.closeIcon &&
-  //               <div className="close-icon-container" >
-  //                 <img className="close-icon icon-button" src={ICONS.CLOSE.WHITE} alt="Close button" onClick={handleClose} />
-  //               </div>
-
-  //             }
-  //           </div>
-  //           {
-  //             content.body &&
-  //             <p className="modal-body">{ content.body } </p>
-  //           }
-  //           { 
-  //             content.form ? renderForm() : renderButtons()
-  //           }        
-  //         </div>
-  //       </div>      
-  //     </div>
-  //   )
-  // }
-
   return(
     <div className="modal-page-overlay" onClick={handleOverlayClick}>
       <div className="modal" >

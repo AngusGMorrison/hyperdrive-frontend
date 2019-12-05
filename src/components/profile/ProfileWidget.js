@@ -1,6 +1,8 @@
 import React from 'react';
-import { ICONS } from '../../constants';
+import { ICONS, THEMES } from '../../constants';
 import './profile.css'
+
+import ExtraSmallButton from '../buttons/ExtraSmallButton';
 
 const ProfileWidget = ({ user, logOut }) => {
 
@@ -47,9 +49,12 @@ const ProfileWidget = ({ user, logOut }) => {
         <span className="profile-name">{user.name}</span>
         <span className="storage-tracker">{formatStorageTracker()}</span>
       </div>
-      <div className="icon-controls" >
+      <ExtraSmallButton theme={THEMES.SECONDARY} action={logOut}>
+        Log out
+      </ExtraSmallButton>
+      {/* <div className="icon-controls" >
         <img className="icon-button" src={ICONS.LOGOUT.WHITE} alt="Logout icon" onClick={logOut} title="Log out" draggable={false} />
-      </div>
+      </div> */}
     </div>
   )
 }

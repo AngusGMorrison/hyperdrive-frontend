@@ -37,6 +37,16 @@
 
 .button.secondary {
   background-color: transparent;
-  border: 2px solid white;
+  border-color: 2px solid white;
   color: white;
+}
+
+button.extra-small-button.secondary {
+  border: 1px solid white;
+  font-size: 12px;
+}
+
+button.extra-small-button.secondary:active {
+  background-color: white;
+  color: var(--hyper-dark-grey);
 }

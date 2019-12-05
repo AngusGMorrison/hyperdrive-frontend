@@ -46,8 +46,10 @@
 }
 
 .upload-zone label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: var(--hyper-blue);
-  margin-bottom: 20px;
 }
 
 .upload-zone label:hover {
@@ -69,6 +71,7 @@
 .upload-progress {
   width: 76%;
   height: 16px;
+  margin-top: 15px;
   -webkit-appearance: none;
   -moz-appearance:none;
   background-color: var(--hyper-dark-grey);

@@ -67,8 +67,9 @@ const UploadForm = props => {
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      <img className="upload-icon" src={ICONS.CLOUD_UPLOAD.BLUE} alt="Cloud upload icon" draggable={false} />
-      <label onClick={clickFileInput} htmlFor="file">Drag files or click here to upload
+      <label className="upload-label" onClick={clickFileInput} htmlFor="file">
+        <img className="upload-icon" src={ICONS.CLOUD_UPLOAD.BLUE} alt="Cloud upload icon" draggable={false} />
+        Drag files or click here to upload
       <input className="manual-file-input" onClick={e => e.stopPropagation()} ref={fileInput} type="file" name="file" accept=".txt, image/jpg" />
       </label>
       <progress className={`upload-progress ${isUploading ? null : 'hidden'}`} value={uploadProgress.loaded} max={uploadProgress.total}></progress>

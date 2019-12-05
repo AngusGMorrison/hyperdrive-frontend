@@ -19,6 +19,7 @@ const App = withRouter(({ history }) => {
   const logOut = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
     setLoggedIn(false);
+    setServerError(null);
     history.push('/');
   }
 

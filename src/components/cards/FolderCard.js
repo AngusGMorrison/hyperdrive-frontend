@@ -47,7 +47,7 @@ const FolderCard = props => {
       onDrop={handleDrop}
     >
       <img className="folder-icon" src={ICONS.FOLDER.WHITE} alt="Folder icon" draggable={false} />
-      <p className="card-filename">{props.folder.name}</p>
+      <p className="card-filename break">{props.folder.name}</p>
     </div>
   )
 

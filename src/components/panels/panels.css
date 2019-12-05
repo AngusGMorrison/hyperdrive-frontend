@@ -108,7 +108,7 @@ progress::-moz-progress-bar {
 .details-panel {
   padding: 2rem;
   display: inline-block;
-  width: 300px;
+  width: 320px;
   height: 100vh;
   background-color: var(--hyper-light-grey);
   border-left: 2px solid var(--hyper-dark-grey);
@@ -117,6 +117,14 @@ progress::-moz-progress-bar {
 
 .details-panel table {
   width: 100%;
+}
+
+.details-panel tr {
+  height: 30px;
+}
+
+.right-column {
+  text-align: right;
 }
 
 .close-icon-container {

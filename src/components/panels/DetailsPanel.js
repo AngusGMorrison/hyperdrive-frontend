@@ -11,7 +11,7 @@ const DetailsPanel = ({ file, setSelectedFile }) => {
       if (!unrenderedProperties.includes(k)) {
         return(
           <tr key={k}>
-            <td>{makeSentenceCase(k)}:</td><td>{v}</td>
+            <td>{makeSentenceCase(k)}:</td><td className="right-column">{v}</td>
           </tr>
         );
       } 
@@ -34,7 +34,7 @@ const DetailsPanel = ({ file, setSelectedFile }) => {
         <div className="close-icon-container">
           <img className="close-icon icon-button" src={ICONS.CLOSE.DARK} onClick={closePanel} alt="Close details panel" draggable={false} />
         </div>
-        <h3>{file.name}</h3>
+        <h3 className="break">{file.name}</h3>
         <table>
           {renderFileDetails()}
         </table>

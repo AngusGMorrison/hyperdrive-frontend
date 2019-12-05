@@ -1,14 +1,19 @@
-.file-card {
+.card {
   display: flex;
-  flex-direction: column;
-  padding: 38px 20px 16px 20px;
   background-color: var(--hyper-dark-grey);
   border-radius: 3px;
   box-shadow: 0 2px 2px 0 rgba(51, 56, 57, 0.08), 0 2px 4px 0 rgba(51, 56, 57, 0.12);
 }
 
-.file-card:hover {
+.card:hover {
   cursor: pointer;
+}
+
+.file-card {
+  display: flex;
+  flex-direction: column;
+  padding: 38px 20px 16px 20px;
+  
 }
 
 .file-icon-container {
@@ -17,9 +22,34 @@
   margin-bottom: 27px;
 }
 
-
-p.file-card-filename {
+p.card-filename {
   margin: 0;
   font: 400 12px/14px "Menlo";
   color: white;
+}
+
+.folder-card {
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.folder-icon {
+  margin-right: 10px;
+}
+
+.card.dragged-over {
+  box-shadow: 0 0 6px 3px var(--hyper-blue);
+}
+
+.card.dragged {
+  opacity: 0.25;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.break {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  word-break: break-word;
 }

@@ -5,7 +5,7 @@ import ERROR_DETAILS from '../errors/errorDetails';
 import './drive.css';
 
 import ControlPanel from '../components/panels/ControlPanel'
-import FilePanel from '../components/panels/FilePanel';
+import FileContainer from './FileContainer';
 import DetailsPanel from '../components/panels/DetailsPanel';
 import useContextMenu from '../hooks/useContextMenu';
 import useFileSort from '../hooks/useFileSort';
@@ -13,24 +13,30 @@ import useFileSort from '../hooks/useFileSort';
 const Drive = props => {
   
   const [ userDetails, setUserDetails ] = useState(null);
-  const [ files, setFiles ] = useState([]);
-  const [ filesToRender, setFilesToRender ] = useState([]);
+  
   const [ searchTerm, setSearchTerm ] = useState('');
   const { contextMenu, openContextMenu, closeContextMenu } = useContextMenu();
   const { sortType, setSortType, sortFiles } = useFileSort();
   const [ selectedFile, setSelectedFile ] = useState(null);
 
-  useEffect(() => {
-    driveAPI.getFilesInFolder()
+  const initialFolder = { id: null, documents: [], subfolders: [] }
+  const [ currentFolder, setCurrentFolder ] = useState(initialFolder);
+  const initialFilesToRender = { folders: [], documents: [] }
+  const [ filesToRender, setFilesToRender ] = useState(initialFilesToRender);
+
+  useEffect(() => loadFolder(currentFolder), []);
+
+  const loadFolder = targetFolder => {
+    driveAPI.getFolder(targetFolder)
       .then(setDriveState)
-      .catch(error => {
-        ERROR_HANDLERS.handleHttpErrors(error, handleServerError);
-      });
-  }, []);
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleServerError));
+  }
 
   const setDriveState = driveData => {
+    console.log(driveData);
     setUserDetails(driveData.user);
-    setFiles(driveData.documents);
+    setCurrentFolder(driveData.folder);
+    setSelectedFile(null);
   }
 
   const handleServerError = error => {
@@ -39,7 +45,8 @@ const Drive = props => {
         forbidAccess();
         break;
       default:
-        console.error(error);
+        props.setServerError(ERROR_DETAILS.GENERIC)
+        break;
     }
   }
 
@@ -50,7 +57,7 @@ const Drive = props => {
 
   useEffect(() => {
     setFilesToRender(getFilesToRender());
-  }, [files, sortType, searchTerm]);
+  }, [currentFolder, sortType, searchTerm]);
 
   const getFilesToRender = () => {
     const searchResults = searchFiles()
@@ -58,22 +65,61 @@ const Drive = props => {
   }
 
   const searchFiles = () => {
-    if (!searchTerm) return [ ...files ];
-    return files.filter(file => {
-      return file.filename.includes(searchTerm);
-    });
+    if (!searchTerm) return { documents: [ ...currentFolder.documents ], folders: [ ...currentFolder.subfolders ] };
+    return {
+      documents: searchFileType("documents"),
+      folders: searchFileType("subfolders")
+    };
   }
 
-  const addFileAndUpdateUser = (file, userDetails) => {
-    setFiles([ ...files, file ]);
-    setUserDetails({ ...userDetails });
+  const searchFileType = fileType => {
+    return currentFolder[fileType].filter(file => {
+      return file.name.toLowerCase().includes(searchTerm.toLowerCase());
+    })
   }
 
-  const removeFileAndUpdateUser = (deletedFile, userDetails) => {
-    setFiles(files.filter(file => {
-      return file.id !== deletedFile.id;
-    }));
-    setUserDetails({...userDetails});
+  const updateDrive = (folder, userDetails) => {
+    setCurrentFolder(folder);
+    setUserDetails(userDetails);
+  }
+
+  const deleteFile = file => {
+    const confirmation = window.confirm("Delete this file? This can't be undone.")
+    if (!confirmation) return;
+    driveAPI.deleteFile(file)
+      .then(setDriveState)
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
+  }
+
+  const downloadFile = file => {
+    driveAPI.downloadFile(file)
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
+  }
+
+  const handleFileError = error => {
+    switch (error.code) {
+      case 403:
+        props.forbidAccess();
+        break;
+      case 404:
+        props.setServerError(ERROR_DETAILS.FILE_NOT_FOUND);
+        break;
+      default:
+        props.setServerError(ERROR_DETAILS.GENERIC)
+        break;
+    }
+  }
+
+  const createFolder = folderDetails => {
+    driveAPI.createFolder(folderDetails, currentFolder)
+      .then(setDriveState)
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleServerError))
+  }
+
+  const moveFile = (file, destinationFolder) => {
+    driveAPI.moveFile(file, destinationFolder)
+      .then(setDriveState)
+      .catch(error => ERROR_HANDLERS.handleHttpErrors(error, handleFileError));
   }
 
   return(
@@ -86,20 +132,29 @@ const Drive = props => {
             setSearchTerm={setSearchTerm}
             sortType={sortType}
             setSortType={setSortType}
-            addFileAndUpdateUser={addFileAndUpdateUser}
+            currentFolder={currentFolder}
+            updateDrive={updateDrive}
             logOut={props.logOut}
+            createFolder={createFolder}
             
           />
-          <FilePanel
-            files={filesToRender}
-            setSelectedFile={setSelectedFile}
-            serverError={props.serverError}
-            setServerError={props.setServerError}
-            contextMenu={contextMenu}
-            openContextMenu={openContextMenu}
-            removeFileAndUpdateUser={removeFileAndUpdateUser}
-            forbidAccess={forbidAccess}
-          />
+          {
+            currentFolder.id &&
+            <FileContainer
+              currentFolder={currentFolder}
+              files={filesToRender}
+              setSelectedFile={setSelectedFile}
+              serverError={props.serverError}
+              setServerError={props.setServerError}
+              contextMenu={contextMenu}
+              openContextMenu={openContextMenu}
+              forbidAccess={forbidAccess}
+              loadFolder={loadFolder}
+              deleteFile={deleteFile}
+              downloadFile={downloadFile}
+              moveFile={moveFile}
+            />
+          }
         </div>
       </div>
       {

@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ICONS, REGEX } from '../../constants';
 import './cards.css';
 
-const FileCard = ({ file, openContextMenu, setSelectedFile }) => {
+import useDragFile from '../../hooks/useDragFile';
+
+const FileCard = ({ file, openContextMenu, setSelectedFile, downloadFile, deleteFile }) => {
 
   const MAX_NAME_LENGTH = 14
+
+  const contextActions = [
+    {
+      label: "Download",
+      onClick: downloadFile,
+    },
+    {
+      label: "Delete",
+      onClick: deleteFile,
+    }
+  ]
 
   const get_icon_src = () => {
     if (file.content_type.match(REGEX.CONTENT_TYPE_TEXT)) {
@@ -15,12 +28,12 @@ const FileCard = ({ file, openContextMenu, setSelectedFile }) => {
   }
 
   const format_filename = () => {
-    const name = file.filename.match(REGEX.FILENAME_PARTS)[1]
+    const name = file.name.match(REGEX.FILENAME_PARTS)[1]
     if (name.length > MAX_NAME_LENGTH) {
       const formatted_name = name.slice(0, MAX_NAME_LENGTH);
       return formatted_name + '..' + file.extension
     } else {
-      return file.filename;
+      return file.name;
     }
   }
 
@@ -35,16 +48,25 @@ const FileCard = ({ file, openContextMenu, setSelectedFile }) => {
       x: event.pageX,
       y: event.pageY
     }
-    openContextMenu(file, mouseCoords);
+    openContextMenu(file, mouseCoords, contextActions);
   }
 
+  const { isDragged, handleDragStart, handleDragEnd } = useDragFile(file);
+
   return(
-    <div className="file-card" onClick={handleClick} onContextMenu={handleContextMenu}>
+    <div
+      className={`file-card card no-select ${isDragged ? 'dragged' : null}`}
+      onClick={handleClick}
+      onContextMenu={handleContextMenu}
+      draggable
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
       <div className="file-icon-container">
-        <img className="file-icon" src={get_icon_src()} alt="File icon" />
+        <img className="file-icon" src={get_icon_src()} alt="File icon" draggable={false} />
       </div>
       <div>
-        <p className="file-card-filename">{format_filename()}</p>
+        <p className="card-filename">{format_filename()}</p>
       </div>
     </div>
   )

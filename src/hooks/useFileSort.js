@@ -7,11 +7,13 @@ const useFileSort = () => {
 
   const sortFiles = filesToSort => {
     const sortFunction = sortFunctions[sortType];
-    return [ ...filesToSort ].sort(sortFunction);
+    return Object.entries(filesToSort).reduce((sortedFiles, [ fileType, files ]) => {
+      return { ...sortedFiles, [fileType]: files.sort(sortFunction)}
+    }, {})
   }
 
   const sortByName = (a, b) => {
-    return (a.filename).localeCompare(b.filename);
+    return (a.name.toLowerCase()).localeCompare(b.name.toLowerCase());
   }
 
   const sortByCreatedAt = (a, b) => {

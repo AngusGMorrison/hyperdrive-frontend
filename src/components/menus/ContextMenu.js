@@ -2,10 +2,10 @@ import React from 'react';
 
 import './menus.css';
 
-const ContextMenu = ({ attributes, actions }) => {
+const ContextMenu = ({ attributes }) => {
 
   const renderActions = () => {
-    return actions.map(action => {
+    return attributes.actions.map(action => {
       return <li key={action.label} onClick={() => action.onClick(attributes.file)}>{action.label}</li>
     })
   }

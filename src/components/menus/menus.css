@@ -26,3 +26,51 @@
   background-color: var(--hyper-yellow);
   color: var(--hyper-dark-grey);
 }
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  margin-bottom: 2rem;
+  color: var(--hyper-dark-grey);
+  border-bottom: 2px solid var(--hyper-dark-grey);
+  overflow: auto;
+}
+
+.nav-folder-link {
+  border-radius: 3px;
+}
+
+.nav-folder-link-container {
+  display: flex;
+  align-items: center;
+}
+
+.nav-folder-link {
+  display: flex;
+  align-items: center;
+}
+
+.nav-folder-arrow {
+  margin: 0 8px;
+}
+
+.nav-folder-button {
+  height: 30px;
+  padding: 0 15px;
+  font: var(--body);
+  white-space: nowrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 3px;
+}
+
+.nav-folder-button:hover {
+  cursor: pointer;
+  background-color: var(--hyper-yellow);
+}
+
+.nav-folder-button.dragged {
+  background-color: var(--hyper-yellow);
+  box-shadow: 0 0 6px 3px var(--hyper-yellow);
+}

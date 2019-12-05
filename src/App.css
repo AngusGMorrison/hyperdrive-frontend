@@ -5,6 +5,7 @@ body {
   --hyper-blue: #7AFFE0;
   --hyper-magenta: #F61DB7;
 
+  --heading-small: 700 16px/1.4 "Menlo";
   --single-line-big: 700 18px/18px "Menlo";
   --body-big: 700 16px/1.4 "Menlo";
   --body: 400 14px/1.4 "Menlo";
@@ -39,4 +40,11 @@ input:-webkit-autofill:focus {
   background-color: transparent;
   transition: all 5000s ease-in-out 0s;
   transition-property: font, color, background-color, font-family;
+}
+
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 }

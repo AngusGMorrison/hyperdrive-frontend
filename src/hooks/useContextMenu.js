@@ -6,6 +6,7 @@ const useContextMenu = () => {
 
   const initialContextMenu = {
     isOpen: false,
+    actions: {},
     fileId: null,
     position: {
       top: 0,
@@ -15,9 +16,10 @@ const useContextMenu = () => {
 
   const [ contextMenu, setContextMenu ] = useState(initialContextMenu);
 
-  const openContextMenu = (file, mouseCoords) => {
+  const openContextMenu = (file, mouseCoords, actions) => {
     setContextMenu({
       isOpen: true,
+      actions: actions,
       file: file,
       position: {
         top: mouseCoords.y - POSITION_OFFSET_PX,

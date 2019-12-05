@@ -14,6 +14,7 @@ const SearchField = props => {
           className="field-icon"
           src={ICONS.SEARCH.YELLOW}
           alt="Search field icon"
+          draggable={false}
         />
 
         <input

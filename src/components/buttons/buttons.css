@@ -2,21 +2,51 @@
   border-radius: 3px;
   height: 40px;
   display: flex;
-  padding-left: 10px;
+  padding: 0 10px;
   align-items: center;
   border: none;
   font: var(--single-line-big);
   color: var(--hyper-dark-grey);
 }
 
+.button:hover {
+  cursor: pointer;
+}
+
 .big-button {
   width: 100%;
+  margin-bottom: 25px;
 }
 
 .button.blue {
   background-color: var(--hyper-blue);
 }
 
+.button.yellow {
+  background-color: var(--hyper-yellow);
+}
+
 .button-text {
   margin-top: 1px;
+}
+
+.small-button {
+  margin-left: 20px;
+  margin-top: 12px;
+}
+
+.button.secondary {
+  background-color: transparent;
+  border-color: 2px solid white;
+  color: white;
+}
+
+button.extra-small-button.secondary {
+  border: 1px solid white;
+  font-size: 12px;
+}
+
+button.extra-small-button.secondary:active {
+  background-color: white;
+  color: var(--hyper-dark-grey);
 }

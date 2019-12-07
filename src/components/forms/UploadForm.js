@@ -34,7 +34,7 @@ const UploadForm = props => {
     setIsDraggedOver(false);
     if (!event.dataTransfer.files[0]) return;
     const formData = new FormData();
-    formData.append('file', event.dataTransfer.files[0]);
+    formData.append('document', event.dataTransfer.files[0]);
     uploadFile(formData);
     setIsUploading(true);
   }
@@ -48,7 +48,8 @@ const UploadForm = props => {
   }
 
   const uploadFile = formData => {
-    driveAPI.uploadFile(formData, props.currentFolder, setUploadProgress, handleResponse);
+    formData.append('parent_folder_id', props.currentFolder.id);
+    driveAPI.uploadFile(formData, setUploadProgress, handleResponse);
   }
 
   const handleResponse = response => {
@@ -70,7 +71,7 @@ const UploadForm = props => {
       <label className="upload-label" onClick={clickFileInput} htmlFor="file">
         <img className="upload-icon" src={ICONS.CLOUD_UPLOAD.BLUE} alt="Cloud upload icon" draggable={false} />
         Drag files or click here to upload
-      <input className="manual-file-input" onClick={e => e.stopPropagation()} ref={fileInput} type="file" name="file" accept=".txt, image/jpg" />
+      <input className="manual-file-input" onClick={e => e.stopPropagation()} ref={fileInput} type="file" name="document" accept=".txt, image/jpg" />
       </label>
       <progress className={`upload-progress ${isUploading ? null : 'hidden'}`} value={uploadProgress.loaded} max={uploadProgress.total}></progress>
     </form>

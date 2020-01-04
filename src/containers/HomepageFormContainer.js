@@ -23,7 +23,7 @@ const HomepageFormContainer = props => {
 
   const resetErrorsAndLogin = responseData => {
     props.setServerError(null);
-    props.logIn(responseData.token);
+    props.logIn(responseData.authorization);
   }
 
   const handleServerError = error => {

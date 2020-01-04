@@ -11,10 +11,9 @@ const getFolder = folder => {
   return API.ajax("GET", route);
 }
 
-const uploadFile = (file, folder, progressCallback, completionCallback) => {
+const uploadFile = (file, progressCallback, completionCallback) => {
   const xhr = new XMLHttpRequest();
-  const path = FOLDER_URL + `/${folder.id}`;
-  xhr.open('POST', path, true);
+  xhr.open('POST', DOCUMENT_URL, true);
   xhr.setRequestHeader('Authorization', localStorage.token);
   xhr.responseType = 'json';
   xhr.upload.onprogress = event => computeUploadProgress(event, progressCallback);

@@ -2,7 +2,6 @@ import { THROWABLE_STATUS_CODES } from '../constants'
 import { ServerError } from '../errors/errors';
 
 export const BASE_URL = 'http://localhost:3000';
-export const TEST_URL = BASE_URL + '/test';
 
 const ajax = (method, route, payload = null) => {
   const config = createConfig(method, payload);

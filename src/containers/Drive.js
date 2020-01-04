@@ -55,6 +55,7 @@ const Drive = props => {
   }
 
   useEffect(() => {
+    // @ts-ignore
     setFilesToRender(getFilesToRender());
   }, [currentFolder, sortType, searchTerm]);
 

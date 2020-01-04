@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ICONS } from '../../constants';
 
 import useDropFile from '../../hooks/useDropFile';

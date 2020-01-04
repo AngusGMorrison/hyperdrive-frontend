@@ -4,17 +4,21 @@ import { ICONS } from '../../constants';
 
 const DetailsPanel = ({ file, setSelectedFile }) => {
 
-  const unrenderedProperties = ["id", "name"]
-
   const renderFileDetails = () => {
-    return Object.entries(file).map(([k, v]) => {
-      if (!unrenderedProperties.includes(k)) {
-        return(
-          <tr key={k}>
-            <td>{makeSentenceCase(k)}:</td><td className="right-column">{v}</td>
-          </tr>
-        );
-      } 
+    const detailsToRender = getDetailsToRender();
+    return detailsToRender.map(([k, v]) => {
+      return(
+        <tr key={k}>
+          <td>{makeSentenceCase(k)}:</td><td className="right-column">{v}</td>
+        </tr>
+      )
+    });
+  }
+
+  const getDetailsToRender = () => {
+    const hiddenFileDetails = ["id", "name"];
+    return Object.entries(file).filter(([k, v]) => {
+      return !hiddenFileDetails.includes(k);
     });
   }
 
@@ -36,7 +40,9 @@ const DetailsPanel = ({ file, setSelectedFile }) => {
         </div>
         <h3 className="break">{file.name}</h3>
         <table>
-          {renderFileDetails()}
+          <tbody>
+            {renderFileDetails()}
+          </tbody>
         </table>
       </div>
     </div>

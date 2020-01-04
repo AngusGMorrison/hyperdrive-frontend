@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICONS, THEMES } from '../../constants';
+import { THEMES } from '../../constants';
 import './profile.css'
 
 import ExtraSmallButton from '../buttons/ExtraSmallButton';

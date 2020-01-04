@@ -54,7 +54,6 @@ const UploadForm = props => {
 
   const handleResponse = response => {
     setUploadProgress(initialProgress);
-    console.log(response);
     props.updateDrive(response.folder, response.user);
     setIsUploading(false);
   }

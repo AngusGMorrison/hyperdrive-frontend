@@ -1,7 +1,6 @@
 import React from 'react';
 
 import FileCard from '../cards/FileCard';
-import ContextMenu from '../menus/ContextMenu';
 
 const DocumentPanel = props => {
 

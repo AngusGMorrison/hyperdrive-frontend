@@ -33,7 +33,6 @@ const Drive = props => {
   }
 
   const setDriveState = driveData => {
-    console.log(driveData);
     setUserDetails(driveData.user);
     setCurrentFolder(driveData.folder);
     setSelectedFile(null);
@@ -56,6 +55,7 @@ const Drive = props => {
   }
 
   useEffect(() => {
+    // @ts-ignore
     setFilesToRender(getFilesToRender());
   }, [currentFolder, sortType, searchTerm]);
 

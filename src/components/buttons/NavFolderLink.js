@@ -40,9 +40,9 @@ const NavFolderLink = props => {
             <button
               className={`nav-folder-button ${isValidDropTarget() && isDraggedOver && 'dragged'}`}
               onClick={props.loadFolder ? handleFolderClick : null }
-              onDragOver={isValidDropTarget() && handleDragOver}
-              onDragLeave={isValidDropTarget() && handleDragLeave}
-              onDrop={isValidDropTarget() && handleDrop}
+              onDragOver={isValidDropTarget() ? handleDragOver : undefined }
+              onDragLeave={isValidDropTarget() ? handleDragLeave : undefined }
+              onDrop={isValidDropTarget() ? handleDrop : undefined }
             >
               { formatFolderName() }
             </button>
